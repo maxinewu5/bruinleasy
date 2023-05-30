@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
+import {Button} from './Button';
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -9,17 +10,6 @@ function Navbar() {
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
-    // const showButton = () => {
-    //     if(window.innerWidth <= 960) {
-    //         setButton(false);
-    //     }
-    //     else {
-    //         setButton(true);
-    //     }
-    // };
-
-    // window.addEventListener('resize', showButton);
-    // useEffect(() => { showButton(), [] });
     return (
         <>
             <nav className='navbar'>
@@ -27,12 +17,6 @@ function Navbar() {
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                         <img class='navbar-pic' src={process.env.PUBLIC_URL + './images/logo.png'} alt = "Logo" />
                     </Link>
-
-                    {/* <div className='login-pic'>
-                            <Link to='/Login' onClick={closeMobileMenu}>
-                                <img class='login-pic' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Login" />
-                            </Link>
-                    </div> */}
 
                     <div className='menu-icon' onClick={handleClick}>
                         <img style={{width:30, height: 30}} src={process.env.PUBLIC_URL + './images/menubar2.png'} alt = "MenuBar" />
