@@ -1,0 +1,50 @@
+video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+  }
+
+.img-background {
+    object-fit: cover;
+    width: 100%;
+    height:100%;
+    position: fixed;
+    z-index: -1;
+}
+
+.front-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+}
+
+/* .front-container > h2 {
+    color: #50A5FF;
+    font-family: impact, sans-serif;
+    font-size: 100px;
+    margin-top: 10px;
+} */
+
+.front-container > p {
+    margin-top: 8px;
+    color: #7ABBFF;
+    font-size: 32px;
+    font-family: 'Rebuchet MS', 'Lucida Sans Unicode', 
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.front-btns {
+    margin-top: 32px;
+}
+
+.front-btns .btn {
+    margin: 0px;
+}
+
+
+
