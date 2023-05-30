@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 
+import { signInWithGoogle } from '../Firebase';
+
 function Login() {
   /*
   -Username and Password taken in from the input 
@@ -44,8 +46,12 @@ function Login() {
     */
     }
     <button>Submit</button>
+    <br></br>
     <br />
     </form>
+
+    <button onClick={signInWithGoogle}>Sign in with Google</button>
+    
     </React.Fragment>
   );
 }
