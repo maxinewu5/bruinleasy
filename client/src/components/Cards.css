@@ -22,34 +22,39 @@
   }
   
   .cards__items {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
   }
+
   
+  /*makes the style for each post box */
   .cards__item {
     display: flex;
     flex: 1;
     margin: 0 1rem;
-    border-radius: 10px;
+    border-radius: 0px;
   }
   
   .cards__item__link {
     display: flex;
     flex-flow: column;
     width: 100%;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    box-shadow: 0 5px 20px rgba(56, 125, 255, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+
   }
   
   .cards__item__pic-wrap {
     position: relative;
+    top: -15px;
+    left:-50px;
     object-fit: cover;
-    width: 270px;
-    height: 30px;
-    padding-top: 200px;
+    width: 100%;
+    padding-top: 180px;
+    padding-right: 40px;
     overflow: hidden;
   }
   
@@ -58,6 +63,7 @@
     animation-duration: 2s;
   }
   
+  /*style for the rating box on each picture */
   .cards__item__pic-wrap::after {
     content: attr(data-category);
     position: absolute;
@@ -65,18 +71,18 @@
     margin-left: 10px;
     padding: 6px 8px;
     max-width: calc((100%) - 60px);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    color: #fff;
-    background-color: #1f98f4;
+    color: white;
+    background-color: #FFD77B;
     box-sizing: border-box;
   }
   
+  /*style for post image*/
   .cards__item__img {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
     display: block;
     width: 100%;
@@ -92,10 +98,13 @@
   }
   
   .cards__item__info {
-    padding: 20px 30px 30px;
+    padding: 30px 40px 40px;
   }
   
   .cards__item__text {
+    position: relative;
+    top: -70px;
+    left: -20px;
     color: #252e48;
     font-size: 18px;
     line-height: 18px;

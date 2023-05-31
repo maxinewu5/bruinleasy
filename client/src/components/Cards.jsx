@@ -19,6 +19,28 @@ function Cards() {
                         text='Another one'
                         label='4 star'
                         path='/services'/>
+                    <CardItem 
+                        src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
+                        text='Pic 2'
+                        label='5 star'
+                        path='/services'/>
+                </ul>
+                <ul className='cards__items'>
+                    <CardItem 
+                        src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                        text='Pretty Apartment hehe'
+                        label='5 star'
+                        path='/services'/>
+                    <CardItem 
+                        src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
+                        text='Another one'
+                        label='4 star'
+                        path='/services'/>
+                    <CardItem 
+                        src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
+                        text='Pic 2'
+                        label='5 star'
+                        path='/services'/>
                 </ul>
             </div>
         </div>
