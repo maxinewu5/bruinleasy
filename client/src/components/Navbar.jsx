@@ -37,7 +37,7 @@ function Navbar() {
                         <li className='nav-item'>
                             <Link to='/Profile' className='nav-links' onClick={closeMobileMenu}>
                                 {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/profile.png'} alt = "Profile" />
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/process.png'} alt = "Process" />}
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/profile.png'} alt = "Profile" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
