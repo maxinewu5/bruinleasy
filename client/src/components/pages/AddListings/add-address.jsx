@@ -1,21 +1,11 @@
 import React, { useState } from "react";
 
-const AddAddress = ({ onNext }) => {
-  const [address, setAddress] = useState(["", "", "", "", ""]);
-
+const AddAddress = ({ onNext, address }) => {
   const handleChange = (i, e) => {
     const { value } = e.target;
     const newAddress = [...address];
     newAddress[i] = value;
-    setAddress(newAddress);
-  };
-
-  const handleNext = () => {
-    if (address.includes("")) {
-      alert("Please enter a valid address");
-    }
-    onNext(address);
-    setAddress(["", "", "", "", ""]);
+    onNext(newAddress);
   };
 
   return (
@@ -62,7 +52,6 @@ const AddAddress = ({ onNext }) => {
       />
       <br />
       <br />
-      <button onClick={handleNext}>Next</button>
     </div>
   );
 };

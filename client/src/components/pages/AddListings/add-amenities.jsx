@@ -1,20 +1,10 @@
 import React, { useState } from "react";
 
-const AddAmenities = ({ onNext }) => {
-  const [isChecked, setIsChecked] = useState(Array(5).fill(false));
-
+const AddAmenities = ({ onNext, isChecked }) => {
   const handleCheckboxChange = (i) => {
     const updatedChecked = [...isChecked];
     updatedChecked[i] = !updatedChecked[i];
-    setIsChecked(updatedChecked);
-  };
-
-  const handleNext = () => {
-    const selectedAmenities = isChecked
-      .map((checked, index) => (checked ? index : null))
-      .filter((index) => index !== null);
-    onNext(selectedAmenities);
-    setIsChecked(Array(5).fill(false));
+    onNext(updatedChecked);
   };
 
   return (
@@ -71,7 +61,6 @@ const AddAmenities = ({ onNext }) => {
       </label>
       <br />
       <br />
-      <button onClick={handleNext}>Next</button>
     </div>
   );
 };

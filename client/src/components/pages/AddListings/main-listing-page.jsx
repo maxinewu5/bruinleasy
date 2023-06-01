@@ -1,37 +1,59 @@
 import React, { useState } from "react";
 import { db } from "../../../Firebase";
+import { storage } from "../../../Firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+/////////////////////////////////////////////////////////////////////////
 import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
 import AddOcc from "./add-occupation";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import AddImages from "./add-images";
 
 // Function to add listings....obviously
 const AddListing = () => {
   const PropertiesRef = collection(db, "Properties");
 
-  const [address, setAddress] = useState([]);
-  const [amenities, setAmenities] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [address, setAddress] = useState(["", "", "", "", ""]);
+  const [amenities, setAmenities] = useState(Array(5).fill(false));
   const [occCounters, setOccCounters] = useState([0, 0]);
+  const [images, setImages] = useState([]);
 
-  // Functions to be passed as props so that child components can make changes
+  const uploadImage = (image) => {
+    const imageRef = ref(storage, `images/${image.name + v4()}`);
+    uploadBytes(imageRef, image).then(() => {
+      alert("Image Uploaded");
+    });
+  };
+
   const handleNextAddress = (addressData) => {
     setAddress(addressData);
-  };
-  const handleNextAmenities = (amenitiesData) => {
-    setAmenities(amenitiesData);
-  };
-  const handleNextOcc = (updatedCounters) => {
-    setOccCounters(updatedCounters);
+    // setCurrentPage(currentPage + 1);
   };
 
-  // Function to submit data in correct form to database
+  const handleNextAmenities = (amenitiesData) => {
+    setAmenities(amenitiesData);
+    // setCurrentPage(currentPage + 1);
+  };
+
+  const handleNextOcc = (updatedCounters) => {
+    setOccCounters(updatedCounters);
+    // setCurrentPage(currentPage + 1);
+  };
+
+  const handleNextImages = (image) => {
+    setImages(image);
+  };
+
   const handleSubmit = async () => {
     console.log("Address:", address);
     console.log("Amenities:", amenities);
     console.log("Occupation Counters:", occCounters);
-    if (address.includes("")) {
-      alert("Please enter a valid address");
-    }
+    images.forEach((image) => {
+      console.log("Image:", image);
+      uploadImage(image);
+    });
     // Perform further actions or API calls here
     // await addDoc(PropertiesRef, {
     //   CreatedAt: serverTimestamp(),
@@ -50,20 +72,58 @@ const AddListing = () => {
     // });
   };
 
+  const handlePrev = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    // if (address.includes("")) {
+    //   alert("Please enter a valid address.");
+    //   return;
+    // }
+    if (currentPage == 3 && images.length === 0) {
+      alert("You have not added any images");
+      return;
+    }
+    setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div>
       <h1>
         To add your property we will take you through a series of steps
         (Placeholder)
       </h1>
-      <br />
-      <AddAddress onNext={handleNextAddress} />
-      <br />
-      <AddAmenities onNext={handleNextAmenities} />
-      <br />
-      <AddOcc onNext={handleNextOcc} />
-      <br />
-      <button onClick={handleSubmit}>Submit</button>
+      {currentPage === 0 && (
+        <AddAddress onNext={handleNextAddress} address={address} />
+      )}
+      {currentPage === 1 && (
+        <AddAmenities onNext={handleNextAmenities} isChecked={amenities} />
+      )}
+      {currentPage === 2 && (
+        <AddOcc onNext={handleNextOcc} counters={occCounters} />
+      )}
+      {currentPage === 3 && (
+        <AddImages onNext={handleNextImages} images={images} />
+      )}
+      {currentPage === 4 && (
+        <div>
+          <h2>Review and Submit</h2>
+          {/* <p>Address:</p>
+          <p>
+            {address[0]}, {address[1]}
+          </p>
+          <p>
+            {address[3]}, {address[4]}, {address[5]}
+          </p>
+
+          <p>Amenities: {amenities.join(", ")}</p>
+          <p>Occupation Counters: {occCounters.join(", ")}</p> */}
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+      )}
+      {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
+      {currentPage < 4 && <button onClick={handleNext}>Next</button>}
     </div>
   );
 };
