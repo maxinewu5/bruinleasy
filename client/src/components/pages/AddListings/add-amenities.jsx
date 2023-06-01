@@ -1,11 +1,20 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-const AddAmenities = () => {
+const AddAmenities = ({ onNext }) => {
   const [isChecked, setIsChecked] = useState(Array(5).fill(false));
 
   const handleCheckboxChange = (i) => {
-    setIsChecked(!isChecked[i]);
+    const updatedChecked = [...isChecked];
+    updatedChecked[i] = !updatedChecked[i];
+    setIsChecked(updatedChecked);
+  };
+
+  const handleNext = () => {
+    const selectedAmenities = isChecked
+      .map((checked, index) => (checked ? index : null))
+      .filter((index) => index !== null);
+    onNext(selectedAmenities);
+    setIsChecked(Array(5).fill(false));
   };
 
   return (
@@ -16,6 +25,7 @@ const AddAmenities = () => {
           type="checkbox"
           checked={isChecked[0]}
           onChange={() => handleCheckboxChange(0)}
+          value={isChecked[0]}
         />
         Air Conditioner
       </label>
@@ -25,6 +35,7 @@ const AddAmenities = () => {
           type="checkbox"
           checked={isChecked[1]}
           onChange={() => handleCheckboxChange(1)}
+          value={isChecked[1]}
         />
         Parking
       </label>
@@ -34,6 +45,7 @@ const AddAmenities = () => {
           type="checkbox"
           checked={isChecked[2]}
           onChange={() => handleCheckboxChange(2)}
+          value={isChecked[2]}
         />
         Furnishing
       </label>
@@ -41,8 +53,9 @@ const AddAmenities = () => {
       <label>
         <input
           type="checkbox"
-          checked={isChecked[2]}
-          onChange={() => handleCheckboxChange(2)}
+          checked={isChecked[3]}
+          onChange={() => handleCheckboxChange(3)}
+          value={isChecked[3]}
         />
         Rooftop
       </label>
@@ -50,14 +63,15 @@ const AddAmenities = () => {
       <label>
         <input
           type="checkbox"
-          checked={isChecked[2]}
-          onChange={() => handleCheckboxChange(2)}
+          checked={isChecked[4]}
+          onChange={() => handleCheckboxChange(4)}
+          value={isChecked[4]}
         />
         Lobby
       </label>
       <br />
       <br />
-      <button>Next</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 };

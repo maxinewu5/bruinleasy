@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const AddOcc = () => {
+const AddOcc = ({ onNext }) => {
   const [counters, setCounters] = useState([0, 0]);
+
+  useEffect(() => {
+    onNext(counters);
+  }, []);
 
   const increaseCount = (i) => {
     setCounters((prevCounters) => {
@@ -9,6 +13,11 @@ const AddOcc = () => {
       updatedCounters[i] += 1;
       return updatedCounters;
     });
+  };
+
+  const handleNext = () => {
+    onNext(counters);
+    setCounters([0, 0]);
   };
 
   return (
@@ -23,7 +32,7 @@ const AddOcc = () => {
         <button onClick={() => increaseCount(1)}>Increase</button>
       </div>
       <br />
-      <button>Next</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 };
