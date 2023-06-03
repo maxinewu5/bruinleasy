@@ -19,26 +19,23 @@ function Cards() {
                 rating='5 star'
                 />
             <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
+                src={process.env.PUBLIC_URL + './images/aprt7.png'}
                 title='Mowe, Los Angeles'
                 author_name='Janie'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Best apartment ever!!!!'
                 rating='5 star'
                 />
             <CardItem 
-                src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                src={process.env.PUBLIC_URL + './images/aprt6.png'}
                 title='ajksgd, Los Angeles'
                 author_name='Anirudhk'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Great spot hehe'
                 rating='5 star'
                 />
             <CardItem 
-                src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                src={process.env.PUBLIC_URL + './images/aprt4.png'}
                 title='agkljkfdjhuie, Los Angeles'
                 author_name='srinut'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='WE have sooo many rooms'
                 rating='5 star'
                 />
@@ -46,15 +43,13 @@ function Cards() {
                 src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
                 title='Mowe, Los Angeles'
                 author_name='Janie'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Best apartment ever!!!!'
                 rating='5 star'
                 />
             <CardItem 
-                src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                src={process.env.PUBLIC_URL + './images/aprt5.png'}
                 title='ajksgd, Los Angeles'
                 author_name='Anirudhk'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Great spot hehe'
                 rating='5 star'
                 />
