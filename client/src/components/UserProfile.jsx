@@ -5,9 +5,6 @@ import { collection, query, where, doc, getDoc, getDocs } from "firebase/firesto
 import CardItem from './CardItem'
 import { getAdditionalUserInfo } from 'firebase/auth';
 
-import SearchBar from './SearchBar'
-import { filter2b4b } from '../actions/listingSearch'
-
 function UserProfile() {
 
     const [ userData, setUserData ] = useState()
@@ -77,8 +74,6 @@ function UserProfile() {
             {favProperties?.map((listing) => {
                 return <CardItem></CardItem>
             })}
-    
-            <button onClick={filter2b4b}>TEST BUTTON</button>
 
         </>
         );
