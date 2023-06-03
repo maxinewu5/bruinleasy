@@ -12,7 +12,7 @@ function CardItem(props) {
           className='card_item_img_inside'/>
         </div>
         <h1 className='heading_post'> 
-          <Link href={'/props/${props.slug}'}>
+          <Link className='card_header' href={'/props/${props.slug}'}>
             {props.title}
           </Link>
         </h1>
@@ -29,13 +29,9 @@ function CardItem(props) {
             <p className='item_author_txt'>{props.author_name}</p>
           </div>
         </div>
-        {/* <div className='item_body_center'>
-          <Link href={'/props/${props.slug}'}>
-            <span className='item_body_inside'>
-              More
-            </span>
-          </Link>
-        </div> */}
+        <div className='cards_item_rating_box'>
+          <h5 className='cards_item_rating'>{props.rating}</h5>
+        </div>
       </div>
     </div>
   );

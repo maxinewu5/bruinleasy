@@ -15,7 +15,8 @@ function Cards() {
                 title='Kelton, Los Angeles'
                 author_name='Maxine'
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
-                excerpt='This is a great apartment for you!! \nTry it'
+                excerpt='This is a great apartment for you!! Try it i w o rd word wrap plz'
+                rating='5 star'
                 />
             <CardItem 
                 src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
@@ -23,6 +24,7 @@ function Cards() {
                 author_name='Janie'
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Best apartment ever!!!!'
+                rating='5 star'
                 />
             <CardItem 
                 src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
@@ -30,6 +32,7 @@ function Cards() {
                 author_name='Anirudhk'
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='Great spot hehe'
+                rating='5 star'
                 />
             <CardItem 
                 src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
@@ -37,6 +40,23 @@ function Cards() {
                 author_name='srinut'
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='WE have sooo many rooms'
+                rating='5 star'
+                />
+                       <CardItem 
+                src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
+                title='Mowe, Los Angeles'
+                author_name='Janie'
+                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                excerpt='Best apartment ever!!!!'
+                rating='5 star'
+                />
+            <CardItem 
+                src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                title='ajksgd, Los Angeles'
+                author_name='Anirudhk'
+                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
+                excerpt='Great spot hehe'
+                rating='5 star'
                 />
           </ul>
         </div>

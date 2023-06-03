@@ -23,15 +23,15 @@ function Navbar() {
                     </div> 
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/Home' className='nav-links' onClick={closeMobileMenu}>
                                 {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/home.png'} alt = "Home" /> 
                                 : <img class='display-none' src={process.env.PUBLIC_URL + './images/home.png'} alt = "Home" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/Browse' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/browse.png'} alt = "Browse" /> 
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/browse.png'} alt = "Browse" />}
+                            <Link to='/Explore' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/explore.png'} alt = "Explore" /> 
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/explore.png'} alt = "Explore" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
