@@ -1,9 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
-
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import { signInWithGoogle } from '../Firebase';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 
-function Login() {
+const Login = () => {
+  const [EmailID, setEmailID] = useState('');
+  const [Password, setPassword] = useState('');
+  const navigate = useNavigate();
   /*
   -Username and Password taken in from the input 
   -DEFAULT VALUES: Username = null, Password = null. 
@@ -11,18 +14,24 @@ function Login() {
   then Username stores the inputted value, and password is set to null. 
   -Use either Username = null or Password = null to check for incorrectly formatted Username/Password input
   */
-  const [Username, setUsername] = useState(null);
-  const [Password, setPassword] = useState(null);
-
-  const submit = () => {
-    alert("Username: " + Username + "\nPassword: " + Password)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, EmailID, Password);
+      navigate('/');
+// ...
+    } catch (error) {
+      alert('Invalid login details');
+      window.location.reload(false);
+    }
+  };
 
   return (
     <React.Fragment>
     {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
     <img src= {process.env.PUBLIC_URL + './images/logo.png'} alt = "BruinLeasy logo"/>
-    <form classname = "Login-Form" onSubmit={submit}> 
+    <form classname = "Login-Form" onSubmit={handleSubmit}> 
     {
       /*
       -onChange is a pre-defined prop that defines what is to be done when changes are made to the corresponding
@@ -35,9 +44,9 @@ function Login() {
       -'Value' is a property of target that stores the changes made to the input fields value. 
        */
     }
-    <input placeholder = "Username" onChange = {(event)=>{setUsername(event.target.value)}} value = {Username}/>
+    <input type = "email" placeholder = "Email id" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
     <br />
-    <input placeholder = "Password" onChange = {(event)=>{setPassword(event.target.value)}} value = {Password}/>
+    <input type = "password" placeholder = "Password" onChange = {(event)=>{setPassword(event.target.value)}} value = {Password}/>
     <br />
     {
       /*
@@ -49,9 +58,10 @@ function Login() {
     <br></br>
     <br />
     </form>
-
     <button onClick={signInWithGoogle}>Sign in with Google</button>
-    
+    <Link to='/CreateAccount'>
+    <button>New? Create An Account</button>
+    </Link>
     </React.Fragment>
   );
 }
