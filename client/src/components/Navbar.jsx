@@ -1,17 +1,32 @@
 //navigation bar for website
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
 import {Button} from './Button';
 
 function Navbar() {
+    const [fixed, setFixed] = useState(false);
+    const [height, setHeight] = useState(false);
+
+    const navbar = useRef();
+
+    useEffect(() => {
+        const handleScroll = () => { 
+            setFixed(window.scrollY > 500); 
+        };
+        window.addEventListener('scroll', handleScroll);
+        // setHeight(navbar.current.clientHeight);
+        return () => window.removeEventListener('scroll', handleScroll);
+    });
+
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
     return (
-        <>
+        <nav className={'${sticky ? "sticky" : ""}'}>
             <nav className='navbar'>
                 <div className='navbar-container'>
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
@@ -23,15 +38,15 @@ function Navbar() {
                     </div> 
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/Home' className='nav-links' onClick={closeMobileMenu}>
                                 {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/home.png'} alt = "Home" /> 
                                 : <img class='display-none' src={process.env.PUBLIC_URL + './images/home.png'} alt = "Home" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/Browse' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/browse.png'} alt = "Browse" /> 
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/browse.png'} alt = "Browse" />}
+                            <Link to='/Explore' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/explore.png'} alt = "Explore" /> 
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/explore.png'} alt = "Explore" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
@@ -54,7 +69,7 @@ function Navbar() {
                     </ul>
                 </div>
              </nav> 
-        </>
+        </nav>
     );
 }
 
