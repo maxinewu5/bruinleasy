@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const AddOcc = ({ onNext, counters }) => {
-  useEffect(() => {
-    // Code that previously used onNext should be placed here if needed
-  }, []);
+  // useEffect(() => {
+  // }, []);
 
   const increaseCount = (i) => {
     onNext((prevCounters) => {
