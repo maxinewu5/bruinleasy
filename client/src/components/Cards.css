@@ -92,11 +92,10 @@ h1 {
   width: 100%;
 }
 
-
-.card_body_inside {
+/*this is for the bottom-most row*/
+.card_body_bottom {
   display: flex;
-  align-items: left;
-  justify-content: left;
+  align-self: flex-end;
   margin-bottom: 4px;
   margin-right: 20px;
   margin-left: 20px;
@@ -110,11 +109,21 @@ h1 {
 
 .item_author_txt {
   display: inline;
-  text-align: left;
   vertical-align: center;
-  color: #777;
+  color: black;
   margin-left: 2px;
-  font-size: 1rem;
+}
+
+/*for price of rental*/
+
+.item_price {
+  position: relative;
+  bottom: 0px;
+  left: 160px;
+  display: inline;
+  text-align: right;
+  vertical-align: center;
+  color: black;
 }
 
 .item_body {
@@ -122,7 +131,7 @@ h1 {
   white-space: pre-wrap;
   margin-left: 20px;
   font-size: 1rem;
-  color: #777;
+  color: black;
   font-weight: normal;
   padding: 4px;
 }
@@ -187,6 +196,6 @@ depending on size of screen using flexboxes */
 }
 
 /*heart for like button*/
-.heart {
+.item_heart {
   position: absolute;
 }
