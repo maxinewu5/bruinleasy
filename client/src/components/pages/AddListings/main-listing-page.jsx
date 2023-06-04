@@ -16,6 +16,7 @@ import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
 import AddOcc from "./add-occupation";
 import AddImages from "./add-images";
+import AddDescription from "./add-description";
 
 // Function to add listings....obviously
 const AddListing = ({ user }) => {
@@ -26,6 +27,7 @@ const AddListing = ({ user }) => {
   const [amenities, setAmenities] = useState(Array(5).fill(false));
   const [occCounters, setOccCounters] = useState([0, 0]);
   const [images, setImages] = useState([]);
+  const [description, setDescription] = useState("");
 
   const handleNextAddress = (addressData) => {
     setAddress(addressData);
@@ -44,6 +46,10 @@ const AddListing = ({ user }) => {
 
   const handleNextImages = (image) => {
     setImages(image);
+  };
+
+  const handleNextDescription = (desc) => {
+    setDescription(desc);
   };
 
   const getImageURLs = async (path) => {
@@ -78,6 +84,7 @@ const AddListing = ({ user }) => {
       Bathrooms: occCounters[0],
       Bedrooms: occCounters[1],
       UserEmail: user.email,
+      Description: description,
     };
 
     const addProperty = async () => {
@@ -177,6 +184,12 @@ const AddListing = ({ user }) => {
         <AddImages onNext={handleNextImages} images={images} />
       )}
       {currentPage === 4 && (
+        <AddDescription
+          onNext={handleNextDescription}
+          description={description}
+        />
+      )}
+      {currentPage === 5 && (
         <div>
           <h2>Review and Submit</h2>
           {/* <p>Address:</p>
@@ -193,7 +206,7 @@ const AddListing = ({ user }) => {
         </div>
       )}
       {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
-      {currentPage < 4 && <button onClick={handleNext}>Next</button>}
+      {currentPage < 5 && <button onClick={handleNext}>Next</button>}
     </div>
   );
 };

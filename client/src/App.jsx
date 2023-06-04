@@ -6,8 +6,6 @@ import "./App.css";
 import Home from "./components/pages/Home";
 import Login from "./components/Login";
 import AddListing from "./components/pages/AddListings/main-listing-page";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
 
 function App() {
   // const [isAuth, setIsAuth] = useState(!!cookies.get("auth-token"));
