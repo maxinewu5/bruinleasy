@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { auth, db } from '../Firebase'
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
-import { getUserData } from '../actions/userFunctions';
 import CardItem from './CardItem';
 
 /*
