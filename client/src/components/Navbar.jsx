@@ -1,17 +1,32 @@
 //navigation bar for website
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import './Navbar.css';
 import {Button} from './Button';
 
 function Navbar() {
+    const [fixed, setFixed] = useState(false);
+    const [height, setHeight] = useState(false);
+
+    const navbar = useRef();
+
+    useEffect(() => {
+        const handleScroll = () => { 
+            setFixed(window.scrollY > 500); 
+        };
+        window.addEventListener('scroll', handleScroll);
+        // setHeight(navbar.current.clientHeight);
+        return () => window.removeEventListener('scroll', handleScroll);
+    });
+
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
     return (
-        <>
+        <nav className={'${sticky ? "sticky" : ""}'}>
             <nav className='navbar'>
                 <div className='navbar-container'>
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
@@ -54,7 +69,7 @@ function Navbar() {
                     </ul>
                 </div>
              </nav> 
-        </>
+        </nav>
     );
 }
 
