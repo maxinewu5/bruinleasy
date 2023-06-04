@@ -1,4 +1,4 @@
-const CreateAccount = ()=> {
+const CreateAccount = () => {
     return;
 }
 
