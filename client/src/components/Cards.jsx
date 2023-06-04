@@ -17,6 +17,7 @@ function Cards() {
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='This is a great apartment for you!! Try it i w o rd word wrap plz'
                 rating='5 star'
+                date='3/4-5/6'
                 price='$$$'
                 />
             <CardItem 
@@ -25,6 +26,7 @@ function Cards() {
                 author_name='Janie'
                 excerpt='Best apartment ever!!!! /nWe have aircon /nWe are gret'
                 rating='5 star'
+                date='7/8-9/9'
                 price='$$$$$'
                 />
             <CardItem 
@@ -33,6 +35,7 @@ function Cards() {
                 author_name='Anirudhk'
                 excerpt='Great spot hehe /nFour bedroom /Big kitchen come try why does it not wrp'
                 rating='5 star'
+                date='5/7-8/9'
                 price='$$$'
                 />
             <CardItem 
@@ -41,6 +44,7 @@ function Cards() {
                 author_name='srinut'
                 excerpt='WE have sooo many rooms js v more interesting facts, some sizes'
                 rating='5 star'
+                date='3/1-9/1'
                 price='$$'
                 />
                        <CardItem 
@@ -49,6 +53,7 @@ function Cards() {
                 author_name='Janie'
                 excerpt='Best apartment ever!!!! really great experiences from over 10 students'
                 rating='5 star'
+                date='1/1-12/1'
                 price='$'
                 />
             <CardItem 
@@ -57,6 +62,7 @@ function Cards() {
                 author_name='Anirudhk'
                 excerpt='Great spot hehe, very clean, relatively new, good place to live'
                 rating='5 star'
+                date='5/10-7/10'
                 price='$$$$'
                 />
           </ul>

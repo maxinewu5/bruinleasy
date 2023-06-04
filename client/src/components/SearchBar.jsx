@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { auth, db } from '../Firebase'
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
+import './SearchBar.css'
 import CardItem from './CardItem';
 
 /*
@@ -181,7 +182,10 @@ function SearchBar() {
   return (
     <>
       <form>
-
+        <div className='login-container'>
+            <img class='img-background' src={process.env.PUBLIC_URL + './images/bcgrd.png'} alt='search' />
+            <div className='title'>Find YOUR Apartment WORK</div>
+        </div>
         <br></br><br></br>
 
         <p>Dates</p>

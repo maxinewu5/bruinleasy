@@ -50,9 +50,9 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/Profile' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/profile.png'} alt = "Profile" />
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/profile.png'} alt = "Profile" />}
+                            <Link to='/Search' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/search.png'} alt = "Seach" />
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/search.png'} alt = "Search" />}
                             </Link>
                         </li>
                         <li className='nav-item'>

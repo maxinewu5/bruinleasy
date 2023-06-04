@@ -33,7 +33,7 @@ h1 {
   flex-direction: column;
   flex: 1;
   width: 300px;
-  height: 380px;
+  height: 400px;
   background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -82,26 +82,29 @@ h1 {
   color: #FFD77B;
 }
 
+.card_body_wrap {
+  padding-right: 18px;
+  padding-left: 16px;
+}
+
 /*the description */
 .card_body {
   display: block;
-  word-wrap: break-word;  /*wrap text */
-  text-align: left;
-  align-items: left;
-  justify-content: center;
   margin-bottom: 5px;
   width: 100%;
-}
-
-.card_body {
   text-align: left;
-  white-space: pre-wrap;
-  margin-left: 17px;
-  margin-right:20px;
+  white-space: wrap;
+  /* margin-left: 17px; */
+  padding-right: 20px;
+  padding-left: 20px;
   font-size: 1rem;
   color: #495869;
   font-weight: normal;
   padding: 4px;
+}
+
+.card_date {
+  color: #848B94;
 }
 
 /*this is for the bottom-most row*/
@@ -125,9 +128,9 @@ h1 {
 
 .card_author_txt {
   position: relative;
-  bottom: -13px;
+  bottom: 5px;
   display: inline;
-  color: #495869;
+  color: #50A5FF;
   margin-left: 20px;
 }
 
@@ -142,10 +145,10 @@ h1 {
 .card_price {
   position: relative; 
   display: inline;
-  bottom: 40px;
+  bottom: 56px;
   left: 250px;
   text-align: left;
-  color: #495869;
+  color: #50A5FF;
   z-index: 10;
 }
 
@@ -157,7 +160,7 @@ h1 {
   transition-duration:500ms;
 }
 
-.card_body_inside:hover {
+/* .card_body_inside:hover {
   transform: translateY(-1px);
   display: inline-block;
   background-color: fuchsia;
@@ -167,7 +170,7 @@ h1 {
   border-radius: 9999px;
   padding: 8px 24px;
   cursor: pointer;
-}
+} */
 
 /*for the rating inside the picture frame */
 .cards_item_rating_box {
@@ -190,8 +193,8 @@ h1 {
   margin-left: 0px;
   padding: 6px 8px;
   max-width: calc((100%) - 60px);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 12.3px;
+  font-weight: 600;
   color: #fff;
   background-color: #1f98f4;
   box-sizing: border-box;
@@ -208,14 +211,35 @@ depending on size of screen using flexboxes */
   }
 }
 
-
 /*heart for like button*/
+.card_heart_box {
+  position: absolute;
+  width: 100%;
+  padding-top: 73.5%;
+  padding-left: 82.6%;
+  overflow: hidden;
+}
+
 .card_heart {
-  position: relative;
-  left: 120px;
-  top: 2px;
-  margin-right: 20px;
+  position: absolute;
+  width: 100%;
+  padding-top: 58%;
+  padding-left: 91%;
   font-size: 25px;
-  z-index: 1;
+  color: #50A5FF;
+  z-index: 2;
+}
+.card_heart_box::after {
+  content: attr(data-category);
+  position: absolute;
+  bottom: 20px;
+  margin-left: 23px;
+  padding:14px 15px;
+  max-width: calc((100%) - 60px);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background-color: white;
+  box-sizing: border-box;
 }
 

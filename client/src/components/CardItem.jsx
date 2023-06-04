@@ -20,30 +20,38 @@ function CardItem(props) {
           <img src={props.src} 
           alt ={props.title}
           className='card_item_img_inside'/>
-        <h5 className='cards_item_rating' data-category={props.rating}></h5>
+        <h5 className='cards_item_rating' data-category={props.price}></h5>
+        {/* <div className='card_heart_box'> */}
+          <span className='card_heart_box'></span>
+          <span className='card_heart' onClick={handleLike} > 
+          {like ? <AiFillHeart /> : <AiOutlineHeart/>}</span>
+          {/* </div> */}
         </Link>
 
         {/*Heading, which displays the location of the apartment*/}
         <div className='heading_post'> 
           <div className='card_header'>
             {props.title}
-            <span className='card_heart' onClick={handleLike}>
+            {/* <span className='card_heart' onClick={handleLike}>
             {like ? <AiFillHeart /> : <AiOutlineHeart/>}
-            </span>
+            </span> */}
           </div>
           {/*display heart for like button */}
         </div>
 
         {/*This is the description of the apartment, short two
         to three lines*/}
-        <p className='card_body'>{props.excerpt}</p>
-
+        <div className='card_body_wrap'>
+          <p className='card_body'>{props.excerpt}
+            <br/><br/><span className='card_date'>Available: {props.date} </span>
+          </p>
+        </div>
         <div className='card_author_wrap'>
           <p className='card_author_txt'>{props.author_name}</p>
         </div>
-        <div className='card_price_wrap'>
+        {/* <div className='card_price_wrap'>
           <p className='card_price'>{props.price}</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

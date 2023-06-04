@@ -6,11 +6,11 @@ import '../FrontPage.css';
 function Explore() {
   return (
     <>
-      <div className='front-container'>
+      <div className='explore-container'>
         <img class='img-background' src={process.env.PUBLIC_URL + './images/explore.gif'} alt='explore' />
         <h1>Explore</h1>
-        <Cards />
       </div>
+        <Cards />
     </>
   );
 }
