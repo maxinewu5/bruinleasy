@@ -1,3 +1,11 @@
+.sticky {
+  box-shadow: 0px 5px 10px white;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+}
+
 .navbar {
     height: 50px;
     width: 100%;
@@ -7,7 +15,7 @@
     font-size: 1.2rem;
     position: sticky;
     top: 0;
-    z-index: 999;
+    box-sizing: border-box;
   }
   
   .navbar-container {
@@ -21,7 +29,7 @@
   .navbar-logo {
     color: #fff;
     justify-self: start;
-    margin-left: 20px;
+    margin-left: 25px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -39,25 +47,6 @@
     object-position: center 48%;
   }
 
-  /* .login-pic {
-    position: absolute;
-    top: -4px;
-    right: 6px; 
-    object-fit: cover;
-    width: 150px;
-    height: 48px;
-    object-position: center 48%; 
-  } */
-  
-  /* .nav-menu {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 5px;
-    list-style: none;
-    justify-content: flex-start;
-    margin-right: 2rem;
-  }
-   */
   .nav-item {
     object-fit: cover;
     height: 48px;
