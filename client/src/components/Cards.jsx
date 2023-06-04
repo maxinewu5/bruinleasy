@@ -12,7 +12,7 @@ function Cards() {
           <ul className='cards__items'>
             <CardItem 
                 src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
-                title='Kelton, Los Angeles'
+                title='Kelton, LA'
                 author_name='Maxine'
                 author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
                 excerpt='This is a great apartment for you!! Try it i w o rd word wrap plz'

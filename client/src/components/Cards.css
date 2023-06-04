@@ -65,17 +65,17 @@ h1 {
   transition-duration: 700ms;
   text-align: left;
   margin-left: 20px;
-  margin-bottom: 8px;
+  margin-top: 15px;
+  margin-bottom: 4px;
   cursor: pointer;
-  font-size: 2xl;
-  font-weight: 500;
-  /* color: #50A5FF; */
-}
-
-.card_header {
+  color: #50A5FF;
   text-decoration: none;
 }
 
+.card_header {
+  font-size: 25px;
+  font-weight: 500;
+}
 
 .heading_post:hover {
   color: #FFD77B;
@@ -149,24 +149,23 @@ h1 {
 
 /*for the rating inside the picture frame */
 .cards_item_rating_box {
-  padding: 20px;
+  padding: 20px 30px 30px;
   z-index: 1;
 }
 
 .cards_item_rating {
   position: absolute;
   width: 100%;
-  padding-top: 74.5%;
+  padding-top: 59.5%;
   overflow: hidden;
   z-index: 1;
 }
 
 .cards_item_rating::after {
-  z-index: 1;
   content: attr(data-category);
   position: absolute;
   bottom: 0;
-  margin-right: 10px;
+  margin-left: 0px;
   padding: 6px 8px;
   max-width: calc((100%) - 60px);
   font-size: 12px;
@@ -190,23 +189,4 @@ depending on size of screen using flexboxes */
 /*heart for like button*/
 .heart {
   position: absolute;
-  background-color: pink;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left:0;
-  bottom:0;
-  height: 100px;
-  width: 100px;
-  transform: rotate(-45deg);
-}
-
-.heart::after {
-  background-color: pink;
-  content: "";
-  border-radius: 50%;
-  position: absolute;
-  height: 175px;
-  top: 0px;
-  left: 87.5px;
 }
