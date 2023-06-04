@@ -6,6 +6,7 @@ import Home from './components/pages/Home';
 import Explore from './components/pages/Explore';
 import Login from './components/Login';
 import SearchBar from './components/SearchBar';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/Explore' element={<Explore />} />
           <Route path = '/Login' element = {<Login />} />
           <Route path = '/Profile' element = {<SearchBar />} />
+          <Route path = '/User' element = {<UserProfile />} />
         </Routes>
       </Router>
     </>
