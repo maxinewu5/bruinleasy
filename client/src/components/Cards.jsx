@@ -23,7 +23,7 @@ function Cards() {
                 src={process.env.PUBLIC_URL + './images/aprt7.png'}
                 title='Mowe, LA'
                 author_name='Janie'
-                excerpt='Best apartment ever!!!!'
+                excerpt='Best apartment ever!!!! /nWe have aircon /nWe are gret'
                 rating='5 star'
                 price='$$$$$'
                 />
@@ -31,15 +31,15 @@ function Cards() {
                 src={process.env.PUBLIC_URL + './images/aprt6.png'}
                 title='ajksgd, LA'
                 author_name='Anirudhk'
-                excerpt='Great spot hehe'
+                excerpt='Great spot hehe /nFour bedroom /Big kitchen come try why does it not wrp'
                 rating='5 star'
                 price='$$$'
                 />
             <CardItem 
                 src={process.env.PUBLIC_URL + './images/aprt4.png'}
-                title='agkljkfdjhuie, LA'
+                title='agkuie, LA'
                 author_name='srinut'
-                excerpt='WE have sooo many rooms'
+                excerpt='WE have sooo many rooms js v more interesting facts, some sizes'
                 rating='5 star'
                 price='$$'
                 />
@@ -47,7 +47,7 @@ function Cards() {
                 src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
                 title='Mowe, LA'
                 author_name='Janie'
-                excerpt='Best apartment ever!!!!'
+                excerpt='Best apartment ever!!!! really great experiences from over 10 students'
                 rating='5 star'
                 price='$'
                 />
@@ -55,7 +55,7 @@ function Cards() {
                 src={process.env.PUBLIC_URL + './images/aprt5.png'}
                 title='ajksgd, LA'
                 author_name='Anirudhk'
-                excerpt='Great spot hehe'
+                excerpt='Great spot hehe, very clean, relatively new, good place to live'
                 rating='5 star'
                 price='$$$$'
                 />
