@@ -63,8 +63,14 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                             <Link to='/ReportUser' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Report User" />
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Report User" />}
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />}
+                            </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link to='/User' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/myprofile.png'} alt = "My Profile" />
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/myprofile.png'} alt = "My Profile" />}
                             </Link>
                         </li>
                     </ul>
