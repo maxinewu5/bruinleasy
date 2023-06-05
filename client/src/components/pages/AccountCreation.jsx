@@ -48,7 +48,7 @@ export default function CreateAccount()
       else{
             //creates a user via email and password auth. 
             //Treates g.ucla.edu as ucla.edu
-            if(EmailID.slice(-8) === "ucla.edu")
+            if(EmailID.slice(-8) === "ucla.edu" && !(EmailID.slice(-10) === "g.ucla.edu"))
             {
                 const email = EmailID.substring(0,EmailID.length - 8) + "g.ucla.edu"
                 try{
@@ -72,7 +72,6 @@ export default function CreateAccount()
                 catch (error) 
                 {
                     alert(error)
-                    window.location.reload(false);
                 }
             }
             else

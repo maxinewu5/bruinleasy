@@ -9,6 +9,7 @@ import CreateAccount from '../src/components/pages/AccountCreation'
 import SearchBar from './components/SearchBar';
 import UserProfile from './components/UserProfile';
 import ReportUser from './components/pages/ReportAUser';
+
 function App() {
   return (
     <>
