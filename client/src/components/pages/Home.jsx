@@ -2,10 +2,10 @@ import React from 'react';
 import '../../App.css';
 import FrontPage from '../FrontPage';
 
-function Home() {
+function Home({user}) {
   return (
     <>
-      <FrontPage />
+      <FrontPage user={user}/>
     </>
   );
 }
