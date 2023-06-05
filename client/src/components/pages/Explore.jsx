@@ -8,7 +8,7 @@ function Explore() {
     <>
       <div className='explore-container'>
         <img class='img-background' src={process.env.PUBLIC_URL + './images/explore.gif'} alt='explore' />
-        <h1>Explore</h1>
+        <img className='img-title' src={process.env.PUBLIC_URL + './images/explore-title.png'} alt='explore' />
       </div>
         <Cards />
     </>

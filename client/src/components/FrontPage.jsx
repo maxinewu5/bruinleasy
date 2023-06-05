@@ -2,14 +2,12 @@ import React from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './FrontPage.css';
-// import dribbble from '../images/dribbble.gif';
 
 function FrontPage() {
     return (
         <div className='front-container'>
-            {/* <img src={dribbble}  /> */}
-            <img class='img-background' src={process.env.PUBLIC_URL + './images/house.gif'} alt='house' />
-            <h1>WELCOME</h1>
+            <img className='img-background' src={process.env.PUBLIC_URL + './images/house.gif'} alt='house' />
+            <img className='img-title' src={process.env.PUBLIC_URL + './images/welcome1.png'} alt='welcome' />
             <div className='front-btns'>
                 <Button 
                 className='btns' 

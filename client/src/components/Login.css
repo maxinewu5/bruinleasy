@@ -1,3 +1,172 @@
+.login_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 200px;
+}
+
+.login_submission {
+  align-items: right;
+  padding-left: 50%;
+}
+
+.login_container {
+  box-sizing: border-box;
+  padding: 0px 20px 20px -10px;
+  width: 900px;
+  height: 550px;
+  border: 1px solid;
+  border-radius: 10px;
+  border: transparent;
+  box-shadow: 2px 3px 28px 1px rgba(0,0,0,0.1);
+}
+
+.login_box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  height: 30px;
+  width: 300px;
+  position: relative;
+  bottom: 370px;
+  left: 85px;
+  font-size: 18px;
+  text-indent: 10px;
+}
+
+.login_logo_pic {
+  position: absolute;
+  width: 330px;
+  bottom: 73%;
+  left: 49%;
+  transform: translate(25%, 50%);
+}
+
+.login_house_logo {
+  position: relative;
+  overflow: hidden;
+  padding-right: 50%;
+  border: 1px solid transparent;
+  width: 54%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 47.5%;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/*buttons*/
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 360px;
+  left: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_buttons_container {
+  display: relative;
+  margin-top: 60%;
+}
+
+.login_btns {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  bottom: 310px;
+  left: 4%;
+  margin: 20px;
+} 
+
+.fcGoogle {
+  position: relative;
+  top: 2.5px;
+  margin-right: 2.5px;
+}
+
+.btn--outline--small {
+  cursor: pointer;
+  background-color: transparent;
+  color: #162031;
+  border: 0.5px solid var(#394252);
+  border-radius: 10px;
+  transition: all 0.3s ease-out;
+  padding: 8px 17px;
+  font-size: 13px;
+  width: 310px;
+  margin: -6px;
+}
+.btn--outline--medium {
+  cursor: pointer;
+  background-color: transparent;
+  color: #162031;
+  border: 1px solid var(#162031);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease-out;
+  padding: 11px 20px;
+  font-size: 17px;
+  width: 310px;
+  margin: 5px;
+}
+
+.btn--outline--large {
+  cursor: pointer;
+  background-color: transparent;
+  color: #162031;
+  border: 1px solid var(#162031);
+  border-radius: 3px;
+  transition: all 0.3s ease-out;
+  padding: 11px 20px;
+  font-size: 17px;
+  margin: 5px;
+}
+
+.btn--medium {
+  padding: 8px 20px;
+  font-size: 17px;
+}
+
+.btn--large {
+  padding: 12px 26px;
+  font-size: 17px;
+}
+
+.btn--outline--small:hover {
+  transition: all 0.3s ease-out;
+  background: #fff;
+  color: #7ABBFF;
+  border-color:#50A5FF;
+  font-size: 16px;
+  transition: 250ms;
+}
+.btn--outline--large:hover,
+.btn--outline--medium:hover {
+  transition: all 0.3s ease-out;
+  background: #334058;
+  color: white;
+  font-size: 20px;
+  transition: 250ms;
+}
+
+
 .App {
     text-align: center;
   }

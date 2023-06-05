@@ -47,7 +47,7 @@ function Cards() {
                 date='3/1-9/1'
                 price='$$'
                 />
-                       <CardItem 
+            <CardItem 
                 src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
                 title='Mowe, LA'
                 author_name='Janie'
