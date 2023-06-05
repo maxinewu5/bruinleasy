@@ -18,6 +18,7 @@ import AddOcc from "./add-occupation";
 import AddImages from "./add-images";
 import AddDescription from "./add-description";
 import AddPrice from "./add-price";
+import AddDates from "./add-dates";
 
 // Function to add listings....obviously
 const AddListing = ({ user }) => {
@@ -30,6 +31,7 @@ const AddListing = ({ user }) => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(1200);
+  const [dates, setDates] = useState(["", ""]);
 
   const handleNextAddress = (addressData) => {
     setAddress(addressData);
@@ -56,6 +58,10 @@ const AddListing = ({ user }) => {
 
   const handleNextPrice = (price) => {
     setPrice(price);
+  };
+
+  const handleNextDates = (updatedDates) => {
+    setDates(updatedDates);
   };
 
   const getImageURLs = async (path) => {
@@ -92,6 +98,8 @@ const AddListing = ({ user }) => {
       UserEmail: user.email,
       Description: description,
       Rent: price,
+      StartDate: dates[0],
+      EndDate: dates[0],
     };
 
     const addProperty = async () => {
@@ -196,9 +204,10 @@ const AddListing = ({ user }) => {
           description={description}
         />
       )}
-      {currentPage === 5 && <AddPrice onNext={handleNextPrice} price={price} />}
+      {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
+      {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
 
-      {currentPage === 6 && (
+      {currentPage === 7 && (
         <div>
           <h2>Review and Submit</h2>
           {/* <p>Address:</p>
@@ -215,7 +224,7 @@ const AddListing = ({ user }) => {
         </div>
       )}
       {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
-      {currentPage < 6 && <button onClick={handleNext}>Next</button>}
+      {currentPage < 7 && <button onClick={handleNext}>Next</button>}
     </div>
   );
 };
