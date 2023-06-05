@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: 1px solid transparent;
   height: 30px;
@@ -42,6 +42,7 @@
   bottom: 370px;
   left: 85px;
   font-size: 18px;
+  font-family: 'Nunito', sans-serif;
   text-indent: 10px;
 }
 
@@ -113,6 +114,21 @@
   width: 310px;
   margin: -6px;
 }
+
+.btn--outline--small--half {
+  cursor: pointer;
+  background-color: transparent;
+  color: #162031;
+  border: 0.5px solid var(#394252);
+  border-radius: 10px;
+  transition: all 0.3s ease-out;
+  padding: 12px 17px;
+  font-size: 17px;
+  width: 120px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
 .btn--outline--medium {
   cursor: pointer;
   background-color: transparent;
@@ -166,55 +182,3 @@
   transition: 250ms;
 }
 
-
-.App {
-    text-align: center;
-  }
-  
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-
-  /*for report page*/
-  .report_text {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 89px;
-    bottom: 370px;
-    font-size: 12px;
-    color: gray;
-    max-width: 310px;
-  }

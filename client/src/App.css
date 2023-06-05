@@ -1,3 +1,8 @@
+/*import font*/
+@fontface {
+  font-family: 'Nunito', sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Nunito')
+}
 .App {
   text-align: center;
 }

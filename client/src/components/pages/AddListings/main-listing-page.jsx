@@ -19,6 +19,8 @@ import AddImages from "./add-images";
 import AddDescription from "./add-description";
 import AddPrice from "./add-price";
 import AddDates from "./add-dates";
+import './Listing.css';
+import '../../Login.css';
 
 // Function to add listings....obviously
 const AddListing = ({ user }) => {
@@ -181,10 +183,9 @@ const AddListing = ({ user }) => {
   };
 
   return (
-    <div>
-      <h1>
+    <div className='listing_page' >
+      <h1 className='title'>
         To add your property we will take you through a series of steps
-        (Placeholder)
       </h1>
       {currentPage === 0 && (
         <AddAddress onNext={handleNextAddress} address={address} />
@@ -223,8 +224,10 @@ const AddListing = ({ user }) => {
           <button onClick={handleSubmit}>Submit</button>
         </div>
       )}
-      {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
-      {currentPage < 7 && <button onClick={handleNext}>Next</button>}
+      <div className='button_next'>
+        {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
+        {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
+      </div>
     </div>
   );
 };
