@@ -1,6 +1,6 @@
-import React, { useReducer }, {useState} from "react";
-import './Login.css';
-import {Link, useNavigate, useEffect} from "react-router-dom";
+import React, { useReducer, useState, useEffect } from "react";
+import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../Firebase";
 import { getAuth, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import {
@@ -14,6 +14,10 @@ import {
 import { db } from "../Firebase";
 import Home from "./pages/Home";
 import AddListing from "./pages/AddListings/main-listing-page";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Button } from "./Button";
+import CreateAccount from "./pages/AccountCreation";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const signInWithGoogle = () => {
@@ -82,6 +86,7 @@ const Login = () => {
     // Cleanup function
     return () => unsubscribe();
   }, []);
+
   const handleSignOut = () => {
     const auth = getAuth();
     auth.signOut().catch((error) => {
@@ -89,15 +94,9 @@ const Login = () => {
     });
     refreshPage();
   };
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
-import { Button } from './Button';
-import CreateAccount from './pages/AccountCreation';
-import { FcGoogle } from 'react-icons/fc';
 
-
-const Login = () => {
-  const [EmailID, setEmailID] = useState('');
-  const [Password, setPassword] = useState('');
+  const [EmailID, setEmailID] = useState("");
+  const [Password, setPassword] = useState("");
   const navigate = useNavigate();
   /*
   -Username and Password taken in from the input 
@@ -111,25 +110,28 @@ const Login = () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, EmailID, Password);
-      navigate('/');
-// ...
+      navigate("/");
+      // ...
     } catch (error) {
-      alert('Invalid login details');
-      window.location.reload(false);;
-    };
+      alert("Invalid login details");
+      window.location.reload(false);
+    }
   };
 
   return !user ? (
     <React.Fragment>
-      <div className='login_page'>
-        <div className='login_container'>
-          <img className='login_house_logo' src={process.env.PUBLIC_URL + './images/login-key.png'} alt = "Login-House" />
+      <div className="login_page">
+        <div className="login_container">
+          <img
+            className="login_house_logo"
+            src={process.env.PUBLIC_URL + "./images/login-key.png"}
+            alt="Login-House"
+          />
           {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
           {/* <img src= {process.env.PUBLIC_URL + './images/logo.png'} alt = "BruinLeasy logo"/> */}
-          <div className='login_submission'>
-            <form classname = "login_form" onSubmit={handleSubmit}> 
-            {
-              /*
+          <div className="login_submission">
+            <form classname="login_form" onSubmit={handleSubmit}>
+              {/*
               -onChange is a pre-defined prop that defines what is to be done when changes are made to the corresponding
               input field. 
               -In this case, it calls a funcion defined in-line with an event object. 
@@ -138,38 +140,63 @@ const Login = () => {
               -One of the properties of the event is 'target' which is an object that corresponds to the specific field 
               that was changed(i.e. the specific input field that was modified)
               -'Value' is a property of target that stores the changes made to the input fields value. 
-              */
-            }
-            <img class='login_logo_pic' src={process.env.PUBLIC_URL + './images/logo.png'} alt = "Logo" />
-            <input className='login_box' type = "email" placeholder = "Email" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
-            <br />
-            <input className='login_box' type = "password" placeholder = "Password" onChange = {(event)=>{setPassword(event.target.value)}} value = {Password}/>
-            <br />
-            {
-              /*
+              */}
+              <img
+                class="login_logo_pic"
+                src={process.env.PUBLIC_URL + "./images/logo.png"}
+                alt="Logo"
+              />
+              <input
+                className="login_box"
+                type="email"
+                placeholder="Email"
+                onChange={(event) => {
+                  setEmailID(event.target.value);
+                }}
+                value={EmailID}
+              />
+              <br />
+              <input
+                className="login_box"
+                type="password"
+                placeholder="Password"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                value={Password}
+              />
+              <br />
+              {/*
               -Whenever a button is defined by default within a form tag, it is automatically treated as a submit button.
               -Clicking on this button will submit the form.
-            */
-            }
-            <div className='submit'>
-            <button className='btn--outline--medium'>Submit</button>
-            </div>
+            */}
+              <div className="submit">
+                <button className="btn--outline--medium">Submit</button>
+              </div>
             </form>
-            <div className='login_btns'>
-              <button className='btn--outline--small' onClick={signInWithGoogle}><FcGoogle className='fcGoogle'/>   Sign in with Google</button> <br />
-              <Link to='/CreateAccount'> 
-                <button className='btn--outline--small'>New? Create An Account</button>
+            <div className="login_btns">
+              <button
+                className="btn--outline--small"
+                onClick={signInWithGoogle}
+              >
+                <FcGoogle className="fcGoogle" /> Sign in with Google
+              </button>{" "}
+              <br />
+              <Link to="/CreateAccount">
+                <button className="btn--outline--small">
+                  New? Create An Account
+                </button>
               </Link>
             </div>
           </div>
         </div>
-    </div>
+      </div>
       {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
       <img
         src={process.env.PUBLIC_URL + "./images/logo.png"}
         alt="BruinLeasy logo"
       />
-      <form classname="Login-Form" onSubmit={submit}>
+      <form classname="Login-Form" onSubmit={handleSubmit}>
         {/*
       -onChange is a pre-defined prop that defines what is to be done when changes are made to the corresponding
       input field. 
@@ -181,11 +208,11 @@ const Login = () => {
       -'Value' is a property of target that stores the changes made to the input fields value. 
        */}
         <input
-          placeholder="Username"
+          placeholder="Email"
           onChange={(event) => {
-            setUsername(event.target.value);
+            setEmailID(event.target.value);
           }}
-          value={Username}
+          value={EmailID}
         />
         <br />
         <input
