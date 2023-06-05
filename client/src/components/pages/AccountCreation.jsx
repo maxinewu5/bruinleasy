@@ -3,7 +3,7 @@ import { signInWithGoogle, auth } from "../../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import {getFirestore, collection, doc, setDoc} from "firebase/firestore"
-
+import '../Login.css';
 export default function CreateAccount()
 {
     /* These variables are used to store the name, email ID, and password entered by the user when they create an account */
@@ -105,29 +105,43 @@ export default function CreateAccount()
     }
     return(
     <React.Fragment>
-    {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
-    <form classname = "Login-Form" onSubmit={submit}> 
-    {
-      /*
-      -onChange is a pre-defined prop that defines what is to be done when changes are made to the corresponding
-      input field. 
-      -In this case, it calls a funcion defined in-line with an event object. 
-      -The event object stores the information corresponding to the change, and is automatically created whenever
-      such changes are made by the user. 
-      -One of the properties of the event is 'target' which is an object that corresponds to the specific field 
-      that was changed(i.e. the specific input field that was modified)
-      -'Value' is a property of target that stores the changes made to the input fields value. 
-       */
-    }
-    <input type = "email" placeholder = "Email id" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
-    <br />
-    <input type = "text" placeholder = "Name" onChange = {(event)=>{setName(event.target.value)}} value = {Name}/>
-    <br />
-    <input placeholder = "Password" onChange = {(event)=>{setPassword(event.target.value)}} value = {Password}/>
-    <br />
-    <button>Create an Account</button>
-    </form>
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
-    </React.Fragment>);
-    }
-  
+        <div className='login_page'>
+            <div className='login_container'>
+                <img className='login_house_logo' src={process.env.PUBLIC_URL + './images/create-account.png'} alt = "Create Account" />
+                {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
+                {/* <img src= {process.env.PUBLIC_URL + './images/logo.png'} alt = "BruinLeasy logo"/> */}
+                <div className='login_submission'>
+                {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
+                    <form classname = "login_form" onSubmit={submit}> 
+                    {
+                    /*
+                    -onChange is a pre-defined prop that defines what is to be done when changes are made to the corresponding
+                    input field. 
+                    -In this case, it calls a funcion defined in-line with an event object. 
+                    -The event object stores the information corresponding to the change, and is automatically created whenever
+                    such changes are made by the user. 
+                    -One of the properties of the event is 'target' which is an object that corresponds to the specific field 
+                    that was changed(i.e. the specific input field that was modified)
+                    -'Value' is a property of target that stores the changes made to the input fields value. 
+                    */
+                    }
+                    <img class='login_logo_pic' src={process.env.PUBLIC_URL + './images/darklogo.png'} alt = "DarkLogo" />
+         /images/create-account.png           <input className="login_box" placeholder = "Email" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
+                    <br />
+                    <input className="login_box" placeholder = "Name" onChange = {(event)=>{setName(event.target.value)}} value = {Name}/>
+                    <br />
+                    <input className="login_box" placeholder = "Password" onChange = {(event)=>{setPassword(event.target.value)}} value = {Password}/>
+                    <br />
+                    <div className='submit'>
+                        <button className='btn--outline--medium'>Create an Account</button>
+                    </div>
+                    </form>
+                    <div className='login_btns'>
+                        <button className='btn--outline--small' onClick={signInWithGoogle}>Sign in with Google</button>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </React.Fragment>
+    );
+}

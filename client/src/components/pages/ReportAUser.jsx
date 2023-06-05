@@ -63,7 +63,7 @@ const ReportUser =() =>
         <React.Fragment>
             <div className='login_page'>
                 <div className='login_container'>
-                    <img className='login_house_logo' src={process.env.PUBLIC_URL + './images/login-key.png'} alt = "Login-House" />
+                    <img className='login_house_logo' src={process.env.PUBLIC_URL + './images/report!.gif'} alt = "Report" />
                     {/*For a form element, hitting enter on either input field will result in form submission. Classname defined for future css styling.*/}
                     {/* <img src= {process.env.PUBLIC_URL + './images/logo.png'} alt = "BruinLeasy logo"/> */}
                     <div className='login_submission'>

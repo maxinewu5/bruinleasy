@@ -50,27 +50,21 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/Search' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/search.png'} alt = "Seach" />
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/search.png'} alt = "Search" />}
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
                             <Link to='/Login' className='nav-links' onClick={closeMobileMenu}>
                                 {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Login" />
                                 : <img class='display-none' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Login" />}
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/ReportUser' className='nav-links' onClick={closeMobileMenu}>
-                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />
-                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />}
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
                             <Link to='/User' className='nav-links' onClick={closeMobileMenu}>
                                 {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/myprofile.png'} alt = "My Profile" />
                                 : <img class='display-none' src={process.env.PUBLIC_URL + './images/myprofile.png'} alt = "My Profile" />}
+                            </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link to='/ReportUser' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/report.png'} alt = "Report User" />}
                             </Link>
                         </li>
                     </ul>
