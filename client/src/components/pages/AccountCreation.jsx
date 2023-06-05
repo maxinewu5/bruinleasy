@@ -126,7 +126,7 @@ export default function CreateAccount()
                     */
                     }
                     <img class='login_logo_pic' src={process.env.PUBLIC_URL + './images/darklogo.png'} alt = "DarkLogo" />
-         /images/create-account.png           <input className="login_box" placeholder = "Email" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
+                    <input className="login_box" placeholder = "Email" onChange = {(event)=>{setEmailID(event.target.value)}} value = {EmailID}/>
                     <br />
                     <input className="login_box" placeholder = "Name" onChange = {(event)=>{setName(event.target.value)}} value = {Name}/>
                     <br />
