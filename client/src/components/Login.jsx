@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../Firebase";
@@ -12,11 +12,8 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "../Firebase";
-import Home from "./pages/Home";
 import AddListing from "./pages/AddListings/main-listing-page";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Button } from "./Button";
-import CreateAccount from "./pages/AccountCreation";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
@@ -108,14 +105,36 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const email_end = EmailID.slice(-8)
+      if(!(email_end === 'ucla.edu'))
+      {
+        alert("Please enter a UCLA student email ID");
+      }
+      //Empty password entered by the user
+      else if(Password === '')
+      {
+        alert("Please enter a Password");
+      }
+      else{
+
       const auth = getAuth();
-      await signInWithEmailAndPassword(auth, EmailID, Password);
-      navigate("/");
+      if(EmailID.slice(-8) === "ucla.edu" && !(EmailID.slice(-10) === "g.ucla.edu"))
+      {  
+        const email = EmailID.substring(0,EmailID.length - 8) + "g.ucla.edu"
+        await signInWithEmailAndPassword(auth, email, Password);
+        navigate("/");
+      }
+      else{
+        await signInWithEmailAndPassword(auth, EmailID, Password);
+        navigate("/");
+      }
+    }
       // ...
     } catch (error) {
       alert("Invalid login details");
       window.location.reload(false);
     }
+  
   };
 
   return !user ? (

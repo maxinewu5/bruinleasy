@@ -31,19 +31,16 @@ export default function CreateAccount()
       if(!(email_end === 'ucla.edu'))
       {
         alert("Please enter a UCLA student email ID");
-        window.location.reload(false);
       }
       //Empty password entered by the user
       else if(Password === '')
       {
         alert("Please enter a Password");
-        window.location.reload(false);
       }
       //No name field entered by the user
       else if(Name === '')
       {
         alert("Please enter a Name");
-        window.location.reload(false);
       }
       else{
             //creates a user via email and password auth. 
