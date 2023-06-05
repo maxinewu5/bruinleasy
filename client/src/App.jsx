@@ -8,7 +8,7 @@ import Login from './components/Login';
 import CreateAccount from '../src/components/pages/AccountCreation'
 import SearchBar from './components/SearchBar';
 import UserProfile from './components/UserProfile';
-
+import ReportUser from './components/pages/ReportAUser';
 function App() {
   return (
     <>
@@ -22,6 +22,7 @@ function App() {
           <Route path = '/CreateAccount' element = {<CreateAccount />} />
           <Route path = '/Search' element = {<SearchBar />} />
           <Route path = '/User' element = {<UserProfile />} />
+          <Route path = '/ReportUser' element = {<ReportUser /> } />
         </Routes>
       </Router>
     </>

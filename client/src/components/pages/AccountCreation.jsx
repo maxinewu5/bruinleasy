@@ -48,9 +48,9 @@ export default function CreateAccount()
       else{
             //creates a user via email and password auth. 
             //Treates g.ucla.edu as ucla.edu
-            if(EmailID.slice(-10) === "g.ucla.edu")
+            if(EmailID.slice(-8) === "ucla.edu")
             {
-                const email = EmailID.substring(0,EmailID.length - 10) + "ucla.edu"
+                const email = EmailID.substring(0,EmailID.length - 8) + "g.ucla.edu"
                 try{
                     //adds a user with the email and password required. 
                     await createUserWithEmailAndPassword(auth, email, Password);

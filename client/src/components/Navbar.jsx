@@ -62,8 +62,9 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/Login' className='nav-links-login' onClick={closeMobileMenu}>
-                                Login
+                            <Link to='/ReportUser' className='nav-links' onClick={closeMobileMenu}>
+                                {click ? <img class='navbar-icons' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Report User" />
+                                : <img class='display-none' src={process.env.PUBLIC_URL + './images/login.png'} alt = "Report User" />}
                             </Link>
                         </li>
                     </ul>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Reac, { useState } from 'react';
+import { useState } from 'react';
 import CardItem from './CardItem';
 import './Cards.css';
 

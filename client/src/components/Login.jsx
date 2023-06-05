@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   /*
   -Username and Password taken in from the input 
-  -DEFAULT VALUES: Username = null, Password = null. 
+  -DEFAULT VALUES: Username = '', Password = ''. 
   -If nothing is entered into a particular field, Example - the user only enters a username and no password, 
   then Username stores the inputted value, and password is set to null. 
   -Use either Username = null or Password = null to check for incorrectly formatted Username/Password input

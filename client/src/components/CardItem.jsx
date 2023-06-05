@@ -29,9 +29,9 @@ function CardItem(props) {
         </Link>
 
         {/*Heading, which displays the location of the apartment*/}
-        <div className='heading_post'> 
+        <div className='heading_post' onClick = {console.log("CLICKED")}> 
           <div className='card_header'>
-            {props.title}
+           {props.title}
             {/* <span className='card_heart' onClick={handleLike}>
             {like ? <AiFillHeart /> : <AiOutlineHeart/>}
             </span> */}
