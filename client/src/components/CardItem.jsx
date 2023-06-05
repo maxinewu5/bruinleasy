@@ -1,15 +1,28 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { auth, db } from '../Firebase'
+import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
 
 function CardItem(props) {
-  const[like, setLike] = useState(false);
+  const[like, setLike] = useState(props.liked);
   /*this controls the like button, if clicked useState is set to true, and 
   the styling changes so that the heart changes color to indicate the post
   has been liked. */
 
-  const handleLike = () => setLike(!like);
+  //set the like to the input props.liked passed in from Cards.jsx
+  useEffect(()=> {  
+    setLike(props.liked)
+  }, []) 
+  useEffect(() => {
+    setLike(props.liked)
+  }, [props.liked]);  
 
+  const handleLike = () => {
+    setLike(!like);
+    props.setLikeState(!like)
+    props.onLike()
+  }
   
   return (
     <div className='card_item'>
@@ -24,7 +37,7 @@ function CardItem(props) {
         {/* <div className='card_heart_box'> */}
           <span className='card_heart_box'></span>
           <span className='card_heart' onClick={handleLike} > 
-          {like ? <AiFillHeart /> : <AiOutlineHeart/>}</span>
+          {(like) ? <AiFillHeart /> : <AiOutlineHeart/>}</span>
           {/* </div> */}
         </Link>
 
@@ -56,8 +69,5 @@ function CardItem(props) {
     </div>
   );
 } 
-// function CardItem(props) {
-
-// }
 
 export default CardItem;
