@@ -1,118 +1,130 @@
-import React, { useState, useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../Firebase";
+import React, { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../Firebase'
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
-import CardItem from "./CardItem";
+import CardItem from './CardItem'
 import Cards from './Cards'
-import { getAdditionalUserInfo } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { getAdditionalUserInfo } from 'firebase/auth';
 
 function UserProfile() {
-  //useEffect -- hook which handles side effects
-  //called whenever the page renders, can be used for API calls to firebase
-  //asyncronous function -- because API call returns promise -- either success/failure
 
-  const [userData, setUserData] = useState();
-  const [userProperties, setUserProperties] = useState([]);
-  const [favProperties, setFavProperties] = useState([]);
+    //track state of userData, user owned properties, and fav properties
+    const [ userData, setUserData ] = useState()
+    const [ userProperties, setUserProperties ] = useState([])
+    const [ favProperties, setFavProperties ] = useState([])
 
-  const getUserData = async (userEmail) => {
-    let usersRef = collection(db, "users");
-    const userDat = await getDocs(
-      query(usersRef, where("email", "==", userEmail))
-    );
-    const userDataFiltered = userDat.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setUserData(userDataFiltered[0]);
-  };
+    //gets user data given userEmail
+    const getUserData = async(userEmail) => {
+        let usersRef = collection(db, "users")
+        const userDat = await getDocs(query(usersRef, where("email", "==", userEmail)));
+        const userDataFiltered = userDat.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        setUserData(userDataFiltered[0])
+    }
 
-  const getUserProperties = async () => {
-    let userPropertiesData = [];
-    userData?.properties.map(async (property) => {
-      let docRef = doc(db, "Properties", property);
-      const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
-      userPropertiesData.push(docSnap.data());
-      console.log(userPropertiesData);
-      setUserProperties(userPropertiesData);
-    });
+    //fixed code
 
-    //setUserProperties(userPropertiesData)
-  };
+    //gets data for userProperties and favProperties for the user in userData
+    const getsProperties = async () => {
+        
+        //gets user properties
+        let userPropertiesData = [];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let propertiesRef = collection(db, "properties");
-      const propertyData = await getDocs(propertiesRef);
+        //checks if the user is null
+        if (userData == undefined) return
 
-      //get user properties
-      //bug: small delay for the properties to actually show up, looks weird
-      getUserProperties();
+        //use a promise to only continue when async function has finished calling
+        await Promise.all(
+          userData.properties.map(async (property) => {
+            //get the doc reference with the specified propertyid
+            let docRef = doc(db, "Properties", property);
+            //get the doc snapshot at this point in time
+            const docSnap = await getDoc(docRef);
+            //process the snapshot with .data() to pull the actual object date
+            //push to user properties
+            userPropertiesData.push({...docSnap.data(), id: docRef.id});
+            //note: syntax for extracting the actual data out of the firebase doc object
+            //{...doc.data(), id: doc.id})
+          })
+        );
+        setUserProperties(userPropertiesData);
 
-      //temp code: for favorite properties, needs to sync with the explore page like
-      console.log("user id:" + userData?.id);
-      if (!userData) return;
-      const q = query(propertiesRef, where("user_id", "==", userData?.id));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        console.log("doc " + doc.id, " => ", doc.data());
-      });
-      const propFilteredData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setFavProperties(propFilteredData);
-
-      //note: additional code for processing getDocs return
-      //const filteredData = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        //gets user favorite properties
+        let favPropertiesData = [];
+        await Promise.all(
+          userData.fav_properties.map(async (property) => {
+            let docRef = doc(db, "Properties", property);
+            const docSnap = await getDoc(docRef);
+            favPropertiesData.push({...docSnap.data(), id: docRef.id});
+          })
+        );
+        setFavProperties(favPropertiesData);
     };
 
-    const executeFunctions = async () => {
-      console.log("executing funcs");
-      await fetchData();
-      console.log("userdata");
-      console.log(userData);
+    // broken code 
 
-      console.log("fav properties");
-      console.log(favProperties);
-      console.log("finish executing funcs");
-    };
+    // const getUserProperties = async() => {
+    //     let userPropertiesData = []
+    //     userData?.properties.map(async (property) => {
+    //         let docRef = doc(db, "Properties", property)
+    //         const docSnap = await getDoc(docRef)
+    //         //console.log(docSnap.data())
+    //         userPropertiesData.push(docSnap.data())
+    //         //console.log(userPropertiesData)
+    //         setUserProperties(userPropertiesData)
+    //     })
 
-    executeFunctions();
-  }, [userData]);
+    //     let favPropertiesData = []  
+    //     console.log("user data fav property")
+    //     console.log(userData?.fav_properties)
+    //     userData?.fav_properties?.map(async (property) => {
+    //         console.log("fav property")
+    //         let docRef = doc(db, "Properties", property)
+    //         const docSnap = await getDoc(docRef)
+    //         //console.log(docSnap.data())
+    //         favPropertiesData.push(docSnap.data())
+    //         //console.log(favPropertiesData)
+    //         setFavProperties(favPropertiesData)
+    //     })
+    // }
 
-  useEffect(() => {
-    //get user data
-    //temp code: to be replaced with login auth code
-    let email = "maxinewu5@gmail.com";
-    getUserData(email);
-  }, []);
+    //useEffect -- hook which handles side effects
+    //- called whenever the page renders, can be used for API calls to firebase
+    //- calls asyncronous function because API call returns promise (either success/failure) 
+    //get properties upon user data update
 
-  const starRating = 4.89;
+    useEffect(()=> {
+        getsProperties()
+    }, [ userData ])
 
-  return (
-    <>
-      <h2>
-        {localStorage.name} ({starRating})
-      </h2>
-      <Link to="/AddListing">
-        <button>Add Listing</button>
-      </Link>
-      <button>Edit Profile</button>
+    //get user data upon load
+    useEffect(()=> {
+        //#TODO: replace with login auth code
+        let email = "maxinewu5@gmail.com"
+        getUserData(email)
+    }, [])
 
-      <h3>My Listings</h3>
-      {userProperties?.map((listing) => {
-        return <CardItem text={listing.AptName}></CardItem>;
-      })}
 
-      <h3>Favorite Listings</h3>
-      {favProperties?.map((listing) => {
-        return <CardItem></CardItem>;
-      })}
-    </>
-  );
+    return (
+        <>
+            <h2>{localStorage.name}</h2>   
+    
+            <button>Add Listing</button>
+            <button>Edit Profile</button>
+
+            <h3>My Listings</h3> 
+            
+            <Cards 
+                properties={userProperties}
+            />
+
+            <h3>Favorite Listings</h3>
+
+            <Cards 
+                properties={favProperties}
+            />
+
+        </>
+        );
 }
 
 export default UserProfile;

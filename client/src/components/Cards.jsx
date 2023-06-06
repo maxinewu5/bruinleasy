@@ -33,7 +33,7 @@ function Cards(props) {
     let new_favorite_properties = [...userData.fav_properties]
 
     if (new_favorite_properties.includes(propertyID)) {
-      console.log("removed")
+      //console.log("removed")
       new_favorite_properties.splice(new_favorite_properties.indexOf(propertyID), 1)
     } else {
       new_favorite_properties.push(propertyID)
@@ -44,6 +44,9 @@ function Cards(props) {
 
     console.log(new_favorite_properties)
   }
+
+  // console.log("props props")
+  // console.log(props?.properties)
 
   return (
     <div className='cards'>
