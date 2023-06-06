@@ -24,47 +24,49 @@ function CardItem(props) {
     props.onLike()
   }
   
+  const handleTitleClick = () => {
+    // Perform actions when title is clicked
+    console.log('Title clicked!');
+  };
+
   return (
     <div className='card_item'>
       <div className='card_item_bckgrd'>
-        
-        {/*image of apartment*/}
-        <Link className='card_item_img' href={props.post}>
-          <img src={props.src} 
-          alt ={props.title}
-          className='card_item_img_inside'/>
-        <h5 className='cards_item_rating' data-category={props.price}></h5>
-        {/* <div className='card_heart_box'> */}
+        <div className='card_item_img'>
+          <img src={props.src} alt={props.title} className='card_item_img_inside' />
+          <h5 className='cards_item_rating' data-category={props.price}></h5>
           <span className='card_heart_box'></span>
           <span className='card_heart' onClick={handleLike} > 
           {(like) ? <AiFillHeart /> : <AiOutlineHeart/>}</span>
           {/* </div> */}
-        </Link>
+        </div>
 
         {/*Heading, which displays the location of the apartment*/}
         <div className='heading_post'> 
           <div className='card_header'>
-            {props.title}
+            <Link className='card_header'>
+              <span onClick={() => PropertyDisplay("4Igbs9zIFcJAW1k8CZDS")}>{props.title}</span>
+            </Link>
             {/* <span className='card_heart' onClick={handleLike}>
             {like ? <AiFillHeart /> : <AiOutlineHeart/>}
             </span> */}
           </div>
           {/*display heart for like button */}
+          <span className='card_heart' onClick={handleLike}>
+            {like ? <AiFillHeart /> : <AiOutlineHeart />}
+          </span>
         </div>
 
-        {/*This is the description of the apartment, short two
-        to three lines*/}
         <div className='card_body_wrap'>
-          <p className='card_body'>{props.excerpt}
-            <br/><br/><span className='card_date'>Available: {props.date} </span>
+          <p className='card_body'>
+            {props.excerpt}
+            <br /><br />
+            <span className='card_date'>Available: {props.date}</span>
           </p>
         </div>
         <div className='card_author_wrap'>
           <p className='card_author_txt'>{props.author_name}</p>
         </div>
-        {/* <div className='card_price_wrap'>
-          <p className='card_price'>{props.price}</p>
-        </div> */}
       </div>
     </div>
   );
