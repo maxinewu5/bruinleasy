@@ -1,70 +1,70 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardItem from './CardItem';
+import { auth, db } from '../Firebase'
+import { collection, query, where, doc, getDoc, getDocs, setDoc, updateDoc, get } from "firebase/firestore";
 import './Cards.css';
+import { prodErrorMap } from 'firebase/auth';
 
-function Cards() {
+function Cards(props) {
+
+  const [ userData, setUserData ] = useState()
+  const [ favProperties, setFavProperties ] = useState()
+  const [ favUpdate , setFavUpdate ] = useState()
+
+  //get the user data! 
+  const getUserData = async(userEmail) => {
+    let usersRef = collection(db, "users")
+    const userDat = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    const userDataFiltered = userDat.docs.map((doc) => ({...doc.data(), id: doc.id}))
+    setUserData(userDataFiltered[0])
+  }
+
+  useEffect(()=> {
+    //temp code: to be replaced with login auth code 
+    let userEmail = "maxinewu5@gmail.com"
+    getUserData(userEmail)
+  }, [ favUpdate ])
+
+  const handleLike = async (propertyID) => {
+
+    let userEmail = localStorage.email
+
+    let userRef = doc(db, "users", userEmail);
+    let new_favorite_properties = [...userData.fav_properties]
+
+    if (new_favorite_properties.includes(propertyID)) {
+      console.log("removed")
+      new_favorite_properties.splice(new_favorite_properties.indexOf(propertyID), 1)
+    } else {
+      new_favorite_properties.push(propertyID)
+    }
+    await updateDoc(userRef, {
+      fav_properties: new_favorite_properties
+    })
+
+    console.log(new_favorite_properties)
+  }
+
   return (
     <div className='cards'>
-      <h1>Check out these EPIC Rentals!</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/apartment.jpeg'}
-                title='Kelton, LA'
-                author_name='Maxine'
-                author_photo={process.env.PUBLIC_URL + './images/apartment.jpeg'}
-                excerpt='This is a great apartment for you!! Try it i w o rd word wrap plz'
-                rating='5 star'
-                date='3/4-5/6'
-                price='$$$'
-                />
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt7.png'}
-                title='Mowe, LA'
-                author_name='Janie'
-                excerpt='Best apartment ever!!!! /nWe have aircon /nWe are gret'
-                rating='5 star'
-                date='7/8-9/9'
-                price='$$$$$'
-                />
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt6.png'}
-                title='ajksgd, LA'
-                author_name='Anirudhk'
-                excerpt='Great spot hehe /nFour bedroom /Big kitchen come try why does it not wrp'
-                rating='5 star'
-                date='5/7-8/9'
-                price='$$$'
-                />
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt4.png'}
-                title='agkuie, LA'
-                author_name='srinut'
-                excerpt='WE have sooo many rooms js v more interesting facts, some sizes'
-                rating='5 star'
-                date='3/1-9/1'
-                price='$$'
-                />
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt3.jpeg'}
-                title='Mowe, LA'
-                author_name='Janie'
-                excerpt='Best apartment ever!!!! really great experiences from over 10 students'
-                rating='5 star'
-                date='1/1-12/1'
-                price='$'
-                />
-            <CardItem 
-                src={process.env.PUBLIC_URL + './images/aprt5.png'}
-                title='ajksgd, LA'
-                author_name='Anirudhk'
-                excerpt='Great spot hehe, very clean, relatively new, good place to live'
-                rating='5 star'
-                date='5/10-7/10'
-                price='$$$$'
-                />
+            {props.properties?.map((listing) => {
+              return <CardItem 
+                key={listing.id}
+                src={listing.PropertyImageURLs[0]}
+                title={listing.AptName}
+                author_name={listing.OwnerEmail}
+                excerpt={listing.Description}
+                date={listing.StartDate?.toDate().toDateString() + " - " + listing.EndDate?.toDate().toDateString()}
+                price={"$" + listing?.Rent + "/mo"}
+                liked={userData?.fav_properties.includes(listing.id)}
+                onLike={()=>{ handleLike(listing.id) }}
+                setLikeState={()=>{setFavUpdate()}}
+              ></CardItem>
+            })}
+
           </ul>
         </div>
       </div>

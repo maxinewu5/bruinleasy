@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { auth, db } from '../Firebase'
+import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
 import PropertyDisplay from './pages/Property';
 
 function CardItem(props) {
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(props.liked);
+  /*this controls the like button, if clicked useState is set to true, and 
+  the styling changes so that the heart changes color to indicate the post
+  has been liked. */
 
-  const handleLike = () => setLike(!like);
+  //set the like to the input props.liked passed in from Cards.jsx
+  useEffect(()=> {  
+    setLike(props.liked)
+  }, []) 
+  useEffect(() => {
+    setLike(props.liked)
+  }, [props.liked]);  
+
+  const handleLike = () => {
+    setLike(!like);
+    props.setLikeState(!like)
+    props.onLike()
+  }
 
   const handleTitleClick = () => {
     // Perform actions when title is clicked
@@ -20,14 +37,18 @@ function CardItem(props) {
           <img src={props.src} alt={props.title} className='card_item_img_inside' />
           <h5 className='cards_item_rating' data-category={props.price}></h5>
           <span className='card_heart_box'></span>
-          <span className='card_heart' onClick={handleLike}>
-            {like ? <AiFillHeart /> : <AiOutlineHeart />}
-          </span>
-        </div>
-        <div className='heading_post'>
+          <span className='card_heart' onClick={handleLike} > 
+          {(like) ? <AiFillHeart /> : <AiOutlineHeart/>}</span>
+          {/* </div> */}
+        {/*Heading, which displays the location of the apartment*/}
+        <div className='heading_post'> 
           <Link className='card_header'>
             <span onClick={() => PropertyDisplay("4Igbs9zIFcJAW1k8CZDS")}>{props.title}</span>
           </Link>
+          {/*display heart for like button */}
+          <span className='card_heart' onClick={handleLike}>
+            {like ? <AiFillHeart /> : <AiOutlineHeart />}
+          </span>
         </div>
         <div className='card_body_wrap'>
           <p className='card_body'>
@@ -42,6 +63,6 @@ function CardItem(props) {
       </div>
     </div>
   );
-}
+} 
 
 export default CardItem;
