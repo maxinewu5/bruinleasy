@@ -97,6 +97,13 @@
     padding-left: 40px;
   }
 
+  .info_contain_occupation {
+    align-items: center;
+    padding-top: 25px;
+    padding-left: 31%;
+    font-size: 20px;
+  }
+
 label {
     font-size: 20px;
     margin-top: 10px;
@@ -130,4 +137,25 @@ label {
     bottom: 130px;
 }
 
- 
+.inde {
+  margin-bottom: 40px;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+/* for additional addons*/
+.bathroom_img {
+  width: 180px;
+  margin-left: 350px;
+  margin-top: -400px;
+  margin-bottom: 30px;
+}
+
+.bedroom_img {
+  width: 200px;
+  margin-top: -25px;
+  margin-left: 40px;
+}
