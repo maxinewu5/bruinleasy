@@ -5,6 +5,11 @@ const AddImages = ({ onNext, images }) => {
     onNext([...images, e.target.files[0]]);
   };
 
+  const handleRemoveImage = (index) => {
+    const updatedImages = images.filter((_, i) => i !== index);
+    onNext(updatedImages);
+  };
+
   return (
     <div>
       <h2>Please add images of your apartment</h2>
@@ -19,7 +24,10 @@ const AddImages = ({ onNext, images }) => {
         <div>
           <p>You have added the following images:</p>
           {images.map((element, index) => (
-            <p key={index}>{element.name}</p>
+            <div key={index}>
+              <p>{element.name}</p>
+              <button onClick={() => handleRemoveImage(index)}>x</button>
+            </div>
           ))}
         </div>
       )}

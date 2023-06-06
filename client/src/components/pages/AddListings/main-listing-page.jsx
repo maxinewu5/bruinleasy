@@ -33,10 +33,10 @@ const AddListing = () => {
   const [amenities, setAmenities] = useState(Array(5).fill(false));
   const [occCounters, setOccCounters] = useState([0, 0]);
   const [images, setImages] = useState([]);
+  // const [imageVals, setImageVals] = useState([]);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(1200);
   const [dates, setDates] = useState(["", ""]);
-  // console.log(dates);
 
   const handleNextAddress = (addressData) => {
     setAddress(addressData);
@@ -55,6 +55,7 @@ const AddListing = () => {
 
   const handleNextImages = (image) => {
     setImages(image);
+    // setImageVals(imageVal);
   };
 
   const handleNextDescription = (desc) => {
@@ -219,12 +220,26 @@ const AddListing = () => {
             Address: {address[0]}, {address[1]}, {address[3]}, {address[4]}{" "}
             {address[5]}
           </p>
-
+          <button onClick={() => setCurrentPage(0)}>Edit Address</button>
           <p>Amenities: {amenities.join(", ")}</p>
-          <p>Bedrooms: {occCounters[0]}</p>
-          <p>Bathrooms: {occCounters[1]}</p>
+          <button onClick={() => setCurrentPage(1)}>Edit Amenities</button>
+          <p>Bedrooms: {occCounters[1]}</p>
+          <button onClick={() => setCurrentPage(2)}>Edit Bedrooms</button>
+          <p>Bathrooms: {occCounters[0]}</p>
+          <button onClick={() => setCurrentPage(2)}>Edit Bathrooms</button>
           <p>Price: ${price}/month</p>
-          <p>Dates: {}</p>
+          <button onClick={() => setCurrentPage(6)}>Edit Price</button>
+          <p>
+            Dates:{" "}
+            {dates[0].toString().substring(4, 15) +
+              " - " +
+              dates[1].toString().substring(4, 15)}
+          </p>
+          <button onClick={() => setCurrentPage(5)}>Edit Dates</button>
+          <p>Description: {description}</p>
+          <button onClick={() => setCurrentPage(4)}>Edit Description</button>
+          <br />
+          <br />
           <button onClick={handleSubmit}>Submit</button>
         </div>
       )}
