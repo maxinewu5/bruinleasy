@@ -1,49 +1,73 @@
-import React from 'react';
-import '../../App.css';
-import Cards from '../Cards';
-import '../FrontPage.css';
-import SearchBar from '../SearchBar'
-
-import { useState, useEffect } from 'react';
-import { db } from '../../Firebase'
-import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
+import React from "react";
+import "../../App.css";
+import Cards from "../Cards";
+import "../FrontPage.css";
+import SearchBar from "../SearchBar";
+import { getAuth } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { db } from "../../Firebase";
+import {
+  collection,
+  query,
+  where,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import Login from "../Login";
 
 function Explore() {
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-  const [ allProperties, setAllProperties ] = useState([])
+  const [allProperties, setAllProperties] = useState([]);
 
   //get all properties
   const getAllProperty = async () => {
-    const propertyData = await getDocs(collection(db, "Properties"))
-    const propFilteredData = propertyData.docs.map((doc) => ({...doc.data(), id: doc.id}))
-    setAllProperties(propFilteredData)
-  }
+    const propertyData = await getDocs(collection(db, "Properties"));
+    const propFilteredData = propertyData.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setAllProperties(propFilteredData);
+  };
 
   //add property to user favorite
-  const addPropertyToUserFavorite = async(userEmail) => {
+  const addPropertyToUserFavorite = async (userEmail) => {
     //get the user collection
-    let usersRef = collection(db, "users")
-    //get the documents where email matches the user email 
-    const userDat = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    let usersRef = collection(db, "users");
+    //get the documents where email matches the user email
+    const userDat = await getDocs(
+      query(usersRef, where("email", "==", userEmail))
+    );
     //extract useful info from the documents
-    const userDataFiltered = userDat.docs.map((doc) => ({...doc.data(), id: doc.id}))
-  }
+    const userDataFiltered = userDat.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+  };
 
-  return (
+  return user ? (
     <>
-      <div className='explore-container'>
-        <img class='img-background' src={process.env.PUBLIC_URL + './images/explore.gif'} alt='explore' />
-        <img className='img-title' src={process.env.PUBLIC_URL + './images/explore-title.png'} alt='explore' />
+      <div className="explore-container">
+        <img
+          class="img-background"
+          src={process.env.PUBLIC_URL + "./images/explore.gif"}
+          alt="explore"
+        />
+        <img
+          className="img-title"
+          src={process.env.PUBLIC_URL + "./images/explore-title.png"}
+          alt="explore"
+        />
       </div>
-      
-      <SearchBar 
-        setFilteredProperties={setAllProperties}
-      />
 
-      <Cards 
-        properties={allProperties} 
-      />
+      <SearchBar setFilteredProperties={setAllProperties} />
+
+      <Cards properties={allProperties} />
     </>
+  ) : (
+    <Login />
   );
 }
 

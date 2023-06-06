@@ -1,9 +1,11 @@
 import React from "react";
 import "../App.css";
-import { Button } from "./Button";
+import { Button1, Button2 } from "./Button";
 import "./FrontPage.css";
+import { useNavigate } from "react-router-dom";
 
 function FrontPage() {
+  const navigate = useNavigate();
   return (
     <div className="front-container">
       <img
@@ -17,20 +19,20 @@ function FrontPage() {
         alt="welcome"
       />
       <div className="front-btns">
-        <Button
+        <Button1
           className="btns"
           buttonStyle="btn--outline"
           buttonSize="btn--large"
         >
           EXPLORE
-        </Button>
-        <Button
+        </Button1>
+        <Button2
           className="btns"
           buttonStyle="btn--primary"
           buttonSize="btn--large"
         >
           VIEW LISTINGS
-        </Button>
+        </Button2>
       </div>
     </div>
   );

@@ -1,13 +1,22 @@
-import React from 'react';
-import '../../App.css';
-import FrontPage from '../FrontPage';
+import React from "react";
+import "../../App.css";
+import FrontPage from "../FrontPage";
+import Login from "../Login";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-function Home({user}) {
+function Home() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   return (
     <>
-      <FrontPage user={user}/>
+      <FrontPage />
     </>
   );
 }
 
 export default Home;
+
+function refreshPage() {
+  window.location.reload(false);
+}
