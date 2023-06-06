@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import { getAuth } from "firebase/auth";
 /////////////////////////////////////////////////////////////////////////
 import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
@@ -19,9 +20,12 @@ import AddImages from "./add-images";
 import AddDescription from "./add-description";
 import AddPrice from "./add-price";
 import AddDates from "./add-dates";
+import Login from "../../Login";
 
 // Function to add listings....obviously
-const AddListing = ({ user }) => {
+const AddListing = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
   const PropertiesRef = collection(db, "Properties");
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -32,6 +36,7 @@ const AddListing = ({ user }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(1200);
   const [dates, setDates] = useState(["", ""]);
+  // console.log(dates);
 
   const handleNextAddress = (addressData) => {
     setAddress(addressData);
@@ -99,7 +104,7 @@ const AddListing = ({ user }) => {
       Description: description,
       Rent: price,
       StartDate: dates[0],
-      EndDate: dates[0],
+      EndDate: dates[1],
     };
 
     const addProperty = async () => {
@@ -180,7 +185,7 @@ const AddListing = ({ user }) => {
     setCurrentPage(currentPage + 1);
   };
 
-  return (
+  return user ? (
     <div>
       <h1>
         To add your property we will take you through a series of steps
@@ -210,22 +215,24 @@ const AddListing = ({ user }) => {
       {currentPage === 7 && (
         <div>
           <h2>Review and Submit</h2>
-          {/* <p>Address:</p>
           <p>
-            {address[0]}, {address[1]}
-          </p>
-          <p>
-            {address[3]}, {address[4]}, {address[5]}
+            Address: {address[0]}, {address[1]}, {address[3]}, {address[4]}{" "}
+            {address[5]}
           </p>
 
           <p>Amenities: {amenities.join(", ")}</p>
-          <p>Occupation Counters: {occCounters.join(", ")}</p> */}
+          <p>Bedrooms: {occCounters[0]}</p>
+          <p>Bathrooms: {occCounters[1]}</p>
+          <p>Price: ${price}/month</p>
+          <p>Dates: {}</p>
           <button onClick={handleSubmit}>Submit</button>
         </div>
       )}
       {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
       {currentPage < 7 && <button onClick={handleNext}>Next</button>}
     </div>
+  ) : (
+    <Login />
   );
 };
 

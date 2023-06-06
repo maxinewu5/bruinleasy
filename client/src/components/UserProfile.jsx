@@ -13,8 +13,10 @@ import CardItem from "./CardItem";
 import Cards from "./Cards";
 import { getAuth } from "firebase/auth";
 import Login from "./Login";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
+  const navigate = useNavigate();
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -121,7 +123,13 @@ function UserProfile() {
     <>
       <h2>{localStorage.name}</h2>
 
-      <button>Add Listing</button>
+      <button
+        onClick={() => {
+          navigate("/AddListing");
+        }}
+      >
+        Add Listing
+      </button>
       <button>Edit Profile</button>
 
       <h3>My Listings</h3>
