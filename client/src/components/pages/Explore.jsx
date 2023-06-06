@@ -12,15 +12,20 @@ function Explore() {
 
   const [ allProperties, setAllProperties ] = useState([])
 
+  //get all properties
   const getAllProperty = async () => {
     const propertyData = await getDocs(collection(db, "Properties"))
     const propFilteredData = propertyData.docs.map((doc) => ({...doc.data(), id: doc.id}))
     setAllProperties(propFilteredData)
   }
 
+  //add property to user favorite
   const addPropertyToUserFavorite = async(userEmail) => {
+    //get the user collection
     let usersRef = collection(db, "users")
+    //get the documents where email matches the user email 
     const userDat = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    //extract useful info from the documents
     const userDataFiltered = userDat.docs.map((doc) => ({...doc.data(), id: doc.id}))
   }
 
@@ -37,7 +42,6 @@ function Explore() {
 
       <Cards 
         properties={allProperties} 
-        addPropertyToUserFavorite={addPropertyToUserFavorite} 
       />
     </>
   );

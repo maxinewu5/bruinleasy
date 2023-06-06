@@ -8,14 +8,12 @@ import { getAdditionalUserInfo } from 'firebase/auth';
 
 function UserProfile() {
 
-    //useEffect -- hook which handles side effects
-    //called whenever the page renders, can be used for API calls to firebase
-    //asyncronous function -- because API call returns promise -- either success/failure 
-
+    //track state of userData, user owned properties, and fav properties
     const [ userData, setUserData ] = useState()
     const [ userProperties, setUserProperties ] = useState([])
     const [ favProperties, setFavProperties ] = useState([])
 
+    //gets user data given userEmail
     const getUserData = async(userEmail) => {
         let usersRef = collection(db, "users")
         const userDat = await getDocs(query(usersRef, where("email", "==", userEmail)));
@@ -24,27 +22,33 @@ function UserProfile() {
     }
 
     //fixed code
+
+    //gets data for userProperties and favProperties for the user in userData
     const getsProperties = async () => {
         
         //gets user properties
-
         let userPropertiesData = [];
 
+        //checks if the user is null
         if (userData == undefined) return
-        console.log("not null!")
 
+        //use a promise to only continue when async function has finished calling
         await Promise.all(
           userData.properties.map(async (property) => {
+            //get the doc reference with the specified propertyid
             let docRef = doc(db, "Properties", property);
+            //get the doc snapshot at this point in time
             const docSnap = await getDoc(docRef);
+            //process the snapshot with .data() to pull the actual object date
+            //push to user properties
             userPropertiesData.push({...docSnap.data(), id: docRef.id});
+            //note: syntax for extracting the actual data out of the firebase doc object
             //{...doc.data(), id: doc.id})
           })
         );
         setUserProperties(userPropertiesData);
 
         //gets user favorite properties
-      
         let favPropertiesData = [];
         await Promise.all(
           userData.fav_properties.map(async (property) => {
@@ -55,6 +59,8 @@ function UserProfile() {
         );
         setFavProperties(favPropertiesData);
     };
+
+    // broken code 
 
     // const getUserProperties = async() => {
     //     let userPropertiesData = []
@@ -81,25 +87,22 @@ function UserProfile() {
     //     })
     // }
 
+    //useEffect -- hook which handles side effects
+    //- called whenever the page renders, can be used for API calls to firebase
+    //- calls asyncronous function because API call returns promise (either success/failure) 
     //get properties upon user data update
+
     useEffect(()=> {
-
         getsProperties()
-
     }, [ userData ])
 
     //get user data upon load
     useEffect(()=> {
-        //get user data
-        //temp code: to be replaced with login auth code 
+        //#TODO: replace with login auth code
         let email = "maxinewu5@gmail.com"
         getUserData(email)
     }, [])
 
-    // console.log("user properties")
-    // console.log(userProperties)   
-    // console.log("fav properties")
-    // console.log(favProperties)  
 
     return (
         <>

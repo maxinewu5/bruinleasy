@@ -11,14 +11,14 @@ import { jaroWinklerDistance } from './scripts/search'
 
 // Overall Searching Functionality:
 // - Search:
-//   - Apartment Name 
-//   - Start Date / End Date
-//   - Price Range 
+//   - apartment name
+//   - start date / end date
+//   - price range
 // - Filter: 
 //   - single/double/triple 
-//   - Checkbox: air_con 
+//   - Checkbox: air conditioning
 
-function SearchBar(props) {
+function SearchBar( { setFilteredProperties }) {
 
   const [ userData, setUserData ] = useState()
   const [ searchQ, setSearchQ ] = useState("")
@@ -32,33 +32,39 @@ function SearchBar(props) {
   const getAllProperty = async () => {
     const propertyData = await getDocs(collection(db, "Properties"))
     const propFilteredData = propertyData.docs.map((doc) => ({...doc.data(), id: doc.id}))
-    props.setFilteredProperties(propFilteredData)
+    setFilteredProperties(propFilteredData)
   }
 
+  //function to handle when the search form is submitted
   const handleSubmit = async (e) => {
+    //prevents the page from refreshing like default
     e.preventDefault()
 
     let propertiesRef = collection(db, "Properties")
     const propertyData = await getDocs(propertiesRef)
+    //get all documnts from the properties collection
     const propSnap = await getDocs(collection(db, "Properties"));
 
+    //clean up propSnap to extract the actual useful data
     let propDocs = propSnap.docs.map((doc) => {
       return {...doc.data(), id: doc.id}
     })
 
     let filteredDocs = propDocs; 
 
+    //filter for date (only apply if date has been explicitly set by user, not default)
     if (dateFlag) {
       filteredDocs = filteredDocs.filter((doc) => {     
         if (!(doc.StartDate)) return false
         if (!(doc.EndDate)) return false
 
+        //calculates end dates and start dates in ms
         const pEndDate = doc.StartDate.toDate().getTime() / 1000
         const pStartDate = doc.EndDate.toDate().getTime() / 1000
-
         const qEndDate = new Date(endDate).getTime() / 1000
         const qStartDate = new Date(startDate).getTime() / 1000
 
+        //returns true if the doc matches the criteria
         return pEndDate < qEndDate && pStartDate > qStartDate;
       });
     }
@@ -66,12 +72,10 @@ function SearchBar(props) {
     //filter for search 
     if (searchQ != "") {
       filteredDocs = filteredDocs.filter((doc) => {
-        console.log(searchQ.toLocaleLowerCase())
-        console.log(doc.AptName)
-        console.log(doc)
-        
+        //make case insensitive
         let string1 = doc.AptName.toLocaleLowerCase()
         let string2 = searchQ.toLocaleLowerCase()
+        //do a fuzzy search based on jaroWinkler distance
         return jaroWinklerDistance(string1, string2) > 0.85
       });
     }
@@ -81,6 +85,7 @@ function SearchBar(props) {
       filteredDocs = filteredDocs.filter((doc) => {
         let propertyPrice = parseInt(doc.Rent); 
         let renterPrice = parseInt(priceQ);
+        //match between 90% to 110% of the price range
         return (renterPrice * 0.9 < propertyPrice) && (propertyPrice < renterPrice * 1.1);
       });
     }
@@ -94,7 +99,8 @@ function SearchBar(props) {
   
     //can add more filters here if necessary
   
-    props.setFilteredProperties(filteredDocs)
+    //update the filtered properties from the passed down function
+    setFilteredProperties(filteredDocs)
   }
 
   //on initial load, get properties 
