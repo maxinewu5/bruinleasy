@@ -85,7 +85,7 @@ const ReportUser =() =>
                             <h4 className='report_text'>Enter the email ID of the individual you wish to report and why you would like to report them</h4>
                             <input className='login_box' type='email' placeholder="Email" onChange={(event) => { setEmailID(event.target.value) }} value={EmailID} />
                             <br />
-                            <input className='login_box' placeholder="Reason" onChange={(event) => { setReason(event.target.value) }} value={Reason} />
+                            <input className='login_box_long' placeholder="Reason" onChange={(event) => { setReason(event.target.value) }} value={Reason} />
                             <div className='submit'>
                                 <button className='btn--outline--medium'>Submit</button>
                             </div>

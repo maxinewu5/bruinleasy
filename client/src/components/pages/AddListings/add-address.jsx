@@ -24,7 +24,7 @@ const AddAddress = ({ onNext, address }) => {
             <div className='info_contain_address'>
               <input
                 className='info_box'
-                type="number"
+                type="text"
                 name="room"
                 placeholder="Room No."
                 value={address[0]}
