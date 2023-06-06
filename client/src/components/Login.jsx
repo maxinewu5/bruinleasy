@@ -15,6 +15,7 @@ import { db } from "../Firebase";
 import AddListing from "./pages/AddListings/main-listing-page";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
+import Home from "./pages/Home";
 
 const Login = () => {
   const signInWithGoogle = () => {
@@ -105,36 +106,32 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const email_end = EmailID.slice(-8)
-      if(!(email_end === 'ucla.edu'))
-      {
+      const email_end = EmailID.slice(-8);
+      if (!(email_end === "ucla.edu")) {
         alert("Please enter a UCLA student email ID");
       }
       //Empty password entered by the user
-      else if(Password === '')
-      {
+      else if (Password === "") {
         alert("Please enter a Password");
+      } else {
+        const auth = getAuth();
+        if (
+          EmailID.slice(-8) === "ucla.edu" &&
+          !(EmailID.slice(-10) === "g.ucla.edu")
+        ) {
+          const email = EmailID.substring(0, EmailID.length - 8) + "g.ucla.edu";
+          await signInWithEmailAndPassword(auth, email, Password);
+          navigate("/");
+        } else {
+          await signInWithEmailAndPassword(auth, EmailID, Password);
+          navigate("/");
+        }
       }
-      else{
-
-      const auth = getAuth();
-      if(EmailID.slice(-8) === "ucla.edu" && !(EmailID.slice(-10) === "g.ucla.edu"))
-      {  
-        const email = EmailID.substring(0,EmailID.length - 8) + "g.ucla.edu"
-        await signInWithEmailAndPassword(auth, email, Password);
-        navigate("/");
-      }
-      else{
-        await signInWithEmailAndPassword(auth, EmailID, Password);
-        navigate("/");
-      }
-    }
       // ...
     } catch (error) {
       alert("Invalid login details");
       window.location.reload(false);
     }
-  
   };
 
   return !user ? (
@@ -254,8 +251,9 @@ const Login = () => {
     </React.Fragment>
   ) : (
     <div>
-      <p>User is logged in</p>
-      <AddListing user={user} />
+      {/* <p>User is logged in</p> */}
+      <Home />
+      {/* <AddListing user={user} /> */}
       <button onClick={handleSignOut}>Sign Out</button>
     </div>
   );
