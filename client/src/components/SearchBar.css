@@ -42,6 +42,7 @@
     width: 80%;
 }
 
+
 .bar_item {
 }
 
@@ -140,6 +141,10 @@ label {
 } */
 
 .filters {
+    display:none;
+}
+
+.filters.active {
     display: flex;
     flex-direction: column;
     width: 180px;
@@ -151,9 +156,6 @@ label {
     opacity: 1;
     padding: 8px 8px 25px;
     transition: all 1s ease;
-}
-
-.filters.active {
     background-color: #394252;
     color: #FFD77B;
     opacity: 1;

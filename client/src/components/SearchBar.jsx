@@ -131,6 +131,16 @@ function SearchBar( { setFilteredProperties }) {
         <div className="search-bar">
           <div className='search-bar-main'>
           <div>
+            <label>PRICE</label>
+            <br></br>
+            <input 
+              className="input-box"
+              type="number"
+              value={priceQ}
+              onChange={(e)=>setPriceQ(e.target.value)}
+            /> 
+          </div> 
+          <div>
             <label>START DATE</label>
             <DatePicker 
               className="input-box"
@@ -149,17 +159,6 @@ function SearchBar( { setFilteredProperties }) {
               dateFormat="MM/dd/yyyy"
             />
           </div>
-
-          <div>
-            <label>PRICE</label>
-            <br></br>
-            <input 
-              className="input-box"
-              type="number"
-              value={priceQ}
-              onChange={(e)=>setPriceQ(e.target.value)}
-            ></input> 
-          </div> 
 
           <div>
             <label></label>

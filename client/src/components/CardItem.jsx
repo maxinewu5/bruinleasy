@@ -2,16 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { auth, db } from "../Firebase";
-import {
-  collection,
-  query,
-  where,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-} from "firebase/firestore";
-import PropertyDisplay from "./pages/Property";
+import { doc, getDoc, updateDoc} from "firebase/firestore";
 
 function CardItem(props) {
   const [like, setLike] = useState(props.liked);
@@ -24,7 +15,9 @@ function CardItem(props) {
     const userSnap = await getDoc(userRef);
     const userProc = { ...userSnap.data(), id: userSnap.id };
     console.log(userProc);
-    setLike(userProc.fav_properties.includes(props.PropertyID));
+    if(userProc.fav_properties)
+      setLike(userProc.fav_properties.includes(props.PropertyID));
+      
     //setUserData(userProc);
   };
 
@@ -69,11 +62,6 @@ function CardItem(props) {
     console.log(new_favorite_properties);
   };
 
-  const handleTitleClick = () => {
-    // Perform actions when title is clicked
-    console.log("Title clicked!");
-  };
-
   return (
     <div className="card_item">
       <div className="card_item_bckgrd">
@@ -83,7 +71,7 @@ function CardItem(props) {
             alt={props.title}
             className="card_item_img_inside"
           />
-          <h5 className="cards_item_rating" data-category={props.price}></h5>
+          <h5 className="cards_item_rating" data-category={props.price} />
           <span className="card_heart_box"></span>
           <span className="card_heart" onClick={handleLike}>
             {like ? <AiFillHeart /> : <AiOutlineHeart />}
