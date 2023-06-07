@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 function UserProfile() {
   const navigate = useNavigate();
   const auth = getAuth();
-  const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth);
 
   //track state of userData, user owned properties, and fav properties
   const [userData, setUserData] = useState();
@@ -118,6 +118,10 @@ function UserProfile() {
     let email = "maxinewu5@gmail.com";
     getUserData(email);
   }, []);
+
+  if (loading) {
+    return <div></div>; // Display a loading state while authentication state is being resolved
+  }
 
   return user ? (
     <>

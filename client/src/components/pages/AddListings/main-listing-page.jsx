@@ -12,6 +12,7 @@ import {
 import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 /////////////////////////////////////////////////////////////////////////
 import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
@@ -25,7 +26,9 @@ import Login from "../../Login";
 // Function to add listings....obviously
 const AddListing = () => {
   const auth = getAuth();
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth); // Use useAuthState hook to handle authentication state
+
   const PropertiesRef = collection(db, "Properties");
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -185,6 +188,12 @@ const AddListing = () => {
     }
     setCurrentPage(currentPage + 1);
   };
+
+  console.log("CHECK", user);
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading state while authentication state is being resolved
+  }
 
   return user ? (
     <div>

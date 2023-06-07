@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import "../Login.css";
 import Login from "../Login";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const ReportUser = () => {
   const auth = getAuth();
-  const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth);
   const [EmailID, setEmailID] = useState("");
   const [Reason, setReason] = useState("");
   const navigate = useNavigate();
@@ -71,6 +72,10 @@ const ReportUser = () => {
       }
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading state while authentication state is being resolved
+  }
 
   return user ? (
     <React.Fragment>

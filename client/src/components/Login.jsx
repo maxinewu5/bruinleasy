@@ -115,7 +115,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return !user ? (
     <React.Fragment>
       <div className="login_page">
         <div className="login_container">
@@ -175,6 +175,8 @@ const Login = () => {
         </div>
       </div>
     </React.Fragment>
+  ) : (
+    <Home />
   );
   // : (
   //   <div>

@@ -15,10 +15,11 @@ import {
   getDocs,
 } from "firebase/firestore";
 import Login from "../Login";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Explore() {
   const auth = getAuth();
-  const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth);
 
   const [allProperties, setAllProperties] = useState([]);
 
@@ -46,6 +47,10 @@ function Explore() {
       id: doc.id,
     }));
   };
+
+  if (loading) {
+    return <div></div>; // Display a loading state while authentication state is being resolved
+  }
 
   return user ? (
     <>
