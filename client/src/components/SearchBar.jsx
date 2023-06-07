@@ -40,6 +40,10 @@ function SearchBar( { setFilteredProperties }) {
   const [ startDate, setStartDate] = useState(undefined);
   const [ endDate, setEndDate] = useState(undefined);
   const [ AC, setAC ] = useState(false);
+  const [ parking, setParking ] = useState(false);
+  const [ furnishing, setFurnishing ] = useState(false);
+  const [ rooftop, setRooftop ] = useState(false);
+  const [ lobby, setLobby ] = useState(false);
   const [ filtersActive, setFiltersActive ] = useState(false)
   const [ openModal, setOpenModal ] = useState(false)
 
@@ -110,6 +114,34 @@ function SearchBar( { setFilteredProperties }) {
         return listing.AirConditioner == true;
       })
     } 
+
+    //filter for parking
+    if (parking) {
+      filteredDocs = filteredDocs.filter((listing) => {
+        return listing.Parking == true;
+      })
+    } 
+
+    //filter for furnishing
+    if (furnishing) {
+      filteredDocs = filteredDocs.filter((listing) => {
+        return listing.Furnishing == true;
+      })
+    } 
+
+    //filter for rooftop
+    if (rooftop) {
+      filteredDocs = filteredDocs.filter((listing) => {
+        return listing.Rooftop == true;
+      })
+    } 
+
+    //filter for lobby
+    if (lobby) {
+      filteredDocs = filteredDocs.filter((listing) => {
+        return listing.Lobby == true;
+      })
+    } 
   
     //can add more filters here if necessary
   
@@ -161,11 +193,10 @@ function SearchBar( { setFilteredProperties }) {
           </div>
 
           <div>
-            <label></label>
+            <label>FILTER</label>
             <br></br>
             <button 
-               className="btnfilter"
-               class="collapsible"   
+               className="btnfilter btn"  
                type="button"
                onClick={()=>{ setOpenModal(true); setFiltersActive(!filtersActive)}}>
                 <AiFillFilter></AiFillFilter>
@@ -173,26 +204,27 @@ function SearchBar( { setFilteredProperties }) {
           </div>
 
           <div>
-            <label></label>
+            <label>SEARCH </label>
             <br></br>
             <button 
-               className="btnsearch"
+               className="btnsearch btn"
                 onClick={handleSubmit}>
                 <AiOutlineSearch></AiOutlineSearch>
             </button>
           </div>
+
         </div>
         </div>
 
         <br></br>
-        <div
+        {/* <div
           className="btn--filter"
           type="button" 
           class="collapsible" 
           onClick={()=>{ setFiltersActive(!filtersActive) }}
         >
-        {/* <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p> */}
-        </div>
+        { <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p> }
+        </div> */}
       <div class filters_bar>
       {/* <div className={filtersActive ? 'filters_bar' : 'filters_bar active'}> */}
         {/* <div className="filters" style={{ display: filtersActive ? "block" : "none" }}> */}
@@ -220,13 +252,13 @@ function SearchBar( { setFilteredProperties }) {
             <p className='text_s'>AMENITIES</p>
             <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
             <label className='text_special'>air conditioning</label>
-            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <input className='check_box_s' onChange={(e) => { setParking(e.target.checked)} } type="checkbox"></input>
             <label className='text_special'>parking</label>
-            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <input className='check_box_s' onChange={(e) => { setFurnishing(e.target.checked)} } type="checkbox"></input>
             <label className='text_special'>furnishing</label>
-            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <input className='check_box_s' onChange={(e) => { setRooftop(e.target.checked)} } type="checkbox"></input>
             <label className='text_special'>rooftop</label>
-            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <input className='check_box_s' onChange={(e) => { setLobby(e.target.checked)} } type="checkbox"></input>
             <label className='text_special'>lobby</label>
             {/*notes right now everything is at setAC, make sure to change for parking furnishing etc too */}
           </li>
