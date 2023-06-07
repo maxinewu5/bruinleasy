@@ -219,12 +219,11 @@ depending on size of screen using flexboxes */
 
 .card_heart {
   position: absolute;
-  width: 100%;
-  padding-top: 58%;
-  padding-left: 91%;
   font-size: 25px;
   color: #50A5FF;
   z-index: 1;
+  right: 2px;
+  bottom: -8px;
 }
 .card_heart_box::after {
   content: attr(data-category);
@@ -240,3 +239,13 @@ depending on size of screen using flexboxes */
   box-sizing: border-box;
 }
 
+.delete_button {
+  /* border: 5px solid blue; */
+  z-index: 1;
+  top: 0px;
+  right: 0px;
+  color: white; 
+  background: black;
+  position: absolute;
+  padding: 6px 6px 4px 6px;
+} 

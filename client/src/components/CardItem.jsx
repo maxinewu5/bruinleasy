@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
 import { auth, db } from "../Firebase";
 import {
   collection,
@@ -10,6 +10,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  deleteDoc
 } from "firebase/firestore";
 import PropertyDisplay from "./pages/Property";
 
@@ -18,6 +19,10 @@ function CardItem(props) {
   /*this controls the like button, if clicked useState is set to true, and 
   the styling changes so that the heart changes color to indicate the post
   has been liked. */
+
+  if (props.canDelete) {
+    console.log(props.propertyID + "can delete")
+  }
 
   const getUserData = async (userEmail) => {
     let userRef = doc(db, "users", userEmail);
@@ -74,10 +79,42 @@ function CardItem(props) {
     console.log("Title clicked!");
   };
 
+  const deleteProperty = async () => {
+    console.log("deleted " + props.propertyID)
+
+    //remove property from property db by id
+    await deleteDoc(doc(db, "Properties", props.PropertyID));   
+
+    //TODO: implement an archive property feature
+
+    //get the current logged in user
+    let userEmail = auth.currentUser.email;
+    let userRef = doc(db, "users", userEmail);
+    const userSnap = await getDoc(userRef);
+    let new_properties = [...userSnap.data().properties];
+
+    //remove property from user's list of properties
+    console.log("removing " + props.PropertyID);
+    new_properties.splice(new_properties.indexOf(props.PropertyID), 1);
+    await updateDoc(userRef, {
+      properties: new_properties,
+    });
+    console.log("after!");
+
+
+
+    //remove from user properties 
+  };
+
   return (
     <div className="card_item">
       <div className="card_item_bckgrd">
         <div className="card_item_img">
+          {props.canDelete ? 
+            <span className="delete_button" onClick={deleteProperty}> 
+              {props.canDelete ? <AiOutlineClose /> : "" }
+            </span>
+          : <></>}
           <img
             src={props.src}
             alt={props.title}

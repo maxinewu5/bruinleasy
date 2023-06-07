@@ -18,13 +18,14 @@ function Cards(props) {
           <ul className='cards__items'>
             {props.properties?.map((listing) => {
               return <CardItem 
-                PropertyID={listing.id}
-                src={listing.PropertyImageURLs[0]}
-                title={listing.AptName}
-                author_name={listing.OwnerEmail}
-                excerpt={listing.Description}
-                date={listing.StartDate?.toDate().toLocaleDateString('en-US') + " - " + listing.EndDate?.toDate().toLocaleDateString('en-US')}
+                PropertyID={listing?.id}
+                src={listing?.PropertyImageURLs[0]}
+                title={listing?.AptName}
+                author_name={listing?.OwnerEmail}
+                excerpt={listing?.Description}
+                date={listing?.StartDate?.toDate().toLocaleDateString('en-US') + " - " + listing?.EndDate?.toDate().toLocaleDateString('en-US')}
                 price={"$" + listing?.Rent + "/mo"}
+                canDelete={props.canDelete}
                 // liked={userData?.fav_properties.includes(listing.id)}
                 // onLike={()=>{ handleLike(listing.id) }}
                 // setLikeState={()=>{setFavUpdate()}}
