@@ -165,14 +165,17 @@ function UserProfile() {
     <>
     <div className='profile_page' >
       <br></br><br></br><br></br><br></br>
-      <img
-        className="profile-background"
-        src={process.env.PUBLIC_URL + "./images/bcgrd.png"}
-        alt="background"
-      />
+      <div class="profile_header">
+        <img
+          className="profile-background"
+          src={process.env.PUBLIC_URL + "./images/bcgrd.png"}
+          alt="background"
+        />
+      </div>
       <img className='pfp' src={user?.photoURL}></img>
       <h3 className='welcome'>WELCOME</h3>
       <h3 className='name'> {user?.displayName}</h3>
+      
       <div className='buttons_profile'>
         <button className="btn--outline--profile"
           onClick={() => {
@@ -186,17 +189,22 @@ function UserProfile() {
           >Report User</button>
       </div>
       <div className='profile_body'>
-      <h3 className='my_listing'>My Listings</h3>
+      <h3 className='my_listing'>MY LISTINGS</h3>
         <Cards 
           canDelete={true}
           properties={userProperties} 
         />
+
+        { userProperties.length == 0 ? <p>No listings.</p> : <></>}
   
-        <h3 className='my_listing'>Favorite Listings</h3>
+      <h3 className='my_listing'>FAVORITE LISTINGS</h3>
       
         <Cards 
           properties={favProperties} 
         />
+
+      { favProperties.length == 0 ? <p className='nofavwarning'>No favorited properties.</p> : <></>}
+
       </div>
     </div>
     </>

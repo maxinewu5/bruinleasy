@@ -1,5 +1,5 @@
 .cards {
-  padding: 4rem;
+  padding: 4rem 4rem;
   background: #fff;
   font-family: 'Nunito', sans-serif;
   color: #162031;
@@ -76,8 +76,17 @@ h1 {
 }
 
 .card_header {
-  font-size: 25px;
+  font-size: 28px;
+  margin-top: 5px;
+  margin-bottom: -6px;
   font-weight: 500;
+  /* text-decoration: none; */
+}
+.card_header:visited{
+  color: #162031;
+}
+.card_header:hover{
+  color: #FFD77B;
 }
 
 .heading_post:hover {
@@ -249,3 +258,7 @@ depending on size of screen using flexboxes */
   position: absolute;
   padding: 6px 6px 4px 6px;
 } 
+
+.delete_button:hover, .card_heart:hover{
+  cursor: pointer;
+}
