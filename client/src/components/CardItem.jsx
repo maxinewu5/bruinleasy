@@ -40,31 +40,31 @@ function CardItem(props) {
 
   const handleLike = () => {
     setLike(!like);
-    updateLikeOnFirebase(props.propertyId)
+    updateLikeOnFirebase(props.PropertyID)
     // props.setLikeState(!like);
     // props.onLike();
   };
 
-  const updateLikeOnFirebase = async (propertyID) => {
+  const updateLikeOnFirebase = async (PropertyID) => {
     let userEmail = auth.currentUser.email
     let userRef = doc(db, "users", userEmail);
     const userSnap = await getDoc(userRef)
     let new_favorite_properties = [...userSnap.data().fav_properties]
-    // console.log("original fav props")
-    // console.log(new_favorite_properties)
+    console.log("original fav props")
+    console.log(new_favorite_properties)
 
-    if (new_favorite_properties.includes(propertyID)) {
-      // console.log("removing " + propertyID)
-      new_favorite_properties.splice(new_favorite_properties.indexOf(propertyID), 1)
+    if (new_favorite_properties.includes(PropertyID)) {
+      console.log("removing " + PropertyID)
+      new_favorite_properties.splice(new_favorite_properties.indexOf(PropertyID), 1)
     } else {
-      // console.log("adding " + propertyID)
-      new_favorite_properties.push(propertyID)
+      console.log("adding " + PropertyID)
+      new_favorite_properties.push(PropertyID)
     }
     await updateDoc(userRef, {
       fav_properties: new_favorite_properties
     })
-    // console.log("after!")
-    // console.log(new_favorite_properties)
+    console.log("after!")
+    console.log(new_favorite_properties)
   }
 
   const handleTitleClick = () => {
