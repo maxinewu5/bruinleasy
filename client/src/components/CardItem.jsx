@@ -31,7 +31,6 @@ function CardItem(props) {
     props.setLikeState(!like);
     props.onLike();
   };
-
   const handleTitleClick = () => {
     // Perform actions when title is clicked
     console.log("Title clicked!");
@@ -58,18 +57,11 @@ function CardItem(props) {
         <div className="heading_post">
           <div className="card_header">
             <Link className="card_header">
-              <span onClick={() => PropertyDisplay("4Igbs9zIFcJAW1k8CZDS")}>
+              <span onClick={() => PropertyDisplay(props.PropertyID)}>
                 {props.title}
               </span>
             </Link>
-            {/* <span className='card_heart' onClick={handleLike}>
-            {like ? <AiFillHeart /> : <AiOutlineHeart/>}
-            </span> */}
           </div>
-          {/*display heart for like button */}
-          <span className="card_heart" onClick={handleLike}>
-            {like ? <AiFillHeart /> : <AiOutlineHeart />}
-          </span>
         </div>
 
         <div className="card_body_wrap">

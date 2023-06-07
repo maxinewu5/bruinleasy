@@ -42,7 +42,7 @@ function Cards(props) {
       fav_properties: new_favorite_properties
     })
 
-    console.log(new_favorite_properties)
+    //console.log(new_favorite_properties)
   }
 
   // console.log("props props")
@@ -55,7 +55,7 @@ function Cards(props) {
           <ul className='cards__items'>
             {props.properties?.map((listing) => {
               return <CardItem 
-                key={listing.id}
+                PropertyID={listing.id}
                 src={listing.PropertyImageURLs[0]}
                 title={listing.AptName}
                 author_name={listing.OwnerEmail}

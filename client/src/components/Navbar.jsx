@@ -6,7 +6,7 @@ import { Button } from "./Button";
 import { getAuth } from "firebase/auth";
 import { auth } from "../Firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
-import 'typeface-nunito';
+
 
 function Navbar() {
   const [user, loading] = useAuthState(auth);
