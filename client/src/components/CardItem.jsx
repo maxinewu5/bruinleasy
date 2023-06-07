@@ -9,6 +9,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  updateDoc
 } from "firebase/firestore";
 import PropertyDisplay from "./pages/Property";
 
@@ -18,8 +19,19 @@ function CardItem(props) {
   the styling changes so that the heart changes color to indicate the post
   has been liked. */
 
+  const getUserData = async(userEmail) => {
+    let userRef = doc(db, "users", userEmail)
+    const userSnap = await getDoc(userRef)
+    const userProc = {...userSnap.data(), id:userSnap.id}
+    console.log(userProc)
+    setLike(userProc.fav_properties.includes(props.PropertyID))
+    //setUserData(userProc);
+  }
+
+
   //set the like to the input props.liked passed in from Cards.jsx
   useEffect(() => {
+    getUserData(auth.currentUser.email)
     setLike(props.liked);
   }, []);
   useEffect(() => {
@@ -28,9 +40,33 @@ function CardItem(props) {
 
   const handleLike = () => {
     setLike(!like);
-    props.setLikeState(!like);
-    props.onLike();
+    updateLikeOnFirebase(props.propertyId)
+    // props.setLikeState(!like);
+    // props.onLike();
   };
+
+  const updateLikeOnFirebase = async (propertyID) => {
+    let userEmail = auth.currentUser.email
+    let userRef = doc(db, "users", userEmail);
+    const userSnap = await getDoc(userRef)
+    let new_favorite_properties = [...userSnap.data().fav_properties]
+    // console.log("original fav props")
+    // console.log(new_favorite_properties)
+
+    if (new_favorite_properties.includes(propertyID)) {
+      // console.log("removing " + propertyID)
+      new_favorite_properties.splice(new_favorite_properties.indexOf(propertyID), 1)
+    } else {
+      // console.log("adding " + propertyID)
+      new_favorite_properties.push(propertyID)
+    }
+    await updateDoc(userRef, {
+      fav_properties: new_favorite_properties
+    })
+    // console.log("after!")
+    // console.log(new_favorite_properties)
+  }
+
   const handleTitleClick = () => {
     // Perform actions when title is clicked
     console.log("Title clicked!");

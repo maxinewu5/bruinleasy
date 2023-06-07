@@ -9,7 +9,7 @@ import './SearchBar.css'
 import './Login.css'
 import CardItem from './CardItem';
 import { jaroWinklerDistance } from './scripts/search'
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiFillFilter } from "react-icons/ai";
 
 // Overall Searching Functionality:
 // - Search:
@@ -19,6 +19,17 @@ import { AiOutlineSearch } from "react-icons/ai";
 // - Filter: 
 //   - single/double/triple 
 //   - Checkbox: air conditioning
+
+function FilterModal ( {closeModal} ) {
+  return (
+    <>
+      <button onClick={()=>{closeModal(false)}}>X</button>
+      <h1>Hi!</h1>
+      <h2>Bye!</h2>
+      <h3>Test</h3>
+    </>
+  )
+}
 
 function SearchBar( { setFilteredProperties }) {
 
@@ -30,6 +41,7 @@ function SearchBar( { setFilteredProperties }) {
   const [ endDate, setEndDate] = useState(undefined);
   const [ AC, setAC ] = useState(false);
   const [ filtersActive, setFiltersActive ] = useState(false)
+  const [ openModal, setOpenModal ] = useState(false)
 
   const getAllProperty = async () => {
     const propertyData = await getDocs(collection(db, "Properties"))
@@ -120,7 +132,7 @@ function SearchBar( { setFilteredProperties }) {
           <div>
             <label>START DATE</label>
             <DatePicker 
-              className="input-box"
+              className="inputbox"
               selected={startDate}
               onChange={(date) => {setStartDate(date); setDateFlag(true)}} 
               dateFormat="MM/dd/yyyy"
@@ -130,7 +142,7 @@ function SearchBar( { setFilteredProperties }) {
           <div>
             <label>END DATE</label>
             <DatePicker 
-              className="input-box"
+              className="inputbox"
               selected={endDate}
               onChange={(date) => {setEndDate(date); setDateFlag(true)}}
               dateFormat="MM/dd/yyyy"
@@ -141,20 +153,32 @@ function SearchBar( { setFilteredProperties }) {
             <label>PRICE</label>
             <br></br>
             <input 
-              className="input-box"
+              className="inputbox"
               type="price"
               name="price"
               value={priceQ}
               onChange={(e)=>setPriceQ(e.target.value)}
             ></input> 
+          </div> 
+
+          <div>
+            <label></label>
+            <br></br>
+            <button 
+               className="btnfilter"
+               class="collapsible"   
+               type="button"
+               onClick={()=>{ setOpenModal(true); setFiltersActive(!filtersActive)}}>
+                <AiFillFilter></AiFillFilter>
+            </button>
           </div>
 
           <div>
             <label></label>
             <br></br>
             <button 
-               className="btn btn--search"
-              onClick={handleSubmit}>
+               className="btnsearch"
+                onClick={handleSubmit}>
                 <AiOutlineSearch></AiOutlineSearch>
             </button>
           </div>
@@ -165,9 +189,9 @@ function SearchBar( { setFilteredProperties }) {
           className="btn--filter"
           type="button" 
           class="collapsible" 
-          onClick={()=>{setFiltersActive(!filtersActive)}}
+          onClick={()=>{ setFiltersActive(!filtersActive) }}
         >
-        <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p>
+        {/* <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p> */}
         </div>
 
         <div class="filters" style={{ display: filtersActive ? "block" : "none" }}>
@@ -192,7 +216,11 @@ function SearchBar( { setFilteredProperties }) {
           <label>Air Conditioning</label>
         </div>
         </div>
+
+{/*   { openModal && <FilterModal closeModal={()=>{setOpenModal(false)}}/>} */}
+
       </form>
+
     </>
   );
 }
