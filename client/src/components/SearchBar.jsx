@@ -194,6 +194,7 @@ function SearchBar( { setFilteredProperties }) {
         >
         {/* <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p> */}
         </div>
+      <div class filters_bar>
       {/* <div className={filtersActive ? 'filters_bar' : 'filters_bar active'}> */}
         {/* <div className="filters" style={{ display: filtersActive ? "block" : "none" }}> */}
         <ul className={filtersActive ? 'filters active' : 'filters'} > 
@@ -231,6 +232,7 @@ function SearchBar( { setFilteredProperties }) {
             {/*notes right now everything is at setAC, make sure to change for parking furnishing etc too */}
           </li>
         </ul>
+        </div>
       </div>
 {/*   { openModal && <FilterModal closeModal={()=>{setOpenModal(false)}}/>} */}
 

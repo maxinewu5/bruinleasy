@@ -127,17 +127,17 @@ label {
     transition: max-height 0.2s ease-out;
 }
 
-/* .filters_bar {
+.filters_bar {
     display: grid;
     position: relative;
     margin-top: -45px;
     margin-left: 40px;
     
-} */
-
-.filters_bar.active {
-    display: none;
 }
+
+/* .filters_bar.active {
+    display: none;
+} */
 
 .filters {
     display: flex;
@@ -146,8 +146,8 @@ label {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     position: absolute;
-    margin-top: 427px;
-    margin-left: -120px;
+    margin-top: -23px;
+    margin-left: 80px;
     opacity: 1;
     padding: 8px 8px 25px;
     transition: all 1s ease;
@@ -164,6 +164,7 @@ label {
 .filter_item {
     display: flex;
     flex-direction: column;
+    position: relative;
     list-style: none;
     transition: all 0.2s ease-out;
 }
