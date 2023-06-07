@@ -20,6 +20,7 @@ import AddDescription from "./add-description";
 import AddPrice from "./add-price";
 import AddDates from "./add-dates";
 import './Listing.css';
+import '../../../App.css';
 import '../../Login.css';
 
 // Function to add listings....obviously
@@ -175,59 +176,58 @@ const AddListing = ({ user }) => {
       alert("Please enter a valid address.");
       return;
     }
-    if (currentPage == 3 && images.length === 0) {
-      alert("You have not added any images");
-      return;
-    }
+    // if (currentPage == 3 && images.length === 0) {
+    //   alert("You have not added any images");
+    //   return;
+    // }
     setCurrentPage(currentPage + 1);
   };
 
   return (
-    <div className='listing_page' >
+    <div className='listing_page'>
       <h1 className='title'>
         To add your property we will take you through a series of steps
       </h1>
-      {currentPage === 0 && (
-        <AddAddress onNext={handleNextAddress} address={address} />
-      )}
-      {currentPage === 1 && (
-        <AddAmenities onNext={handleNextAmenities} isChecked={amenities} />
-      )}
-      {currentPage === 2 && (
-        <AddOcc onNext={handleNextOcc} counters={occCounters} />
-      )}
-      {currentPage === 3 && (
-        <AddImages onNext={handleNextImages} images={images} />
-      )}
-      {currentPage === 4 && (
-        <AddDescription
-          onNext={handleNextDescription}
-          description={description}
-        />
-      )}
-      {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
-      {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
+        {currentPage === 0 && (
+          <AddAddress onNext={handleNextAddress} address={address} />
+        )}
+        {currentPage === 1 && (
+          <AddAmenities onNext={handleNextAmenities} isChecked={amenities} />
+        )}
+        {currentPage === 2 && (
+          <AddOcc onNext={handleNextOcc} counters={occCounters} />
+        )}
+        {currentPage === 3 && (
+          <AddImages onNext={handleNextImages} images={images} />
+        )}
+        {currentPage === 4 && (
+          <AddDescription
+            onNext={handleNextDescription}
+            description={description}
+          />
+        )}
+        {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
+        {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
+        {currentPage === 7 && (
+          <div>
+            <h2>Review and Submit</h2>
+            {/* <p>Address:</p>
+            <p>
+              {address[0]}, {address[1]}
+            </p>
+            <p>
+              {address[3]}, {address[4]}, {address[5]}
+            </p>
 
-      {currentPage === 7 && (
-        <div>
-          <h2>Review and Submit</h2>
-          {/* <p>Address:</p>
-          <p>
-            {address[0]}, {address[1]}
-          </p>
-          <p>
-            {address[3]}, {address[4]}, {address[5]}
-          </p>
-
-          <p>Amenities: {amenities.join(", ")}</p>
-          <p>Occupation Counters: {occCounters.join(", ")}</p> */}
-          <button onClick={handleSubmit}>Submit</button>
+            <p>Amenities: {amenities.join(", ")}</p>
+            <p>Occupation Counters: {occCounters.join(", ")}</p> */}
+            <button className='btn--outline--small--half' onClick={handleSubmit}>Submit</button>
+          </div>
+        )}
+        <div className='button_next'>
+          {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
+          {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
         </div>
-      )}
-      <div className='button_next'>
-        {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
-        {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
-      </div>
     </div>
   );
 };

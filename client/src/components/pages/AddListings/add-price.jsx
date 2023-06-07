@@ -24,12 +24,12 @@ const AddPrice = ({ onNext, price }) => {
           />
         <div className='listing_page'>
           <div className='listing_container'>
-          <h2>
+          <h2 className='heading'>
             What would the monthly rent be for one person (including utilities)?
           </h2>
-          <div>
-            <button onClick={() => decreasePrice()}>-</button> ${price}{" "}
-            <button onClick={() => increasePrice()}>+</button>
+          <div className='info_contain_price'>
+            <button className='inde' onClick={() => decreasePrice()}>-</button> ${price}{" "}
+            <button className='inde' onClick={() => increasePrice()}>+</button>
           </div>
           <br />
         </div>
