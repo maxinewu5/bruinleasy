@@ -28,7 +28,7 @@ function CardItem(props) {
     let userRef = doc(db, "users", userEmail);
     const userSnap = await getDoc(userRef);
     const userProc = { ...userSnap.data(), id: userSnap.id };
-    console.log(userProc);
+    //console.log(userProc);
     if(userProc.fav_properties)
       setLike(userProc.fav_properties.includes(props.PropertyID));
       

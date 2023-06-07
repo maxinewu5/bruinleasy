@@ -1,0 +1,253 @@
+.cards {
+    padding: 4rem;
+    background: #fff;
+    font-family: 'Nunito', sans-serif;
+    color: #162031;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+
+  .card_item_img {
+    display: flex;
+  }
+  
+  .card_item_img_inside {
+    /* Add any additional styling for the images */
+    margin-right: 10px; /* Adjust the spacing between the images */
+  }
+  
+  .cards__wrapper {
+    position: relative;
+    margin: 50px 0 45px;
+  }
+  
+  .cards_item {
+    display: flex;
+    justify-content: center;  
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .cards__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 1rem 1rem;
+  }
+  
+  .card_item_bckgrd{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .card_item_img {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding-bottom: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .card_item_img_inside {
+    position: absolute;
+    top: 0;
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    /* border-top-left-radius: 0.5rem; */
+  }
+  
+  .heading_post {
+    transition-duration: 700ms;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    color: #50A5FF;
+    text-decoration: none;
+  }
+  
+  .card_header {
+    position:relative;
+    font-size: 25px;
+    font-weight: 500;
+  }
+  
+  .heading_post:hover {
+    color: #FFD77B;
+  }
+  
+  .card_body_wrap {
+    padding-right: 18px;
+    padding-left: 16px;
+  }
+  
+  /*the description */
+  .card_body {
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: left;
+    white-space: wrap;
+    /* margin-left: 17px; */
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #495869;
+    font-weight: normal;
+    padding: 4px;
+  }
+  
+  .card_date {
+    color: #848B94;
+  }
+  
+  /*this is for the bottom-most row*/
+  .card_body_bottom {
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  .card_author_wrap {
+    margin-bottom: 0px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  
+  
+  .card_author_txt {
+    position: relative;
+    bottom: 17px;
+    display: inline;
+    color: #50A5FF;
+    margin-left: 20px;
+  }
+  
+  /*for price of rental*/
+  .card_price_wrap {
+    margin-bottom: 0px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  
+  .card_price {
+    position: relative; 
+    display: inline;
+    bottom: 56px;
+    left: 250px;
+    text-align: left;
+    color: #50A5FF;
+    z-index: 10;
+  }
+  
+  .card_body_center {
+    text-align: center;
+  }
+  
+  .card_body_inside {
+    transition-duration:500ms;
+  }
+  
+  /* .card_body_inside:hover {
+    transform: translateY(-1px);
+    display: inline-block;
+    background-color: fuchsia;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    padding: 8px 24px;
+    cursor: pointer;
+  } */
+  
+  /*for the rating inside the picture frame */
+  .cards_item_rating_box {
+    padding: 20px 30px 30px;
+    z-index: 1;
+  }
+  
+  .cards_item_rating {
+    position: absolute;
+    width: 100%;
+    padding-top: 59.5%;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .cards_item_rating::after {
+    content: attr(data-category);
+    position: absolute;
+    bottom: 0;
+    margin-left: 0px;
+    padding: 6px 8px;
+    max-width: calc((100%) - 60px);
+    font-size: 12.3px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #1f98f4;
+    box-sizing: border-box;
+  }
+  
+  /*for screen adjustion, changes amount of posts show in a row 
+  depending on size of screen using flexboxes */
+  @media only screen and (min-width: 1024px) {
+    .cards__items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  /*heart for like button*/
+  .card_heart_box {
+    position: absolute;
+    width: 100%;
+    padding-top: 73.5%;
+    padding-left: 82.6%;
+    overflow: hidden;
+  }
+  
+  .card_heart {
+    position: absolute;
+    width: 100%;
+    padding-top: 58%;
+    padding-left: 91%;
+    font-size: 25px;
+    color: #50A5FF;
+    z-index: 1;
+  }
+  .card_heart_box::after {
+    content: attr(data-category);
+    position: absolute;
+    bottom: 20px;
+    margin-left: 23px;
+    padding:14px 15px;
+    max-width: calc((100%) - 60px);
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background-color: white;
+    box-sizing: border-box;
+  }
+  
+  
