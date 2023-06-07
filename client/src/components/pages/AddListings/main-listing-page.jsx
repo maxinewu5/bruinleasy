@@ -13,6 +13,7 @@ import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////
 import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
@@ -21,17 +22,17 @@ import AddImages from "./add-images";
 import AddDescription from "./add-description";
 import AddPrice from "./add-price";
 import AddDates from "./add-dates";
-import './Listing.css';
-import '../../../App.css';
-import '../../Login.css';
+import "./Listing.css";
+import "../../../App.css";
+import "../../Login.css";
 import Login from "../../Login";
-import ReviewAndSubmit from "./review-submit"
+import ReviewAndSubmit from "./review-submit";
 
 // Function to add listings....obviously
 const AddListing = () => {
   const auth = getAuth();
-  // const user = auth.currentUser;
   const [user, loading] = useAuthState(auth); // Use useAuthState hook to handle authentication state
+  const navigate = useNavigate();
 
   const PropertiesRef = collection(db, "Properties");
 
@@ -170,7 +171,8 @@ const AddListing = () => {
       await updateDoc(doc(PropertiesRef, propertyId), {
         PropertyImageURLs: imageURLs,
       });
-
+      alert("Thank you for submitting a property");
+      navigate("/");
       console.log("Property document updated with image URLs");
     } catch (error) {
       console.error("Error handling submit:", error);
@@ -186,51 +188,78 @@ const AddListing = () => {
       alert("Please enter a valid address.");
       return;
     }
-    // if (currentPage == 3 && images.length === 0) {
-    //   alert("You have not added any images");
-    //   return;
-    // }
+    if (currentPage == 3 && images.length === 0) {
+      alert("You have not added any images");
+      return;
+    }
+
+    if (currentPage == 5 && (dates[0] === "" || dates[1] === "")) {
+      alert("Please add the appropriate dates");
+      return;
+    }
     setCurrentPage(currentPage + 1);
   };
 
-  if(loading){
+  if (loading) {
     return <div></div>;
   }
 
-  return user? (
-    <div className='listing_page'>
-      <h1>
-        To add your property we will take you through a series of steps
-      </h1>
-        {currentPage === 0 && (
-          <AddAddress onNext={handleNextAddress} address={address} />
+  return user ? (
+    <div className="listing_page">
+      <h1>To add your property we will take you through a series of steps</h1>
+      {currentPage === 0 && (
+        <AddAddress onNext={handleNextAddress} address={address} />
+      )}
+      {currentPage === 1 && (
+        <AddAmenities onNext={handleNextAmenities} isChecked={amenities} />
+      )}
+      {currentPage === 2 && (
+        <AddOcc onNext={handleNextOcc} counters={occCounters} />
+      )}
+      {currentPage === 3 && (
+        <AddImages onNext={handleNextImages} images={images} />
+      )}
+      {currentPage === 4 && (
+        <AddDescription
+          onNext={handleNextDescription}
+          description={description}
+        />
+      )}
+      {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
+      {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
+      {currentPage === 7 && (
+        <ReviewAndSubmit
+          setCurrentPage={setCurrentPage}
+          handleSubmit={handleSubmit}
+          address={address}
+          amenities={amenities}
+          occCounters={occCounters}
+          price={price}
+          dates={dates}
+          description={description}
+        />
+      )}
+      <div className="button_next">
+        {currentPage > 0 && (
+          <button className="btn--outline--small--half" onClick={handlePrev}>
+            Previous
+          </button>
         )}
-        {currentPage === 1 && (
-          <AddAmenities onNext={handleNextAmenities} isChecked={amenities} />
+        {currentPage < 7 && (
+          <button className="btn--outline--small--half" onClick={handleNext}>
+            Next
+          </button>
         )}
-        {currentPage === 2 && (
-          <AddOcc onNext={handleNextOcc} counters={occCounters} />
+        {currentPage == 7 && (
+          <button className="btn--outline--small--half" onClick={handleSubmit}>
+            Submit
+          </button>
         )}
-        {currentPage === 3 && (
-          <AddImages onNext={handleNextImages} images={images} />
-        )}
-        {currentPage === 4 && (
-          <AddDescription
-            onNext={handleNextDescription}
-            description={description}
-          />
-        )}
-        {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
-        {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
-        {currentPage === 7 && <ReviewAndSubmit setCurrentPage={setCurrentPage} handleSubmit={handleSubmit} address={address} amenities={amenities} occCounters={occCounters} price={price} dates={dates} description={description}/>}
-        <div className='button_next'>
-          {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
-          {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
-          {currentPage == 7 && <button className='btn--outline--small--half'onClick={handleSubmit}>Submit</button>}
-        </div>
       </div>
-        
-  ) : <Login />;
+    </div>
+  ) : (
+    <Login />
+  );
 };
 
 export default AddListing;

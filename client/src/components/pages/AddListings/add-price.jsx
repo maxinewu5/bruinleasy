@@ -25,8 +25,7 @@ const AddPrice = ({ onNext, price }) => {
         <div className="listing_page">
           <div className="listing_container">
             <h2 className="heading">
-              What would the monthly rent be for one person (including
-              utilities)?
+              What would the monthly rent be for one room (including utilities)?
             </h2>
             <div className="info_contain_price">
               <button className="inde" onClick={() => decreasePrice()}>
