@@ -1,58 +1,84 @@
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import React from "react";
-
+import "./Property.css"
 const PropertyDisplay = () => {
+  const [imageArray, setImageArray] = useState([]);
   const { state } = useLocation();
   const Property_ID = state && state.data;
   const [propertyData, setPropertyData] = useState(null);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const db = getFirestore();
       const Property_Reference = doc(db, "Properties", Property_ID);
       const Property = await getDoc(Property_Reference);
-      setPropertyData(Property.data());
+      if (Property.exists()) {
+        setPropertyData(Property.data());
+      }
     };
-
+  
     if (Property_ID) {
       fetchData();
     }
   }, [Property_ID]);
-
+  
+  useEffect(() => {
+    if (propertyData) {
+      const imageURLs = propertyData.PropertyImageURLs;
+      setImageArray(imageURLs);
+      console.log(imageURLs);
+    }
+  }, [propertyData]);
+  
   if (!propertyData) {
     return <p>Loading...</p>;
   }
-
+  
   return (
-    <div>
-      <h2>{propertyData.AptName}</h2>
-      <p>
-        Location: {propertyData.City}, {propertyData.State},{" "}
-        {propertyData.Zipcode}
-      </p>
-      <p>Description: {propertyData.Description}</p>
-      <p>Bedrooms: {propertyData.Bedrooms}</p>
-      <p>Bathrooms: {propertyData.Bathrooms}</p>
-      <p>Rent: ${propertyData.Rent}</p>
-      <p>Start Date: {propertyData.StartDate.toDate().toLocaleDateString()}</p>
-      <p>End Date: {propertyData.EndDate.toDate().toLocaleDateString()}</p>
-      <p>Amenities:</p>
-      <ul>
-        <li>Air Conditioner: {propertyData.AirConditioner ? "Yes" : "No"}</li>
-        <li>Furnishing: {propertyData.Furnishing ? "Yes" : "No"}</li>
-        <li>Lobby: {propertyData.Lobby ? "Yes" : "No"}</li>
-        <li>Parking: {propertyData.Parking ? "Yes" : "No"}</li>
-        <li>Rooftop: {propertyData.Rooftop ? "Yes" : "No"}</li>
-      </ul>
-      <p>Owner Email: {propertyData.UserEmail}</p>
-      <p>Property Images:</p>
-      {propertyData.PropertyImageURLs.map((imageURL, index) => (
-        <img key={index} src={imageURL} alt={`Image ${index + 1}`} />
-      ))}
+    <div className="card_item">
+      <div className="card_item_bckgrd">
+        <div className="card_item_img">
+          {imageArray.map((imageURL, index) => (
+            <img
+              key={index}
+              src={imageURL}
+              alt={`Image ${index + 1}`}
+              className="card_item_img_inside"
+            />
+          ))}
+          <h5 className="cards_item_rating" data-category={propertyData.Rent} />
+        </div>
+            <div className="heading_post">
+          <div className="card_header">{propertyData.AptName}</div>
+        </div>
+
+        <div className="card_body_wrap">
+          <p className="card_body">
+            Location: {propertyData.City}, {propertyData.State}, {propertyData.Zipcode}
+            Bedrooms: {propertyData.Bedrooms}
+            Bathrooms: {propertyData.Bathrooms}
+            Start Date: {propertyData.StartDate.toDate().toLocaleDateString()}
+            End Date: {propertyData.EndDate.toDate().toLocaleDateString()}
+            <br />
+            Amenities:
+            <ul>
+              <li>Air Conditioner: {propertyData.AirConditioner ? "Yes" : "No"}</li>
+              <li>Furnishing: {propertyData.Furnishing ? "Yes" : "No"}</li>
+              <li>Lobby: {propertyData.Lobby ? "Yes" : "No"}</li>
+              <li>Parking: {propertyData.Parking ? "Yes" : "No"}</li>
+              <li>Rooftop: {propertyData.Rooftop ? "Yes" : "No"}</li>
+       </ul>
+            <br />
+            <br />
+            <span className="card_date">Description: {propertyData.Description}</span>
+          </p>
+        </div>
+        
+        <div className="card_author_wrap">
+          <p className="card_author_txt">Owner Email: {propertyData.UserEmail}</p>
+        </div>
+      </div>
     </div>
   );
 };
