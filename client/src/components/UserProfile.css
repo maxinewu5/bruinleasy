@@ -1,4 +1,8 @@
-
+.profile_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .profile_background {
     object-fit: cover;
     width: 100%;
@@ -7,26 +11,40 @@
     z-index: -1;
 }
 
+.pfp {
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    top: 200px;
+}
 .welcome {
     display: flex;
-    font-size: 40px;
+    font-size: 100px;
     font-family: 'Nunito', sans-serif;
     color: #162031;
     position: absolute;
-    top: 60px;
+    top: 200px;
 }
 
+.name {
+    display: flex;
+    font-size: 60px;
+    font-family: 'Nunito', sans-serif;
+    color: #162031;
+    position: absolute;
+    top: 370px;
+}
 .profile_body {
     display: flex;
     flex-direction: column;
     align-items: center;
     object-fit: none;
-    padding-top: 300px;
+    padding-top: 20px;
 }
 
 .my_listing {
     display: flex;
-    font-size: 20px;
+    font-size: 40px;
     font-family: 'Nunito', sans-serif;
 
 }
@@ -42,7 +60,24 @@
     transition: all 0.3s ease-out;
     padding: 10px 17px;
     width: 150px;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.20);
+  }
+
+  .btn--outline--profile:hover {
+    transition: all 0.3s ease-out;
+    background: #334058;
+    color: white;
+    font-size: 20px;
+    transition: 250ms;
+  }
+
+  .buttons_profile {
+    position: absolute;
+    margin-top: 500px;
+    
   }
 

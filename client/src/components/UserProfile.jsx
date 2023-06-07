@@ -154,27 +154,35 @@ function UserProfile() {
 
   return (user) ? (
     <>
-
+    <div className='profile_page' >
       <br></br><br></br><br></br><br></br>
-      <img height="48px" src={user?.photoURL}></img>
-      <h3>{user?.displayName}</h3>
+      <img
+        className="profile-background"
+        src={process.env.PUBLIC_URL + "./images/bcgrd.png"}
+        alt="background"
+      />
+      <img className='pfp' src={user?.photoURL}></img>
+      <h3 className='welcome'>WELCOME</h3>
+      <h3 className='name'> {user?.displayName}</h3>
+      <div className='buttons_profile'>
+        <button className="btn--outline--profile"
+          onClick={() => {
+            navigate("/AddListing");
+          }}
+        >
+          Add Listing
+        </button>
+        <button className="btn--outline--profile" >Edit Profile</button>
+      </div>
+      <div className='profile_body'>
+      <h3 className='my_listing'>My Listings</h3>
+        <Cards properties={userProperties} />
   
-      <button className="btn--outline--medium"
-        onClick={() => {
-          navigate("/AddListing");
-        }}
-      >
-        Add Listing
-      </button>
-      <button className="btn--outline--medium" >Edit Profile</button>
-
-      <h3>My Listings</h3>
-
-      <Cards properties={userProperties} />
- 
-      <h3>Favorite Listings</h3>
-    
-      <Cards properties={favProperties} />
+        <h3 className='my_listing'>Favorite Listings</h3>
+      
+        <Cards properties={favProperties} />
+      </div>
+    </div>
     </>
   ) :  ( loading ? <></> : <Login />) 
 }
