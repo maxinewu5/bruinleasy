@@ -224,7 +224,7 @@ depending on size of screen using flexboxes */
   padding-left: 91%;
   font-size: 25px;
   color: #50A5FF;
-  z-index: 2;
+  z-index: 1;
 }
 .card_heart_box::after {
   content: attr(data-category);
