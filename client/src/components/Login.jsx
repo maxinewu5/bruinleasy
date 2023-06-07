@@ -16,8 +16,12 @@ import AddListing from "./pages/AddListings/main-listing-page";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import Home from "./pages/Home";
+import Explore from "./pages/Explore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   const signInWithGoogle = () => {
@@ -39,11 +43,12 @@ const Login = () => {
                 email: email,
                 profilePic: profilePic,
                 properties: [],
+                fav_properties: [],
               };
               setDoc(doc(userRef, email), newUser)
                 .then(() => {
-                  alert("New user created:", newUser);
                   navigate("/Explore");
+                  alert("New user created:", newUser);
                 })
                 .catch((error) => {
                   console.log("Error creating user:", error);
@@ -64,16 +69,12 @@ const Login = () => {
       });
   };
 
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        setUser(user);
       } else {
-        setUser(null);
       }
     });
 
@@ -114,6 +115,10 @@ const Login = () => {
       window.location.reload(false);
     }
   };
+
+  if (loading) {
+    return <div></div>; // Display a loading state while authentication state is being resolved
+  }
 
   return !user ? (
     <React.Fragment>
@@ -176,7 +181,7 @@ const Login = () => {
       </div>
     </React.Fragment>
   ) : (
-    <Home />
+    <Explore />
   );
   // : (
   //   <div>
