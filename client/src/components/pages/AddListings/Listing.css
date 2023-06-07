@@ -152,6 +152,11 @@
   padding-top: 20px;
 }
 
+.info_contain_images {
+  font-size: 25px;
+  padding-left: 50px;
+}
+
 label {
   font-size: 20px;
   margin-top: 10px;
