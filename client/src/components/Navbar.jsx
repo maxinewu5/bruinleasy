@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { Button } from "./Button";
 import { getAuth } from "firebase/auth";
+import { auth } from "../Firebase"
+import { useAuthState } from "react-firebase-hooks/auth";
+import 'typeface-nunito';
 
 function Navbar() {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth);
 
   const handleSignOut = () => {
     auth.signOut().catch((error) => {
@@ -123,13 +125,13 @@ function Navbar() {
                 ) : click ? (
                   <img
                     className="navbar-icons"
-                    src={process.env.PUBLIC_URL + "./images/logout.jpg"}
+                    src={process.env.PUBLIC_URL + "./images/logout.png"}
                     alt="Login"
                   />
                 ) : (
                   <img
                     className="display-none"
-                    src={process.env.PUBLIC_URL + "./images/logout.jpg"}
+                    src={process.env.PUBLIC_URL + "./images/logout.png"}
                     alt="Login"
                   />
                 )}
@@ -137,19 +139,28 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link to="/User" className="nav-links" onClick={closeMobileMenu}>
-                {click ? (
+
+                {user ? (
+                  (click) ? (
+                    <img
+                      class="navbar-icons"
+                      src={process.env.PUBLIC_URL + "./images/myprofile.png"}
+                      alt="My Profile"
+                    />
+                  ) : (
+                    <img
+                      class="display-none"
+                      src={process.env.PUBLIC_URL + "./images/myprofile.png"}
+                      alt="My Profile"
+                    />
+                  )
+                ) : 
                   <img
-                    class="navbar-icons"
-                    src={process.env.PUBLIC_URL + "./images/myprofile.png"}
-                    alt="My Profile"
+                    className="display-none"
+                    src={process.env.PUBLIC_URL + "./images/myprofile.jpg"}
+                    alt="Login"
                   />
-                ) : (
-                  <img
-                    class="display-none"
-                    src={process.env.PUBLIC_URL + "./images/myprofile.png"}
-                    alt="My Profile"
-                  />
-                )}
+                }
               </Link>
             </li>
             <li className="nav-item">

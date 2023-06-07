@@ -135,6 +135,12 @@
   cursor: pointer;
 }
 
+.navbar-icons p {
+  font-family: Nunito;
+  color: #50A5FF;
+  text-align: center;
+}
+
 .display-none {
   display: none;
 }

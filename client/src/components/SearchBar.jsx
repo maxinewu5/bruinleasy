@@ -6,8 +6,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { auth, db } from '../Firebase'
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
 import './SearchBar.css'
+import './Login.css'
 import CardItem from './CardItem';
 import { jaroWinklerDistance } from './scripts/search'
+import { AiOutlineSearch } from "react-icons/ai";
 
 // Overall Searching Functionality:
 // - Search:
@@ -111,13 +113,14 @@ function SearchBar( { setFilteredProperties }) {
   return (
     <>
       <form>
-      
+
       <div className='form-div'>
         
         <div className="search-bar">
           <div>
-            <label>Start Date:</label>
+            <label>START DATE</label>
             <DatePicker 
+              className="input-box"
               selected={startDate}
               onChange={(date) => {setStartDate(date); setDateFlag(true)}} 
               dateFormat="MM/dd/yyyy"
@@ -125,8 +128,9 @@ function SearchBar( { setFilteredProperties }) {
           </div>
           
           <div>
-            <label>End Date:</label>
+            <label>END DATE</label>
             <DatePicker 
+              className="input-box"
               selected={endDate}
               onChange={(date) => {setEndDate(date); setDateFlag(true)}}
               dateFormat="MM/dd/yyyy"
@@ -134,9 +138,10 @@ function SearchBar( { setFilteredProperties }) {
           </div>
 
           <div>
-            <label>Price</label>
+            <label>PRICE</label>
             <br></br>
             <input 
+              className="input-box"
               type="price"
               name="price"
               value={priceQ}
@@ -145,15 +150,26 @@ function SearchBar( { setFilteredProperties }) {
           </div>
 
           <div>
+            <label></label>
             <br></br>
-            <button onClick={handleSubmit}>Search</button>
+            <button 
+               className="btn btn--search"
+              onClick={handleSubmit}>
+                <AiOutlineSearch></AiOutlineSearch>
+            </button>
           </div>
         </div>
 
-        <br></br><br></br>
-        <button type="button" class="collapsible" onClick={()=>{setFiltersActive(!filtersActive)}}>
-        { filtersActive ? "Close" : "Expand"} Filters
-        </button>
+        <br></br>
+        <div
+          className="btn--filter"
+          type="button" 
+          class="collapsible" 
+          onClick={()=>{setFiltersActive(!filtersActive)}}
+        >
+        <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p>
+        </div>
+
         <div class="filters" style={{ display: filtersActive ? "block" : "none" }}>
           <p>Apartment Name</p>
           <input 

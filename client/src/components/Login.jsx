@@ -43,14 +43,14 @@ const Login = () => {
               setDoc(doc(userRef, email), newUser)
                 .then(() => {
                   alert("New user created:", newUser);
-                  navigate("/");
+                  navigate("/Explore");
                 })
                 .catch((error) => {
                   console.log("Error creating user:", error);
                 });
             } else {
               // alert("User already exists in Firebase");
-              navigate("/");
+              navigate("/Explore");
             }
           })
           .catch((error) => {
@@ -102,10 +102,10 @@ const Login = () => {
         ) {
           const email = EmailID.substring(0, EmailID.length - 8) + "g.ucla.edu";
           await signInWithEmailAndPassword(auth, email, Password);
-          navigate("/");
+          navigate("/Explore");
         } else {
           await signInWithEmailAndPassword(auth, EmailID, Password);
-          navigate("/");
+          navigate("/Explore");
         }
       }
       // ...
