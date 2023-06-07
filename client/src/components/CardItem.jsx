@@ -9,7 +9,7 @@ import {
   doc,
   getDoc,
   getDocs,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import PropertyDisplay from "./pages/Property";
 
@@ -19,19 +19,18 @@ function CardItem(props) {
   the styling changes so that the heart changes color to indicate the post
   has been liked. */
 
-  const getUserData = async(userEmail) => {
-    let userRef = doc(db, "users", userEmail)
-    const userSnap = await getDoc(userRef)
-    const userProc = {...userSnap.data(), id:userSnap.id}
-    console.log(userProc)
-    setLike(userProc.fav_properties.includes(props.PropertyID))
+  const getUserData = async (userEmail) => {
+    let userRef = doc(db, "users", userEmail);
+    const userSnap = await getDoc(userRef);
+    const userProc = { ...userSnap.data(), id: userSnap.id };
+    console.log(userProc);
+    setLike(userProc.fav_properties.includes(props.PropertyID));
     //setUserData(userProc);
-  }
-
+  };
 
   //set the like to the input props.liked passed in from Cards.jsx
   useEffect(() => {
-    getUserData(auth.currentUser.email)
+    getUserData(auth.currentUser.email);
     setLike(props.liked);
   }, []);
   useEffect(() => {
@@ -40,32 +39,35 @@ function CardItem(props) {
 
   const handleLike = () => {
     setLike(!like);
-    updateLikeOnFirebase(props.PropertyID)
+    updateLikeOnFirebase(props.PropertyID);
     // props.setLikeState(!like);
     // props.onLike();
   };
 
   const updateLikeOnFirebase = async (PropertyID) => {
-    let userEmail = auth.currentUser.email
+    let userEmail = auth.currentUser.email;
     let userRef = doc(db, "users", userEmail);
-    const userSnap = await getDoc(userRef)
-    let new_favorite_properties = [...userSnap.data().fav_properties]
-    console.log("original fav props")
-    console.log(new_favorite_properties)
+    const userSnap = await getDoc(userRef);
+    let new_favorite_properties = [...userSnap.data().fav_properties];
+    console.log("original fav props");
+    console.log(new_favorite_properties);
 
     if (new_favorite_properties.includes(PropertyID)) {
-      console.log("removing " + PropertyID)
-      new_favorite_properties.splice(new_favorite_properties.indexOf(PropertyID), 1)
+      console.log("removing " + PropertyID);
+      new_favorite_properties.splice(
+        new_favorite_properties.indexOf(PropertyID),
+        1
+      );
     } else {
-      console.log("adding " + PropertyID)
-      new_favorite_properties.push(PropertyID)
+      console.log("adding " + PropertyID);
+      new_favorite_properties.push(PropertyID);
     }
     await updateDoc(userRef, {
-      fav_properties: new_favorite_properties
-    })
-    console.log("after!")
-    console.log(new_favorite_properties)
-  }
+      fav_properties: new_favorite_properties,
+    });
+    console.log("after!");
+    console.log(new_favorite_properties);
+  };
 
   const handleTitleClick = () => {
     // Perform actions when title is clicked
@@ -92,8 +94,17 @@ function CardItem(props) {
         {/*Heading, which displays the location of the apartment*/}
         <div className="heading_post">
           <div className="card_header">
-            <Link className="card_header">
-              <span onClick={() => PropertyDisplay(props.PropertyID)}>
+            <Link
+              to="/Property"
+              state={{ data: `${props.PropertyID}` }}
+              className="card_header"
+            >
+              <span
+                onClick={() => {
+                  // PropertyDisplay(props.PropertyID);
+                  // console.log(props.PropertyID);
+                }}
+              >
                 {props.title}
               </span>
             </Link>
