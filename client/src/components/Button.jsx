@@ -13,10 +13,11 @@ export const Button1 = ({
   buttonStyle,
   buttonSize,
 }) => {
+  {/*button style*/}
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0];
-
+  {/*button size*/}
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
