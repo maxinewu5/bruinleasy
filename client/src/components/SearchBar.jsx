@@ -150,19 +150,26 @@ function SearchBar( { setFilteredProperties }) {
           </div>
 
           <div>
+            <label></label>
             <br></br>
             <button 
-               className="btn--small btn--search"
+               className="btn btn--search"
               onClick={handleSubmit}>
                 <AiOutlineSearch></AiOutlineSearch>
             </button>
           </div>
         </div>
 
-        <br></br><br></br>
-        <button type="button" class="collapsible" onClick={()=>{setFiltersActive(!filtersActive)}}>
-        { filtersActive ? "Close" : "Expand"} Filters
-        </button>
+        <br></br>
+        <div
+          className="btn--filter"
+          type="button" 
+          class="collapsible" 
+          onClick={()=>{setFiltersActive(!filtersActive)}}
+        >
+        <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p>
+        </div>
+
         <div class="filters" style={{ display: filtersActive ? "block" : "none" }}>
           <p>Apartment Name</p>
           <input 
