@@ -1,3 +1,4 @@
+/*create the flex box for login page stuff to go into*/
 .login_page {
   display: flex;
   flex-direction: column;
@@ -6,6 +7,7 @@
   padding-top: 100px;
 }
 
+/*styling for the form part with the items ie. the inputs for username and password */
 .login_form {
   display: flex;
   flex-direction: column;
@@ -13,11 +15,13 @@
   top: 200px;
 }
 
+/*container for the login form, right half of the big white box*/
 .login_submission {
   align-items: right;
   padding-left: 50%;
 }
 
+/*big box everything is in*/
 .login_container {
   box-sizing: border-box;
   padding: 0px 20px 20px -10px;
@@ -29,6 +33,7 @@
   box-shadow: 2px 3px 28px 1px rgba(0,0,0,0.1);
 }
 
+/*style for the inputs, like the individual input boxes for username and passsword*/
 .login_box {
   display: flex;
   flex-direction: column;
@@ -45,7 +50,8 @@
   text-indent: 10px;
 }
 
-.login_box_long {
+
+/* .login_box_long {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: 1px solid transparent;
@@ -59,7 +65,7 @@
   padding: 4px 4px 60px 4px;
   resize: none;
   margin-bottom: 20px;
-}
+} */
 
 .login_logo_pic {
   position: absolute;

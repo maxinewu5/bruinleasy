@@ -3,6 +3,7 @@ import "../App.css";
 import { Button1, Button2 } from "./Button";
 import "./FrontPage.css";
 import { useNavigate } from "react-router-dom";
+import './SearchBar.css';
 
 function FrontPage() {
   const navigate = useNavigate();
@@ -13,12 +14,13 @@ function FrontPage() {
         src={process.env.PUBLIC_URL + "./images/house.gif"}
         alt="house"
       />
-      <img
-        className="img-title"
-        src={process.env.PUBLIC_URL + "./images/welcome1.png"}
-        alt="welcome"
-      />
-      <div className="front-btns">
+      <div className='welcome_front'>
+        <h1 className='EXPLORE'>WELC
+          <span className='yellow_explore'>O</span>
+          <span className='blue_explore'>M</span>
+          E</h1>
+      </div>
+      <div className="front-btns"><br />
         <Button1
           className="btns"
           buttonStyle="btn--outline"
@@ -26,13 +28,6 @@ function FrontPage() {
         >
           EXPLORE
         </Button1>
-        <Button2
-          className="btns"
-          buttonStyle="btn--primary"
-          buttonSize="btn--large"
-        >
-          VIEW LISTINGS
-        </Button2>
       </div>
     </div>
   );

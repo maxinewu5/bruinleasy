@@ -20,7 +20,7 @@ function Cards(props) {
               return <CardItem 
                 PropertyID={listing?.id}
                 src={listing?.PropertyImageURLs[0]}
-                title={listing?.AptName}
+                title={listing?.RoomNumber + " " + listing?.AptName}
                 author_name={listing?.OwnerEmail}
                 excerpt={listing?.Description}
                 date={listing?.StartDate?.toDate().toLocaleDateString('en-US') + " - " + listing?.EndDate?.toDate().toLocaleDateString('en-US')}
