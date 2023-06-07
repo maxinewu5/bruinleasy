@@ -14,13 +14,14 @@ const AddDescription = ({ onNext, description }) => {
       <div className='listing_container_big'>
         <img
             className='background_img'
-            src={process.env.PUBLIC_URL + "./images/location-back.png"}
+            src={process.env.PUBLIC_URL + "./images/description-back.png"}
             alt="Location Back"
           />
         <div className='listing_page'>
           <div className='listing_container'>
-          <h2>Please write a short description for your place 😘</h2>
-          <input
+          <h2 className='heading' >Please write a short description for your place 😘</h2>
+          <input 
+            className='description_box_long' 
             type="text"
             name="description"
             placeholder="Description"
