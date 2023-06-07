@@ -133,7 +133,7 @@ function SearchBar( { setFilteredProperties }) {
           <div>
             <label>START DATE</label>
             <DatePicker 
-              className="inputbox"
+              className="input-box"
               selected={startDate}
               onChange={(date) => {setStartDate(date); setDateFlag(true)}} 
               dateFormat="MM/dd/yyyy"
@@ -143,7 +143,7 @@ function SearchBar( { setFilteredProperties }) {
           <div>
             <label>END DATE</label>
             <DatePicker 
-              className="inputbox"
+              className="input-box"
               selected={endDate}
               onChange={(date) => {setEndDate(date); setDateFlag(true)}}
               dateFormat="MM/dd/yyyy"
@@ -154,9 +154,8 @@ function SearchBar( { setFilteredProperties }) {
             <label>PRICE</label>
             <br></br>
             <input 
-              className="inputbox"
-              type="price"
-              name="price"
+              className="input-box"
+              type="number"
               value={priceQ}
               onChange={(e)=>setPriceQ(e.target.value)}
             ></input> 
@@ -195,30 +194,45 @@ function SearchBar( { setFilteredProperties }) {
         >
         {/* <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p> */}
         </div>
-
-        <div class="filters" style={{ display: filtersActive ? "block" : "none" }}>
-          <p>Apartment Name</p>
-          <input 
-            type="search" 
-            name="search-form" 
-            value={searchQ} 
-            onChange={(e)=>setSearchQ(e.target.value)}>
-          </input>
-
-          <p>Apartment Type</p>
-          <select>
-            <option value="any">any</option>
-            <option value="single">single</option>
-            <option value="double">double</option>
-            <option value="triple">triple</option>
-          </select>
-
-          <p>Amenities</p>
-          <input onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
-          <label>Air Conditioning</label>
-        </div>
-        </div>
-
+      <div className={filtersActive ? 'filters_bar' : 'filters_bar active'}>
+        {/* <div className="filters" style={{ display: filtersActive ? "block" : "none" }}> */}
+        <ul className={filtersActive ? 'filters active' : 'filters'} > 
+          <li className='filter_item'>
+            <p className='text_s'>APARTMENT NAME</p>
+            <input 
+              className='text_s'
+              type="search" 
+              name="search-form" 
+              value={searchQ} 
+              onChange={(e)=>setSearchQ(e.target.value)}>
+            </input>
+          </li>
+          <li className='filter_item'>
+            <p className='text_s'>APARTMENT TYPE</p>
+            <select className='text_s'>
+              <option value="any">any</option>
+              <option value="single">single</option>
+              <option value="double">double</option>
+              <option value="triple">triple</option>
+            </select>
+          </li>
+          <li className='filter_item'>
+            <p className='text_s'>AMENITIES</p>
+            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <label className='text_special'>air conditioning</label>
+            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <label className='text_special'>parking</label>
+            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <label className='text_special'>furnishing</label>
+            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <label className='text_special'>rooftop</label>
+            <input className='check_box_s' onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+            <label className='text_special'>lobby</label>
+            {/*notes right now everything is at setAC, make sure to change for parking furnishing etc too */}
+          </li>
+        </ul>
+      </div>
+    </div>
 {/*   { openModal && <FilterModal closeModal={()=>{setOpenModal(false)}}/>} */}
 
       </form>

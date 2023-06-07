@@ -210,3 +210,7 @@
   transition: 250ms;
 }
 
+input[type=text]:focus {
+  outline: 2px solid #FFD77B;
+}
+
