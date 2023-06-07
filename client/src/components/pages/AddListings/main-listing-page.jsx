@@ -198,7 +198,7 @@ const AddListing = () => {
   }
 
   return user? (
-    <div>
+    <div className='listing_page'>
       <h1>
         To add your property we will take you through a series of steps
       </h1>
@@ -226,6 +226,7 @@ const AddListing = () => {
         <div className='button_next'>
           {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
           {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
+          {currentPage == 7 && <button className='btn--outline--small--half'onClick={handleSubmit}>Submit</button>}
         </div>
       </div>
         

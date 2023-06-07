@@ -54,7 +54,7 @@ function Explore() {
 
   return user ? (
     <>
-      <div className="explore-container">
+      {/* <div className="explore-container">
         <img
           class="img-background"
           src={process.env.PUBLIC_URL + "./images/explore.gif"}
@@ -65,7 +65,7 @@ function Explore() {
           src={process.env.PUBLIC_URL + "./images/explore-title.png"}
           alt="explore"
         />
-      </div>
+      </div> */}
 
       <SearchBar setFilteredProperties={setAllProperties} />
 

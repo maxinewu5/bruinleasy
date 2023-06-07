@@ -117,6 +117,7 @@ function SearchBar( { setFilteredProperties }) {
       <div className='form-div'>
         
         <div className="search-bar">
+          <div className='search-bar-main'>
           <div>
             <label>START DATE</label>
             <DatePicker 
@@ -158,6 +159,7 @@ function SearchBar( { setFilteredProperties }) {
                 <AiOutlineSearch></AiOutlineSearch>
             </button>
           </div>
+        </div>
         </div>
 
         <br></br>

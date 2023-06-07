@@ -22,7 +22,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
           <div className='listing_container'>
             <h2 className='heading'>Does the apartment offer any of these amenities? </h2>
             <div className='info_contain_amenities'>
-              <label >
+              <label className='amenities_label'>
                 <input
                   className='check_box'
                   type="checkbox"
@@ -33,7 +33,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Air Conditioner
               </label>
               <br />
-              <label>
+              <label className='amenities_label'>
                 <input
                   className='check_box'
                   type="checkbox"
@@ -44,7 +44,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Parking
               </label>
               <br />
-              <label>
+              <label className='amenities_label'>
                 <input
                   className='check_box'
                   type="checkbox"
@@ -55,7 +55,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Furnishing
               </label>
               <br />
-              <label>
+              <label className='amenities_label'>
                 <input
                   className='check_box'
                   type="checkbox"
@@ -66,7 +66,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Rooftop
               </label>
               <br />
-              <label>
+              <label className='amenities_label'>
                 <input
                   className='check_box'
                   type="checkbox"
