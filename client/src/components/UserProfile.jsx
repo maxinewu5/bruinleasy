@@ -18,19 +18,28 @@ import "./Button.css"
 import './FrontPage.css';
 import './UserProfile.css';
 import './Login.css';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 function UserProfile() {
   const navigate = useNavigate();
 
   //useAuthState hook
   const [user, loading, error] = useAuthState(auth);
+
   //not working auth code--
   //const auth = getAuth();
   //const user = auth.currentUser;
+
+  //console.log(user)
+  //const userRef = doc(db, 'users', user ? user.email : "maxinewu5@gmail.com");
 
   //track state of userData, user owned properties, and fav properties
   const [userData, setUserData] = useState();
   const [userProperties, setUserProperties] = useState([]);
   const [favProperties, setFavProperties] = useState([]);
+
+  //TODO: clean up this implementation
+  //using a temp test@g.ucla.edu placeholder email while the user loads 
+  const [userDocData, userLoading, userError, userSnapshot] = useDocumentData(doc(db, 'users', user ? user.email : "test@g.ucla.edu"));
 
   //gets user data given userEmail
   const getUserData = async (userEmail) => {
@@ -139,7 +148,7 @@ function UserProfile() {
   //get properties upon user data update
 
   useEffect(() => {
-
+    
     getsProperties()  
 
     //broken code:
@@ -148,7 +157,7 @@ function UserProfile() {
     //     getsProperties()  
     //   })
     // }
-  }, [user]);
+  }, [user, userDocData]);
 
   //className="btn--outline--medium"
 
@@ -172,15 +181,22 @@ function UserProfile() {
         >
           Add Listing
         </button>
-        <button className="btn--outline--profile" >Edit Profile</button>
+        <button className="btn--outline--profile" 
+          onClick={()=>{navigate("/ReportUser")}}
+          >Report User</button>
       </div>
       <div className='profile_body'>
       <h3 className='my_listing'>My Listings</h3>
-        <Cards properties={userProperties} />
+        <Cards 
+          canDelete={true}
+          properties={userProperties} 
+        />
   
         <h3 className='my_listing'>Favorite Listings</h3>
       
-        <Cards properties={favProperties} />
+        <Cards 
+          properties={favProperties} 
+        />
       </div>
     </div>
     </>

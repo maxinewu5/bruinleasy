@@ -2,6 +2,7 @@ import { getFirestore } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import React from "react";
 
 const PropertyDisplay = () => {
