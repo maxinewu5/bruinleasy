@@ -10,6 +10,7 @@ import SearchBar from "./components/SearchBar";
 import UserProfile from "./components/UserProfile";
 import ReportUser from "./components/pages/ReportAUser";
 import AddListing from "./components/pages/AddListings/main-listing-page";
+import PropertyDisplay from "./components/pages/Property";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/User" element={<UserProfile />} />
           <Route path="/ReportUser" element={<ReportUser />} />
           <Route path="/AddListing" element={<AddListing />} />
+          <Route path="/Property" element={<PropertyDisplay />} />
         </Routes>
       </Router>
     </>
