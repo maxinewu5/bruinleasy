@@ -19,7 +19,7 @@ const AddDescription = ({ onNext, description }) => {
           />
         <div className='listing_page'>
           <div className='listing_container'>
-          <h2 className='heading' >Please write a short description for your place 😘</h2>
+          <h2 className='heading' >Please write a short description for your place</h2>
           <input 
             className='description_box_long' 
             type="text"

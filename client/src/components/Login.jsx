@@ -124,12 +124,14 @@ const Login = () => {
     <React.Fragment>
       <div className="login_page">
         <div className="login_container">
+          {/*image for half of the login box*/}
           <img
             className="login_house_logo"
             src={process.env.PUBLIC_URL + "./images/login-key.png"}
             alt="Login-House"
           />
 
+        {/*display logo for bruinLeasy */}
           <div className="login_submission">
             <form classname="login_form" onSubmit={handleSubmit}>
               <img
@@ -137,6 +139,7 @@ const Login = () => {
                 src={process.env.PUBLIC_URL + "./images/logo.png"}
                 alt="Logo"
               />
+              {/*the inpits*/}
               <input
                 className="login_box"
                 type="email"
@@ -157,7 +160,7 @@ const Login = () => {
                 value={Password}
               />
               <br />
-
+              {/*submit button*/}
               <div className="submit">
                 <button className="btn--outline--medium">Submit</button>
               </div>
@@ -170,6 +173,7 @@ const Login = () => {
                 <FcGoogle className="fcGoogle" /> Sign in with Google
               </button>{" "}
               <br />
+              {/*create account button*/}
               <Link to="/CreateAccount">
                 <button className="btn--outline--small">
                   New? Create An Account

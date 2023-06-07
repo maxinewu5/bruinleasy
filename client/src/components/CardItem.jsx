@@ -66,11 +66,13 @@ function CardItem(props) {
     <div className="card_item">
       <div className="card_item_bckgrd">
         <div className="card_item_img">
+          {/*card image which is the picture for the listing*/}
           <img
             src={props.src}
             alt={props.title}
             className="card_item_img_inside"
           />
+          {/* the price component goes on the bottom left corner in a blue box*/}
           <h5 className="cards_item_rating" data-category={props.price} />
           <span className="card_heart_box"></span>
           <span className="card_heart" onClick={handleLike}>
@@ -98,7 +100,7 @@ function CardItem(props) {
             </Link>
           </div>
         </div>
-
+        {/*the body of the card*/}
         <div className="card_body_wrap">
           <p className="card_body">
             {props.excerpt}

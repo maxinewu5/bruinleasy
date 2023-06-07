@@ -16,7 +16,8 @@ function Navbar() {
     });
     // refreshPage();
   };
-
+  
+  /*make navbar fixed*/
   const [fixed, setFixed] = useState(false);
   const [height, setHeight] = useState(false);
 
@@ -31,15 +32,19 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   });
 
-  const [click, setClick] = useState(false);
+  const [click, setClick] = useState(false); /* check if has been clicked or not*/
   const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const closeMobileMenu = () => setClick(false);  /*check if menu open or not*/
 
   return (
     <nav className={'${sticky ? "sticky" : ""}'}>
+      {/*wraps the navbar in a large flex box*/}
       <nav className="navbar">
+        {/*wraps the items in the navbar and sets a boundary*/}
         <div className="navbar-container">
+
+          {/*top of navigation bar, contains the logo and the menu icon*/}
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             <img
               class="navbar-pic"
@@ -47,7 +52,7 @@ function Navbar() {
               alt="Logo"
             />
           </Link>
-
+          {/*menu icon*/}
           <div className="menu-icon" onClick={handleClick}>
             <img
               style={{ width: 30, height: 30 }}
@@ -55,132 +60,108 @@ function Navbar() {
               alt="MenuBar"
             />
           </div>
+
+          {/*when menu icon has been clicked on, use style nav-menu.active which
+          displays the navigation bar, else display nothing*/}
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <Link to="/Home" className="nav-links" onClick={closeMobileMenu}>
+                {/*for the images which represent each page(home explore report etc)
+                show image only if click is true*/}
                 {click ? (
                   <img
                     class="navbar-icons"
                     src={process.env.PUBLIC_URL + "./images/home.png"}
-                    alt="Home"
-                  />
-                ) : (
+                    alt="Home"/> ) : (
                   <img
                     class="display-none"
                     src={process.env.PUBLIC_URL + "./images/home.png"}
-                    alt="Home"
-                  />
-                )}
+                    alt="Home"/>)}
               </Link>
             </li>
+            
+            {/*Explore icon*/}
             <li className="nav-item">
               <Link
                 to="/Explore"
                 className="nav-links"
-                onClick={closeMobileMenu}
-              >
+                onClick={closeMobileMenu}>
                 {click ? (
                   <img
                     class="navbar-icons"
                     src={process.env.PUBLIC_URL + "./images/explore.png"}
-                    alt="Explore"
-                  />
-                ) : (
+                    alt="Explore"/> ) : (
                   <img
                     class="display-none"
                     src={process.env.PUBLIC_URL + "./images/explore.png"}
-                    alt="Explore"
-                  />
-                )}
+                    alt="Explore"/> )}
               </Link>
             </li>
+
+            {/*Login icon, not displayed when signed in, is instead replaced by logout*/}
             <li className="nav-item">
               <Link
                 to="/Login"
                 className="nav-links"
-                onClick={
-                  user
-                    ? () => {
-                        closeMobileMenu();
-                        handleSignOut();
-                      }
-                    : closeMobileMenu
-                }
-              >
+                onClick={ user ? () => {closeMobileMenu(); handleSignOut(); } : closeMobileMenu}>
                 {!user ? (
                   click ? (
                     <img
                       className="navbar-icons"
                       src={process.env.PUBLIC_URL + "./images/login.png"}
-                      alt="Login"
-                    />
-                  ) : (
+                      alt="Login"/>) : (
                     <img
                       className="display-none"
                       src={process.env.PUBLIC_URL + "./images/login.png"}
-                      alt="Login"
-                    />
-                  )
-                ) : click ? (
+                      alt="Login"/> ) ) : 
+                  click ? (
                   <img
                     className="navbar-icons"
                     src={process.env.PUBLIC_URL + "./images/logout.png"}
-                    alt="Login"
-                  />
-                ) : (
+                    alt="Logout"
+                  /> ) : (
                   <img
                     className="display-none"
                     src={process.env.PUBLIC_URL + "./images/logout.png"}
-                    alt="Login"
-                  />
-                )}
+                    alt="Logout"/>)}
               </Link>
             </li>
+
+            {/*My Profile icon, not displayed when not signed in*/}
             <li className="nav-item">
               <Link to="/User" className="nav-links" onClick={closeMobileMenu}>
-
                 {user ? (
                   (click) ? (
                     <img
                       class="navbar-icons"
                       src={process.env.PUBLIC_URL + "./images/myprofile.png"}
-                      alt="My Profile"
-                    />
-                  ) : (
+                      alt="My Profile"/> ) : (
                     <img
                       class="display-none"
                       src={process.env.PUBLIC_URL + "./images/myprofile.png"}
-                      alt="My Profile"
-                    />
-                  )
-                ) : 
+                      alt="My Profile"/> ) ) : 
                   <img
                     className="display-none"
                     src={process.env.PUBLIC_URL + "./images/myprofile.jpg"}
-                    alt="Login"
-                  />
-                }
+                    alt="My Profile" />}
               </Link>
             </li>
+
+            {/*Report User icon*/}
             <li className="nav-item">
               <Link
                 to="/ReportUser"
                 className="nav-links"
-                onClick={closeMobileMenu}
-              >
+                onClick={closeMobileMenu}>
                 {click ? (
                   <img
                     class="navbar-icons"
                     src={process.env.PUBLIC_URL + "./images/report.png"}
-                    alt="Report User"
-                  />
-                ) : (
+                    alt="Report User"/>) : (
                   <img
                     class="display-none"
                     src={process.env.PUBLIC_URL + "./images/report.png"}
-                    alt="Report User"
-                  />
-                )}
+                    alt="Report User"/> )}
               </Link>
             </li>
           </ul>

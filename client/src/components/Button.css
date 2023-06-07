@@ -39,6 +39,7 @@
   .btn--large {
     padding: 12px 26px;
     font-size: 17px;
+    border-width: 2px;
   }
   
   .btn--large:hover,

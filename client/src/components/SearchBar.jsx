@@ -127,7 +127,10 @@ function SearchBar( { setFilteredProperties }) {
       <form>
 
       <div className='form-div'>
-        
+      <h1 className='EXPLORE'>EXPL
+        <span className='yellow_explore'>O</span>
+        <span className='blue_explore'>R</span>
+        E</h1>
         <div className="search-bar">
           <div className='search-bar-main'>
           <div>
@@ -159,7 +162,6 @@ function SearchBar( { setFilteredProperties }) {
               dateFormat="MM/dd/yyyy"
             />
           </div>
-
           <div>
             <label></label>
             <br></br>
@@ -183,7 +185,6 @@ function SearchBar( { setFilteredProperties }) {
           </div>
         </div>
         </div>
-
         <br></br>
         <div
           className="btn--filter"
