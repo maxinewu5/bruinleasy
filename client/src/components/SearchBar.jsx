@@ -6,234 +6,192 @@ import "react-datepicker/dist/react-datepicker.css";
 import { auth, db } from '../Firebase'
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
 import './SearchBar.css'
+import './Login.css'
 import CardItem from './CardItem';
+import { jaroWinklerDistance } from './scripts/search'
+import { AiOutlineSearch } from "react-icons/ai";
 
-/*
-Overall Searching Functionality:
-- Search:
-  - Apartment Name 
-  - Start Date / End Date
-  - Price Range 
-- Filter: 
-  - single/double/triple 
-  - Checkbox: air_con 
-*/
+// Overall Searching Functionality:
+// - Search:
+//   - apartment name
+//   - start date / end date
+//   - price range
+// - Filter: 
+//   - single/double/triple 
+//   - Checkbox: air conditioning
 
-//function to calculate similarity between two strings
-function jaroWinklerDistance(str1, str2) {
-  const m = str1.length;
-  const n = str2.length;
-  const maxDistance = Math.floor(Math.max(m, n) / 2) - 1;
-
-  //array to store matches
-  const matches1 = new Array(m).fill(false);
-  const matches2 = new Array(n).fill(false);
-
-  let matches = 0; //count of matching characters
-  let transpositions = 0; //count of transpositions
-
-  //calculate matches
-  for (let i = 0; i < m; i++) {
-    const start = Math.max(0, i - maxDistance);
-    const end = Math.min(i + maxDistance + 1, n);
-    for (let j = start; j < end; j++) {
-      if (!matches2[j] && str1[i] === str2[j]) {
-        matches1[i] = true;
-        matches2[j] = true;
-        matches++;
-        break;
-      }
-    }
-  }
-
-  //no matches found
-  if (matches === 0) {
-    return 0;
-  }
-
-  // Calculate transpositions
-  let k = 0;
-  for (let i = 0; i < m; i++) {
-    if (matches1[i]) {
-      while (!matches2[k]) {
-        k++;
-      }
-      if (str1[i] !== str2[k]) {
-        transpositions++;
-      }
-      k++;
-    }
-  }
-
-  //calculate similarity
-  const similarity = (matches / m + matches / n + (matches - transpositions / 2) / matches) / 3;
-
-  //calculate common prefix length (up to 4 characters)
-  const prefix = str1.substring(0, 4) === str2.substring(0, 4) ? 1 : 0;
-
-  //calculate Jaro-Winkler distance
-  const jaroWinklerDistance = similarity + prefix * 0.1 * (1 - similarity);
-
-  return jaroWinklerDistance;
-}
-
-function SearchBar() {
+function SearchBar( { setFilteredProperties }) {
 
   const [ userData, setUserData ] = useState()
   const [ searchQ, setSearchQ ] = useState("")
+  const [ priceQ, setPriceQ ] = useState("")
   const [ dateFlag, setDateFlag ] = useState(false);
-  const [ startDate, setStartDate] = useState(new Date());
-  const [ endDate, setEndDate] = useState(new Date());
-
+  const [ startDate, setStartDate] = useState(undefined);
+  const [ endDate, setEndDate] = useState(undefined);
   const [ AC, setAC ] = useState(false);
-
-  const [ allProperties, setAllProperties ] = useState([])
-  const [ filteredProperties, setFilteredProperties ] = useState([])
+  const [ filtersActive, setFiltersActive ] = useState(false)
 
   const getAllProperty = async () => {
     const propertyData = await getDocs(collection(db, "Properties"))
     const propFilteredData = propertyData.docs.map((doc) => ({...doc.data(), id: doc.id}))
-    setAllProperties(propFilteredData)
+    setFilteredProperties(propFilteredData)
   }
 
+  //function to handle when the search form is submitted
   const handleSubmit = async (e) => {
-
+    //prevents the page from refreshing like default
     e.preventDefault()
 
     let propertiesRef = collection(db, "Properties")
     const propertyData = await getDocs(propertiesRef)
-
+    //get all documnts from the properties collection
     const propSnap = await getDocs(collection(db, "Properties"));
 
+    //clean up propSnap to extract the actual useful data
     let propDocs = propSnap.docs.map((doc) => {
       return {...doc.data(), id: doc.id}
     })
 
     let filteredDocs = propDocs; 
 
+    //filter for date (only apply if date has been explicitly set by user, not default)
     if (dateFlag) {
-      filteredDocs = filteredDocs.filter((doc) => {
-        //console.log(doc)        
+      filteredDocs = filteredDocs.filter((doc) => {     
         if (!(doc.StartDate)) return false
         if (!(doc.EndDate)) return false
+
+        //calculates end dates and start dates in ms
         const pEndDate = doc.StartDate.toDate().getTime() / 1000
         const pStartDate = doc.EndDate.toDate().getTime() / 1000
-
         const qEndDate = new Date(endDate).getTime() / 1000
         const qStartDate = new Date(startDate).getTime() / 1000
 
+        //returns true if the doc matches the criteria
         return pEndDate < qEndDate && pStartDate > qStartDate;
       });
     }
 
+    //filter for search 
     if (searchQ != "") {
       filteredDocs = filteredDocs.filter((doc) => {
-        console.log(searchQ.toLocaleLowerCase())
-        console.log(doc.AptName)
-        console.log(doc)
-        
+        //make case insensitive
         let string1 = doc.AptName.toLocaleLowerCase()
         let string2 = searchQ.toLocaleLowerCase()
+        //do a fuzzy search based on jaroWinkler distance
         return jaroWinklerDistance(string1, string2) > 0.85
       });
     }
 
+    //filter for price
+    if (priceQ != "") {
+      filteredDocs = filteredDocs.filter((doc) => {
+        let propertyPrice = parseInt(doc.Rent); 
+        let renterPrice = parseInt(priceQ);
+        //match between 90% to 110% of the price range
+        return (renterPrice * 0.9 < propertyPrice) && (propertyPrice < renterPrice * 1.1);
+      });
+    }
+
+    //filter for ac
     if (AC) {
       filteredDocs = filteredDocs.filter((listing) => {
         return listing.AirConditioner == true;
       })
     } 
   
-      //can add more filters here if necessary
+    //can add more filters here if necessary
   
+    //update the filtered properties from the passed down function
     setFilteredProperties(filteredDocs)
-
-
-    
-    //code for filtering on firebase db: 
-    // const q = query(propertiesRef, where("AptName", "==", searchQ));
-    // const querySnapshot = await getDocs(q);
-    // const propFilteredData = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
-    // setFilteredProperties(propFilteredData)
-
-    //more code for filtering from firebase db:
-    // collection(db, 'Properties').where('AptName', '==', searchQ).get()
-    // .then((querySnapshot) => {
-    //   setProperties(querySnapshot.forEach((doc) => {
-    //     // Process the documents that match the condition
-    //     console.log ({...doc.data(), id: doc.id})
-    //   }));
-    // })
-    // .catch((error) => {
-    //   console.log('Error getting documents: ', error);
-    // });
-
-    //note: data.docs.map((doc) => ({...doc.data(), id: doc.id}))
-    //syntax -- .docs is where all the docs are, use the map() to pull data into cleaner format
-    //where(Start_Date, "==", "")
   }
 
-  //on initial load!! 
+  //on initial load, get properties 
   useEffect(()=> {
     getAllProperty()
-    setFilteredProperties(allProperties)
   }, [])
 
   return (
     <>
       <form>
-        <div className='login-container'>
-            <img class='img-background' src={process.env.PUBLIC_URL + './images/bcgrd.png'} alt='search' />
-            <div className='title'>Find YOUR Apartment WORK</div>
+
+      <div className='form-div'>
+        
+        <div className="search-bar">
+          <div>
+            <label>START DATE</label>
+            <DatePicker 
+              className="input-box"
+              selected={startDate}
+              onChange={(date) => {setStartDate(date); setDateFlag(true)}} 
+              dateFormat="MM/dd/yyyy"
+            />
+          </div>
+          
+          <div>
+            <label>END DATE</label>
+            <DatePicker 
+              className="input-box"
+              selected={endDate}
+              onChange={(date) => {setEndDate(date); setDateFlag(true)}}
+              dateFormat="MM/dd/yyyy"
+            />
+          </div>
+
+          <div>
+            <label>PRICE</label>
+            <br></br>
+            <input 
+              className="input-box"
+              type="price"
+              name="price"
+              value={priceQ}
+              onChange={(e)=>setPriceQ(e.target.value)}
+            ></input> 
+          </div>
+
+          <div>
+            <label></label>
+            <br></br>
+            <button 
+               className="btn btn--search"
+              onClick={handleSubmit}>
+                <AiOutlineSearch></AiOutlineSearch>
+            </button>
+          </div>
         </div>
-        <br></br><br></br>
-
-        <p>Dates</p>
-
-        <label>Start Date:</label>
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-        <label>End Date:</label>
-        <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-
-        <p>Price</p>
-        <input></input>
-        <input></input>
-
-        <p>Apartment Name</p>
-        <input 
-          type="search" 
-          name="search-form" 
-          value={searchQ} 
-          onChange={(e)=>setSearchQ(e.target.value)}>
-        </input>
-
-        <p>Apartment Type</p>
-        <select>
-          <option value="any">any</option>
-          <option value="single">single</option>
-          <option value="double">double</option>
-          <option value="triple">triple</option>
-        </select>
-
-
-        <p>Amenities</p>
-        <input onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
-        <label>Need AC</label>
-
-        <br></br><br></br>
-
-        <button onClick={handleSubmit}>Search</button>
 
         <br></br>
+        <div
+          className="btn--filter"
+          type="button" 
+          class="collapsible" 
+          onClick={()=>{setFiltersActive(!filtersActive)}}
+        >
+        <p><u>{ filtersActive ? "CLOSE" : "EXPAND"} FILTERS</u></p>
+        </div>
 
-        <br></br><br></br>
+        <div class="filters" style={{ display: filtersActive ? "block" : "none" }}>
+          <p>Apartment Name</p>
+          <input 
+            type="search" 
+            name="search-form" 
+            value={searchQ} 
+            onChange={(e)=>setSearchQ(e.target.value)}>
+          </input>
 
-        {filteredProperties?.map((listing) => {
-            return <CardItem
-                text={listing.AptName + ": " +  listing.StartDate?.toDate().toDateString() + " - " + listing.EndDate?.toDate().toDateString()}
-            ></CardItem>
-        })}
+          <p>Apartment Type</p>
+          <select>
+            <option value="any">any</option>
+            <option value="single">single</option>
+            <option value="double">double</option>
+            <option value="triple">triple</option>
+          </select>
 
+          <p>Amenities</p>
+          <input onChange={(e) => { setAC(e.target.checked)} } type="checkbox"></input>
+          <label>Air Conditioning</label>
+        </div>
+        </div>
       </form>
     </>
   );

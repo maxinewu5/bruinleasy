@@ -11,6 +11,8 @@ import {
 } from "firebase/firestore";
 import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 /////////////////////////////////////////////////////////////////////////
 import AddAddress from "./add-address";
 import AddAmenities from "./add-amenities";
@@ -22,9 +24,14 @@ import AddDates from "./add-dates";
 import './Listing.css';
 import '../../../App.css';
 import '../../Login.css';
+import Login from "../../Login";
 
 // Function to add listings....obviously
-const AddListing = ({ user }) => {
+const AddListing = () => {
+  const auth = getAuth();
+  // const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth); // Use useAuthState hook to handle authentication state
+
   const PropertiesRef = collection(db, "Properties");
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -32,6 +39,7 @@ const AddListing = ({ user }) => {
   const [amenities, setAmenities] = useState(Array(5).fill(false));
   const [occCounters, setOccCounters] = useState([0, 0]);
   const [images, setImages] = useState([]);
+  // const [imageVals, setImageVals] = useState([]);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(1200);
   const [dates, setDates] = useState(["", ""]);
@@ -53,6 +61,7 @@ const AddListing = ({ user }) => {
 
   const handleNextImages = (image) => {
     setImages(image);
+    // setImageVals(imageVal);
   };
 
   const handleNextDescription = (desc) => {
@@ -102,7 +111,7 @@ const AddListing = ({ user }) => {
       Description: description,
       Rent: price,
       StartDate: dates[0],
-      EndDate: dates[0],
+      EndDate: dates[1],
     };
 
     const addProperty = async () => {
@@ -184,8 +193,8 @@ const AddListing = ({ user }) => {
   };
 
   return (
-    <div className='listing_page'>
-      <h1 className='title'>
+    <div>
+      <h1>
         To add your property we will take you through a series of steps
       </h1>
         {currentPage === 0 && (
@@ -211,16 +220,30 @@ const AddListing = ({ user }) => {
         {currentPage === 7 && (
           <div>
             <h2>Review and Submit</h2>
-            {/* <p>Address:</p>
-            <p>
-              {address[0]}, {address[1]}
+              <p>
+              Address: {address[0]}, {address[1]}, {address[3]}, {address[4]}{" "}
+            {address[5]}
             </p>
-            <p>
-              {address[3]}, {address[4]}, {address[5]}
+            <button onClick={() => setCurrentPage(0)}>Edit Address</button>
+          <p>Amenities: {amenities.join(", ")}</p>
+          <button onClick={() => setCurrentPage(1)}>Edit Amenities</button>
+          <p>Bedrooms: {occCounters[1]}</p>
+          <button onClick={() => setCurrentPage(2)}>Edit Bedrooms</button>
+          <p>Bathrooms: {occCounters[0]}</p>
+          <button onClick={() => setCurrentPage(2)}>Edit Bathrooms</button>
+          <p>Price: ${price}/month</p>
+          <button onClick={() => setCurrentPage(6)}>Edit Price</button>
+          <p>
+              Dates:{" "}
+            {dates[0].toString().substring(4, 15) +
+              " - " +
+              dates[1].toString().substring(4, 15)}
             </p>
-
-            <p>Amenities: {amenities.join(", ")}</p>
-            <p>Occupation Counters: {occCounters.join(", ")}</p> */}
+          <button onClick={() => setCurrentPage(5)}>Edit Dates</button>
+            <p>Description: {description}</p>
+            <button onClick={() => setCurrentPage(4)}>Edit Description</button>
+          <br />
+          <br />
             <button className='btn--outline--small--half' onClick={handleSubmit}>Submit</button>
           </div>
         )}
