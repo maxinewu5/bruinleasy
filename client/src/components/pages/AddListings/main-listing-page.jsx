@@ -25,6 +25,7 @@ import './Listing.css';
 import '../../../App.css';
 import '../../Login.css';
 import Login from "../../Login";
+import ReviewAndSubmit from "./review-submit"
 
 // Function to add listings....obviously
 const AddListing = () => {
@@ -192,7 +193,11 @@ const AddListing = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  return (
+  if(loading){
+    return <div></div>;
+  }
+
+  return user? (
     <div>
       <h1>
         To add your property we will take you through a series of steps
@@ -217,42 +222,14 @@ const AddListing = () => {
         )}
         {currentPage === 5 && <AddDates onNext={handleNextDates} dates={dates} />}
         {currentPage === 6 && <AddPrice onNext={handleNextPrice} price={price} />}
-        {currentPage === 7 && (
-          <div>
-            <h2>Review and Submit</h2>
-              <p>
-              Address: {address[0]}, {address[1]}, {address[3]}, {address[4]}{" "}
-            {address[5]}
-            </p>
-            <button onClick={() => setCurrentPage(0)}>Edit Address</button>
-          <p>Amenities: {amenities.join(", ")}</p>
-          <button onClick={() => setCurrentPage(1)}>Edit Amenities</button>
-          <p>Bedrooms: {occCounters[1]}</p>
-          <button onClick={() => setCurrentPage(2)}>Edit Bedrooms</button>
-          <p>Bathrooms: {occCounters[0]}</p>
-          <button onClick={() => setCurrentPage(2)}>Edit Bathrooms</button>
-          <p>Price: ${price}/month</p>
-          <button onClick={() => setCurrentPage(6)}>Edit Price</button>
-          <p>
-              Dates:{" "}
-            {dates[0].toString().substring(4, 15) +
-              " - " +
-              dates[1].toString().substring(4, 15)}
-            </p>
-          <button onClick={() => setCurrentPage(5)}>Edit Dates</button>
-            <p>Description: {description}</p>
-            <button onClick={() => setCurrentPage(4)}>Edit Description</button>
-          <br />
-          <br />
-            <button className='btn--outline--small--half' onClick={handleSubmit}>Submit</button>
-          </div>
-        )}
+        {currentPage === 7 && <ReviewAndSubmit setCurrentPage={setCurrentPage} handleSubmit={handleSubmit} address={address} amenities={amenities} occCounters={occCounters} price={price} dates={dates} description={description}/>}
         <div className='button_next'>
           {currentPage > 0 && <button className='btn--outline--small--half' onClick={handlePrev}>Previous</button>}
           {currentPage < 7 && <button className='btn--outline--small--half' onClick={handleNext}>Next</button>}
         </div>
-    </div>
-  );
+      </div>
+        
+  ) : <Login />;
 };
 
 export default AddListing;

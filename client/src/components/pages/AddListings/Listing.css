@@ -150,6 +150,7 @@ label {
     flex-direction: row;
     position: relative;
     align-items: center;
+    justify-content: center;
     bottom: 130px;
 }
 

@@ -20,7 +20,7 @@ const AddPrice = ({ onNext, price }) => {
         <img
             className='background_img'
             src={process.env.PUBLIC_URL + "./images/rent-back.png"}
-            alt="Location Back"
+            alt="Rent Back"
           />
         <div className='listing_page'>
           <div className='listing_container'>
