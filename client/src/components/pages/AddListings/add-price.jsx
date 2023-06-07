@@ -1,4 +1,7 @@
 import React from "react";
+import './Listing.css';
+import '../../../App.css';
+import '../../Login.css';
 
 const AddPrice = ({ onNext, price }) => {
   const increasePrice = () => {
@@ -16,7 +19,7 @@ const AddPrice = ({ onNext, price }) => {
       <div className='listing_container_big'>
         <img
             className='background_img'
-            src={process.env.PUBLIC_URL + "./images/location-back.png"}
+            src={process.env.PUBLIC_URL + "./images/rent-back.png"}
             alt="Location Back"
           />
         <div className='listing_page'>

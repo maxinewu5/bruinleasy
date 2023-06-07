@@ -74,6 +74,15 @@
     color: #162031;
   }
 
+  .body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text {
+    padding-bottom:10px;
+  }
+
   .info_box {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -146,10 +155,17 @@ label {
   height: 30px;
 }
 
+.datepicker {
+  width: 150px;
+  height: 40px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  padding-left: 9px;
+}
+
 .description_box_long {
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  border: 1px solid transparent;
+  border: 2px solid #50A5FF;
   height: 30px;
   width: 450px;
   position: relative; 
@@ -175,3 +191,10 @@ label {
   margin-top: -25px;
   margin-left: 40px;
 }
+
+.calendar_img {
+  width: 300px;
+  margin-top: -135px;
+  margin-left: 225px;
+}
+

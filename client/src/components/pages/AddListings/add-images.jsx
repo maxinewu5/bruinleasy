@@ -13,14 +13,13 @@ const AddImages = ({ onNext, images }) => {
       <div className='listing_container_big'>
         <img
             className='background_img'
-            src={process.env.PUBLIC_URL + "./images/image-back.png"}
+            src={process.env.PUBLIC_URL + "./images/images-back.png"}
             alt="Location Back"
           />
         <div className='listing_page'>
           <div className='listing_container'>
           <h2 className='heading'>Please add images of your apartment</h2>
           <input
-            className='login_box_long' 
             type="file"
             onChange={(e) => {
               handleEvent(e);

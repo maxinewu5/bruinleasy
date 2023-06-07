@@ -176,19 +176,9 @@
   border: 1px solid var(#162031);
   border-radius: 3px;
   transition: all 0.3s ease-out;
-  padding: 11px 20px;
+  padding: 11px 25px;
   font-size: 17px;
-  margin: 5px;
-}
-
-.btn--medium {
-  padding: 8px 20px;
-  font-size: 17px;
-}
-
-.btn--large {
-  padding: 12px 26px;
-  font-size: 17px;
+  /* margin: 5px; */
 }
 
 .btn--outline--small:hover {

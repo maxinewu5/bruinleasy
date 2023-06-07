@@ -8,6 +8,8 @@
     outline: none;
     border: none;
     cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    color: #162031;
   }
   
   .btn--primary {

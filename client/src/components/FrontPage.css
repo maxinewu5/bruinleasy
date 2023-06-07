@@ -31,6 +31,8 @@ video {
     flex-direction: column;
     align-items: center;
     object-fit: contain;
+    font-family: 'Nunito', sans-serif;
+    color: #162031;
 }
 
 .explore-container {

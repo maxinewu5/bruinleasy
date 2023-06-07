@@ -1,6 +1,8 @@
 .cards {
   padding: 4rem;
   background: #fff;
+  font-family: 'Nunito', sans-serif;
+  color: #162031;
 }
 
 h1 {
@@ -109,7 +111,6 @@ h1 {
 
 /*this is for the bottom-most row*/
 .card_body_bottom {
-  margin-top: auto;
   margin-left: 20px;
   width: 100%;
 }
@@ -121,14 +122,10 @@ h1 {
   flex-wrap: wrap;
 }
 
-.card_author_img {
-  vertical-align: left;
-  border-radius: 50%;
-}
 
 .card_author_txt {
   position: relative;
-  bottom: 5px;
+  bottom: 17px;
   display: inline;
   color: #50A5FF;
   margin-left: 20px;

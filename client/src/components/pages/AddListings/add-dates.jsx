@@ -34,23 +34,30 @@ const AddDates = ({ onNext, dates }) => {
           <div className='listing_container'>
             <h2 className='heading'>Select Start and End Dates</h2>
             <div className='info_contain_amenities'>
-            <div>
-              <label>Start Date:</label>
+            <div className='body'>
+              <label className='text'>Start Date:</label>
               <DatePicker
+                className='datepicker'
                 selected={dates[0]}
                 onChange={(date) => handleStartDateChange(date)}
                 dateFormat="MM/dd/yyyy"
               />
-            </div>
-            <div>
-              <label>End Date:</label>
+            </div> <br />
+            <div className='body'>
+              <label className='text'>End Date:</label>
               <DatePicker
+                className='datepicker'
                 selected={dates[1]}
                 onChange={(date) => handleEndDateChange(date)}
                 dateFormat="MM/dd/yyyy"
               />
             </div>
           </div>
+          <img
+            className='calendar_img'
+            src={process.env.PUBLIC_URL + "./images/calendar.gif"}
+            alt="Calendar"
+          />
         </div>
        </div>
       </div>

@@ -22,7 +22,7 @@ const AddAmenities = ({ onNext, isChecked }) => {
           <div className='listing_container'>
             <h2 className='heading'>Does the apartment offer any of these amenities? </h2>
             <div className='info_contain_amenities'>
-              <label className='body'>
+              <label >
                 <input
                   className='check_box'
                   type="checkbox"

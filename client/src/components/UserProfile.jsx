@@ -12,7 +12,9 @@ import {
 import CardItem from "./CardItem";
 import { getAdditionalUserInfo } from "firebase/auth";
 import { Link } from "react-router-dom";
-
+import './FrontPage.css';
+import './UserProfile.css';
+import './Login.css';
 function UserProfile() {
   //useEffect -- hook which handles side effects
   //called whenever the page renders, can be used for API calls to firebase
@@ -100,23 +102,41 @@ function UserProfile() {
 
   return (
     <>
-      <h2>
-        {localStorage.name} ({starRating})
-      </h2>
-      <Link to="/AddListing">
-        <button>Add Listing</button>
-      </Link>
-      <button>Edit Profile</button>
+      <div className="front-container">
+        <img
+          className="profile_background"
+          src={process.env.PUBLIC_URL + "./images/house10.gif"}
+          alt="house"
+        />
+        <div className='profile_body'>
+          <h2 className='welcome'>
+            {localStorage.name} ({starRating})
+          </h2>
+          <div className='front-btns'>
+            <Link to="/AddListing">
+               <button 
+               className='btn--outline--large'>
+                Add Listing
+                </button>
+            </Link>
+            <button 
+               className='btn--outline--large'>
+                Edit Profile
+                </button>
+          </div>
+          <h3 className='heading'>My Listings</h3>
+          <div className='cards__items'>
+            {userProperties?.map((listing) => {
+              return <CardItem text={listing.AptName}></CardItem>;
+            })}
+          </div>
 
-      <h3>My Listings</h3>
-      {userProperties?.map((listing) => {
-        return <CardItem text={listing.AptName}></CardItem>;
-      })}
-
-      <h3>Favorite Listings</h3>
-      {favProperties?.map((listing) => {
-        return <CardItem></CardItem>;
-      })}
+          <h3 className='heading'>Favorite Listings</h3>
+          {favProperties?.map((listing) => {
+            return <CardItem></CardItem>;
+          })}
+        </div>
+    </div>
     </>
   );
 }
