@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { Button } from "./Button";
 import { getAuth } from "firebase/auth";
 import { auth } from "../Firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
