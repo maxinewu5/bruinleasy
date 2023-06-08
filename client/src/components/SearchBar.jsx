@@ -88,13 +88,25 @@ function SearchBar( { setFilteredProperties }) {
     }
 
     //filter for search 
-    if (searchQ != "") {
+    if (searchQ !== "") {
       filteredDocs = filteredDocs.filter((doc) => {
+        let string1 = doc.AptName
+        let string2 = searchQ
+        if(string1.includes(string2))
+           return true;
         //make case insensitive
-        let string1 = doc.AptName.toLocaleLowerCase()
-        let string2 = searchQ.toLocaleLowerCase()
+        string1 = string1.toLocaleLowerCase()
+        string2 = string2.toLocaleLowerCase()
+        if(string1.includes(string2))
+        return true;
+        const words = string1.split(" ");
+        for(let i = 0; i < words.length; i++)
+        {
+          if(jaroWinklerDistance(words[i], string2) > 0.65)
+              return true;
+        }
         //do a fuzzy search based on jaroWinkler distance
-        return jaroWinklerDistance(string1, string2) > 0.85
+        return jaroWinklerDistance(string1, string2) > 0.65
       });
     }
 
@@ -111,35 +123,35 @@ function SearchBar( { setFilteredProperties }) {
     //filter for ac
     if (AC) {
       filteredDocs = filteredDocs.filter((listing) => {
-        return listing.AirConditioner == true;
+        return listing.AirConditioner === true;
       })
     } 
 
     //filter for parking
     if (parking) {
       filteredDocs = filteredDocs.filter((listing) => {
-        return listing.Parking == true;
+        return listing.Parking === true;
       })
     } 
 
     //filter for furnishing
     if (furnishing) {
       filteredDocs = filteredDocs.filter((listing) => {
-        return listing.Furnishing == true;
+        return listing.Furnishing === true;
       })
     } 
 
     //filter for rooftop
     if (rooftop) {
       filteredDocs = filteredDocs.filter((listing) => {
-        return listing.Rooftop == true;
+        return listing.Rooftop === true;
       })
     } 
 
     //filter for lobby
     if (lobby) {
       filteredDocs = filteredDocs.filter((listing) => {
-        return listing.Lobby == true;
+        return listing.Lobby === true;
       })
     } 
   

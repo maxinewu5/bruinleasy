@@ -36,25 +36,26 @@ const PropertyDisplay = () => {
   }
   
   return (
-    <div className="card_item">
-      <div className="card_item_bckgrd">
-        <div className="card_item_img">
-          {imageArray.map((imageURL, index) => (
-            <img
-              key={index}
-              src={imageURL}
-              alt={`Image ${index + 1}`}
-              className="card_item_img_inside"
-            />
-          ))}
-          <h5 className="cards_item_rating" data-category={propertyData.Rent} />
-        </div>
-            <div className="heading_post">
-          <div className="card_header">{propertyData.AptName}</div>
-        </div>
-
+    <div className="cards_Property">
+  <div className="card_item_bckgrd">
+    <div className="card_item_img">
+      {imageArray.map((imageURL, index) => (
+        <img
+          key={index}
+          src={imageURL}
+          alt={`Image ${index + 1}`}
+          className="card_item_img_inside"
+        />
+      ))}
+      <h5 className="cards_item_rating" data-category={propertyData.Rent} />
+  </div>
+  </div>
         <div className="card_body_wrap">
           <p className="card_body">
+          <div className="heading_post">
+        <div className="card_header">{propertyData.AptName}</div>
+          </div>
+          <br /> <br />
             Location: {propertyData.City}, {propertyData.State}, {propertyData.Zipcode}
             Bedrooms: {propertyData.Bedrooms}
             Bathrooms: {propertyData.Bathrooms}
@@ -79,7 +80,6 @@ const PropertyDisplay = () => {
           <p className="card_author_txt">Owner Email: {propertyData.UserEmail}</p>
         </div>
       </div>
-    </div>
   );
 };
 
