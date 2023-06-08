@@ -14,7 +14,6 @@ import Cards from "./Cards";
 import { getAuth } from "firebase/auth";
 import Login from "./Login"; 
 import { useNavigate } from "react-router-dom";
-import "./Button.css"
 import './FrontPage.css';
 import './UserProfile.css';
 import './Login.css';
