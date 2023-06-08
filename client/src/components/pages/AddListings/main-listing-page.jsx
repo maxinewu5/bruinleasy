@@ -43,7 +43,7 @@ const AddListing = () => {
   const [images, setImages] = useState([]);
   // const [imageVals, setImageVals] = useState([]);
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(1200);
+  const [price, setPrice] = useState(2400);
   const [dates, setDates] = useState(["", ""]);
 
   const handleNextAddress = (addressData) => {
@@ -102,11 +102,11 @@ const AddListing = () => {
       City: address[2],
       Zipcode: address[3],
       State: address[4],
-      AirConditioner: amenities.includes(0),
-      Parking: amenities.includes(1),
-      Furnishing: amenities.includes(2),
-      Rooftop: amenities.includes(3),
-      Lobby: amenities.includes(4),
+      AirConditioner: amenities[0],
+      Parking: amenities[1],
+      Furnishing: amenities[2],
+      Rooftop: amenities[3],
+      Lobby: amenities[4],
       Bathrooms: occCounters[0],
       Bedrooms: occCounters[1],
       UserEmail: user.email,
@@ -171,7 +171,7 @@ const AddListing = () => {
       await updateDoc(doc(PropertiesRef, propertyId), {
         PropertyImageURLs: imageURLs,
       });
-      alert("Thank you for submitting a property");
+      alert("Thank you for submitting a property!");
       navigate("/");
       console.log("Property document updated with image URLs");
     } catch (error) {

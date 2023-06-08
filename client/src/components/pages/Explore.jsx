@@ -66,7 +66,7 @@ function Explore() {
           alt="explore"
         />
       </div> */}
-  
+
       <SearchBar setFilteredProperties={setAllProperties} />
 
       <Cards properties={allProperties} />
