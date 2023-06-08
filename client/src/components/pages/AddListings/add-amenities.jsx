@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './Listing.css';
-import '../../../App.css';
-import '../../Login.css';
+import "./Listing.css";
+import "../../../App.css";
+import "../../Login.css";
 
 const AddAmenities = ({ onNext, isChecked }) => {
   const handleCheckboxChange = (i) => {
@@ -11,20 +11,22 @@ const AddAmenities = ({ onNext, isChecked }) => {
   };
 
   return (
-    <div className='listing_page'>
-      <div className='listing_container_big'>
+    <div className="listing_page">
+      <div className="listing_container_big">
         <img
-            className='background_img'
-            src={process.env.PUBLIC_URL + "./images/amenities-back.png"}
-            alt="Location Back"
-          />
-        <div className='listing_page'>
-          <div className='listing_container'>
-            <h2 className='heading'>Does the apartment offer any of these amenities? </h2>
-            <div className='info_contain_amenities'>
-              <label className='amenities_label'>
+          className="background_img"
+          src={process.env.PUBLIC_URL + "./images/amenities-back.png"}
+          alt="Location Back"
+        />
+        <div className="listing_page">
+          <div className="listing_container">
+            <h2 className="heading">
+              Does the apartment offer any of these amenities?{" "}
+            </h2>
+            <div className="info_contain_amenities">
+              <label className="amenities_label">
                 <input
-                  className='check_box'
+                  className="check_box"
                   type="checkbox"
                   checked={isChecked[0]}
                   onChange={() => handleCheckboxChange(0)}
@@ -33,9 +35,9 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Air Conditioner
               </label>
               <br />
-              <label className='amenities_label'>
+              <label className="amenities_label">
                 <input
-                  className='check_box'
+                  className="check_box"
                   type="checkbox"
                   checked={isChecked[1]}
                   onChange={() => handleCheckboxChange(1)}
@@ -44,9 +46,9 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Parking
               </label>
               <br />
-              <label className='amenities_label'>
+              <label className="amenities_label">
                 <input
-                  className='check_box'
+                  className="check_box"
                   type="checkbox"
                   checked={isChecked[2]}
                   onChange={() => handleCheckboxChange(2)}
@@ -55,9 +57,9 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Furnishing
               </label>
               <br />
-              <label className='amenities_label'>
+              <label className="amenities_label">
                 <input
-                  className='check_box'
+                  className="check_box"
                   type="checkbox"
                   checked={isChecked[3]}
                   onChange={() => handleCheckboxChange(3)}
@@ -66,9 +68,9 @@ const AddAmenities = ({ onNext, isChecked }) => {
                 Rooftop
               </label>
               <br />
-              <label className='amenities_label'>
+              <label className="amenities_label">
                 <input
-                  className='check_box'
+                  className="check_box"
                   type="checkbox"
                   checked={isChecked[4]}
                   onChange={() => handleCheckboxChange(4)}
