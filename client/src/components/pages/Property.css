@@ -19,19 +19,32 @@
 }
 
 
-.property_img_inside {
-  position: absolute;
-  height: 420px;
+/* .property_img_inside {
+  position: relative;
   width: 100%;
+  height: 100%;
+  padding-bottom: 10px; Adjust this value to allocate more space for the image
+  overflow: hidden;
+} */
+
+.property_img_inside {
+  width: 100%;
+}
+
+
+.property_img_inside img {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;  
 }
 
 h1 {
   text-align: center;
 }  
+
 .heading_post {
   transition-duration: 700ms;
   text-align: left;
@@ -61,7 +74,7 @@ h1 {
 .property_body {
   display: block;
   margin-bottom: 5px;
-  margin-left: 35px;
+  margin-left: 55px;
   width: 100%;
   text-align: left;
   white-space: wrap;
@@ -76,6 +89,7 @@ h1 {
 
 .card_date {
   color: #848B94;
+  
 }
 
 /*this is for the bottom-most row*/
@@ -97,7 +111,7 @@ h1 {
   bottom: 17px;
   display: inline;
   color: #50A5FF;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 /*for price of rental*/
