@@ -23,13 +23,14 @@ const ReportUser = () => {
   const submit = async (event) => {
     event.preventDefault();
     const db = getFirestore();
-    if (EmailID === "") {
+    if (EmailID === "" || EmailID.slice(-4) !== ".edu") {
       alert("Enter a valid Email");
       window.location.reload();
     } else if (Reason === "") {
       alert("Enter a valid reason");
       window.location.reload();
-    } else {
+    }
+    else {
       if (
         EmailID.slice(-8) === "ucla.edu" &&
         !(EmailID.slice(-10) === "g.ucla.edu")
