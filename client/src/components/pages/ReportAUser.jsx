@@ -64,6 +64,7 @@ const ReportUser = () => {
           };
 
           await updateDoc(doc(account_collection, EmailID), newAccount);
+          alert("User has been reported.");
           navigate("/");
         } else {
           alert("No such user exists!");
