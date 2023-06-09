@@ -116,7 +116,8 @@ function SearchBar( { setFilteredProperties }) {
         let propertyPrice = parseInt(doc.Rent); 
         let renterPrice = parseInt(priceQ);
         //match between 90% to 110% of the price range
-        return (renterPrice * 0.9 < propertyPrice) && (propertyPrice < renterPrice * 1.1);
+        //return (renterPrice * 0.9 < propertyPrice) && (propertyPrice < renterPrice * 1.1);
+        return ((renterPrice - 200) <= propertyPrice && propertyPrice <= (renterPrice + 200))
       });
     }
 
