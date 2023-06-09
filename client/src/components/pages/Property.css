@@ -3,21 +3,22 @@
   background-color: white;
   border-radius: 10px;
   padding: 0;
-  margin-right: 100px;
-  margin-left: 100px;
+  margin-right: 245px;
+  margin-left: 245px;
   margin-bottom: 100px;
   margin-top: 100px;
-  font-family: 'Nunito', sans-serif;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  font-family: "Nunito", sans-serif;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 .property_background {
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  padding-bottom: 420px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 520px;
 }
-
 
 /* .property_img_inside {
   position: relative;
@@ -31,7 +32,6 @@
   width: 100%;
 }
 
-
 .property_img_inside img {
   position: absolute;
   top: 0%;
@@ -39,11 +39,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 h1 {
   text-align: center;
-}  
+}
 
 .heading_post {
   transition-duration: 700ms;
@@ -52,18 +54,18 @@ h1 {
   margin-top: 15px;
   margin-bottom: 4px;
   cursor: pointer;
-  color: #50A5FF;
+  color: #50a5ff;
   text-decoration: none;
 }
 
 .card_header {
-  position:relative;
+  position: relative;
   font-size: 25px;
   font-weight: 500;
 }
 
 .heading_post:hover {
-  color: #FFD77B;
+  color: #ffd77b;
 }
 
 .body {
@@ -88,8 +90,7 @@ h1 {
 }
 
 .card_date {
-  color: #848B94;
-  
+  color: #848b94;
 }
 
 /*this is for the bottom-most row*/
@@ -105,12 +106,11 @@ h1 {
   flex-wrap: wrap;
 }
 
-
 .card_author_txt {
   position: relative;
   bottom: 17px;
   display: inline;
-  color: #50A5FF;
+  color: #50a5ff;
   margin-left: 40px;
 }
 
@@ -123,12 +123,12 @@ h1 {
 }
 
 .card_price {
-  position: relative; 
+  position: relative;
   display: inline;
   bottom: 56px;
   left: 250px;
   text-align: left;
-  color: #50A5FF;
+  color: #50a5ff;
   z-index: 10;
 }
 
@@ -137,7 +137,7 @@ h1 {
 }
 
 .card_body_inside {
-  transition-duration:500ms;
+  transition-duration: 500ms;
 }
 
 /* .card_body_inside:hover {
@@ -206,7 +206,7 @@ depending on size of screen using flexboxes */
   padding-top: 58%;
   padding-left: 91%;
   font-size: 25px;
-  color: #50A5FF;
+  color: #50a5ff;
   z-index: 1;
 }
 .card_heart_box::after {
@@ -214,7 +214,7 @@ depending on size of screen using flexboxes */
   position: absolute;
   bottom: 20px;
   margin-left: 23px;
-  padding:14px 15px;
+  padding: 14px 15px;
   max-width: calc((100%) - 60px);
   font-size: 12px;
   font-weight: 700;

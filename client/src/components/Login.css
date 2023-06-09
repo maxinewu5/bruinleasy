@@ -30,7 +30,7 @@
   border: 1px solid;
   border-radius: 10px;
   border: transparent;
-  box-shadow: 2px 3px 28px 1px rgba(0,0,0,0.1);
+  box-shadow: 2px 3px 28px 1px rgba(0, 0, 0, 0.1);
 }
 
 /*style for the inputs, like the individual input boxes for username and passsword*/
@@ -48,10 +48,10 @@
   left: 85px;
   font-size: 18px;
   text-indent: 10px;
+  font-family: "Nunito", sans-serif;
 }
 
-
-/* .login_box_long {
+.login_box_long {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: 1px solid transparent;
@@ -61,12 +61,16 @@
   bottom: 370px;
   left: 85px;
   font-size: 18px;
-  text-indent: 10px;
-  padding: 4px 4px 60px 4px;
+  padding-left: 5px;
+  padding: 4px 4px 60px 10px;
   resize: none;
   margin-bottom: 20px;
-} */
+  resize: none;
+  font-family: "Nunito", sans-serif;
+}
 
+/*container for image that goes on left half of the login big box
+helps to split screen*/
 .login_logo_pic {
   position: absolute;
   width: 330px;
@@ -75,6 +79,8 @@
   transform: translate(25%, 50%);
 }
 
+/*the styling for the image on the left half of box, crops it so it 
+fits the split*/
 .login_house_logo {
   position: relative;
   overflow: hidden;
@@ -89,16 +95,17 @@
   border-bottom-left-radius: 10px;
 }
 
+/*text styling*/
 .report_text {
   font-size: 15px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #495869;
-  position: relative; 
+  position: relative;
   bottom: 370px;
   margin-left: 63px;
   margin-right: 60px;
   left: 24px;
-
+  padding-right: 10px;
 }
 /*buttons*/
 
@@ -114,7 +121,7 @@
 
 .login_buttons_container {
   display: relative;
-  margin-top: 60%;
+  margin-top: 40px;
 }
 
 .login_btns {
@@ -123,11 +130,12 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  bottom: 310px;
+  bottom: 400px;
   left: 4%;
   margin: 20px;
-} 
+}
 
+/*react icon styling*/
 .fcGoogle {
   position: relative;
   top: 2.5px;
@@ -202,8 +210,8 @@
 .btn--outline--small:hover {
   transition: all 0.3s ease-out;
   background: #fff;
-  color: #7ABBFF;
-  border-color:#50A5FF;
+  color: #7abbff;
+  border-color: #50a5ff;
   font-size: 16px;
   transition: 250ms;
 }
@@ -216,7 +224,6 @@
   transition: 250ms;
 }
 
-input[type=text]:focus {
-  outline: 2px solid #FFD77B;
+input[type="text"]:focus {
+  outline: 2px solid #ffd77b;
 }
-

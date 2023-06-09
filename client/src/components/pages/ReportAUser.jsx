@@ -65,6 +65,7 @@ const ReportUser = () => {
           };
 
           await updateDoc(doc(account_collection, EmailID), newAccount);
+          alert("User has been reported.");
           navigate("/");
         } else {
           alert("No such user exists!");
@@ -110,8 +111,8 @@ const ReportUser = () => {
                 value={EmailID}
               />
               <br />
-              <input
-                className="login_box"
+              <textarea
+                className="login_box_long"
                 placeholder="Reason"
                 onChange={(event) => {
                   setReason(event.target.value);
