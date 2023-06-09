@@ -241,6 +241,8 @@ label {
   position: relative;
   margin-left: 46px;
   font-size: 17px;
+  overflow-wrap: break-word;
+  word-break: break-all;
   font-family: "Nunito", sans-serif;
   text-indent: 10px;
   padding: 5px 5px 200px 5px;

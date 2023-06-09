@@ -1,3 +1,10 @@
-.explore_text{
-    font-family: 'Nunito', sans-serif;
+.explore_text {
+    font-family: "Nunito", sans-serif;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 50px;
+    /* margin-left: 40%; */
 }
