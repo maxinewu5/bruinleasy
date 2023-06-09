@@ -71,7 +71,7 @@ function Explore() {
       <SearchBar setFilteredProperties={setAllProperties} />
       {allProperties.length === 0 ? (
         <>
-          <div classname="explore_text">No Properties Found!!!!</div>
+          <div className="explore_text">No Properties Found!!!!</div>
         </>
       ) : (
         <Cards properties={allProperties} />

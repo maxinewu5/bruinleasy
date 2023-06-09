@@ -109,8 +109,8 @@ const ReportUser = () => {
                 value={EmailID}
               />
               <br />
-              <input
-                className="login_box"
+              <textarea
+                className="login_box_long"
                 placeholder="Reason"
                 onChange={(event) => {
                   setReason(event.target.value);

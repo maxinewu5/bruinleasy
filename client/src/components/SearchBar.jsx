@@ -69,7 +69,7 @@ function SearchBar( { setFilteredProperties }) {
     })
 
     let filteredDocs = propDocs; 
-
+    
     //filter for date (only apply if date has been explicitly set by user, not default)
     if (dateFlag) {
       filteredDocs = filteredDocs.filter((doc) => {     
@@ -184,7 +184,7 @@ function SearchBar( { setFilteredProperties }) {
               className="input-box"
               type="number"
               value={priceQ}
-              onChange={(e)=>setPriceQ(e.target.value)}
+              onChange={(e)=> setPriceQ(e.target.value)}
             /> 
           </div> 
           <div>
