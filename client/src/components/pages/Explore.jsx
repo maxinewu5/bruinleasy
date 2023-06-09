@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import Login from "../Login";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./Explore.css"
+import "./Explore.css";
 
 function Explore() {
   const auth = getAuth();
@@ -67,15 +67,9 @@ function Explore() {
           alt="explore"
         />
       </div> */}
-    
+
       <SearchBar setFilteredProperties={setAllProperties} />
-      {allProperties.length === 0 ? (
-        <>
-          <div className="explore_text">No Properties Found!!!!</div>
-        </>
-      ) : (
-        <Cards properties={allProperties} />
-      )}
+      {<Cards properties={allProperties} />}
     </>
   ) : (
     <Login />
