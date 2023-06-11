@@ -12,6 +12,7 @@ Requirements: [Node.js](https://nodejs.org/en)
 Run the following commands to clone to code on your local, go into the client folder, and install any necessary dependencies. 
 ```
 git clone https://github.com/maxinewu5/bruinleasy.git
+cd bruinleasy
 cd client 
 npm install 
 ```
