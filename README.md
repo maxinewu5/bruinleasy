@@ -1,5 +1,5 @@
 # bruinleasy
-leasing made easy
+Leasing made easy!
 
 ## Introduction
 
