@@ -7,7 +7,7 @@ bruinLeasy is a student-driven platform created specifically for UCLA students b
 
 ## Installation
 
-Requirements: [Node.js](https://nodejs.org/en) (Please follow the instructions at https://nodejs.dev/en/learn/how-to-install-nodejs/)
+Requirements: [Node.js](https://nodejs.org/en) (Please follow the instructions at https://nodejs.dev/en/learn/how-to-install-nodejs/ to install)
 
 Run the following commands to clone to code on your local, go into the client folder, and install any necessary dependencies. 
 ```
