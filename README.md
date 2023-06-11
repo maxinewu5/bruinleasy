@@ -3,7 +3,7 @@ leasing made easy
 
 ## Introduction
 
-bruinLeasy is built by and for UCLA students, to help Bruins find leases/subleases, especially for over the summer. bruinLeasy offers a centralized platform connecting people who want to sublease their apartments to people looking for subleases. Sublessors can post listings of their properties and delete them when done, and sublessees can filter search on important factors such as price, start date, amenities.
+bruinLeasy is a student-driven platform created specifically for UCLA students by UCLA students, aimed at facilitating the process of finding leases and subleases. With bruinLeasy, Bruins can easily connect and navigate through a centralized platform that brings together individuals seeking subleases and those offering their apartments for subleasing. Sublessors have the ability to create and manage property listings, while sublessees can efficiently search and filter listings based on essential criteria like price, start date, and amenities.
 
 ## Installation
 
