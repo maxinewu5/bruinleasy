@@ -17,10 +17,12 @@ cd client
 npm install 
 ```
 
-Run the following command to start the start the client-side app on your localhost server. 
+Run the following command to start the start the front-end React app on port 3000 of your localhost server.
 ```
 npm start
 ```
+
+The website should now be visible on: http://localhost:3000 
 
 ## Key Features
 
